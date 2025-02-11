@@ -1,7 +1,7 @@
-import { IMemberInfo } from './dataTypes';
+import { IMemberInfo } from "./dataTypes";
 
 interface IUseChannels {
-  items: IMemberInfo[] | undefined;
+  members: IMemberInfo[] | undefined;
   isLoading: boolean;
   isError: boolean;
 }

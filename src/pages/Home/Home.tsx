@@ -1,42 +1,42 @@
-import { useMemo, useState } from 'react';
-import useChannels from '../../hooks/useChannels';
-import { IMemberInfo } from '../../types/dataTypes';
-import SortableTableHeader from './components/SortableTableHeader';
-import SubscriptionTableRow from './components/SubscriptionTableRow';
+import { useMemo, useState } from "react";
+import useChannels from "../../hooks/useChannels";
+import { IMemberInfo } from "../../types/dataTypes";
+import SortableTableHeader from "./components/SortableTableHeader";
+import SubscriptionTableRow from "./components/SubscriptionTableRow";
 
 export function Home() {
-  const { items, isLoading, isError } = useChannels();
-  const [sortBy, setSortBy] = useState<string>('subscribers');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const { members, isLoading, isError } = useChannels();
+  const [sortBy, setSortBy] = useState<string>("subscribers");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   const handleSort = (columnName: string) => {
     if (sortBy === columnName) {
-      setSortDirection(sortDirection === 'desc' ? 'asc' : 'desc');
+      setSortDirection(sortDirection === "desc" ? "asc" : "desc");
     } else {
       setSortBy(columnName);
-      setSortDirection('desc');
+      setSortDirection("desc");
     }
   };
 
   const sortedData = useMemo(() => {
-    if (!sortBy) return items;
-    const unsortedData = items !== undefined ? [...items] : [];
+    if (!sortBy) return members;
+    const unsortedData = members !== undefined ? [...members] : [];
 
     return unsortedData.sort((a, b) => {
       const valueA = a[sortBy as keyof IMemberInfo];
       const valueB = b[sortBy as keyof IMemberInfo];
 
-      if (typeof valueA === 'string' && typeof valueB === 'string') {
-        return sortDirection === 'desc'
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        return sortDirection === "desc"
           ? valueB.localeCompare(valueA)
           : valueA.localeCompare(valueB);
-      } else if (typeof valueA === 'number' && typeof valueB === 'number') {
-        return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
+      } else if (typeof valueA === "number" && typeof valueB === "number") {
+        return sortDirection === "desc" ? valueB - valueA : valueA - valueB;
       } else {
         return 0;
       }
     });
-  }, [items, sortBy, sortDirection]);
+  }, [members, sortBy, sortDirection]);
 
   if (isLoading) return <div />;
   if (isError) return <div />;
@@ -44,12 +44,12 @@ export function Home() {
   return (
     <div className="mx-8 flex flex-col items-center gap-4 text-slate-300">
       <h1 className="text-3xl">Phase Connect</h1>
-      <h2 className="text-xl">Subscription Count</h2>
+      <h2 className="text-xl">YouTube Subscription Count</h2>
       <table className="table max-w-screen-lg text-center text-base">
         <thead>
           <tr className="text-base text-slate-300">
             <th />
-            {['channel_name', 'generation', 'subscribers'].map((header) => {
+            {["channel_name", "generation", "subscribers"].map((header) => {
               return (
                 <SortableTableHeader
                   column={header}

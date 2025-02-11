@@ -1,7 +1,8 @@
-import { Outlet, useLocation } from 'react-router';
-import PageLayout from './layout/PageLayout';
-import { Home } from './pages/Home/Home';
-import { useEffect } from 'react';
+import { Outlet, useLocation } from "react-router";
+import PageLayout from "./layout/PageLayout";
+import { Home } from "./pages/Home/Home";
+import { useEffect } from "react";
+import { SelectedMemberContextProvider } from "./contexts/SelectedMemberContext";
 
 function App() {
   const { pathname } = useLocation();
@@ -10,7 +11,11 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <PageLayout>{pathname === '/' ? <Home /> : <Outlet />}</PageLayout>;
+  return (
+    <SelectedMemberContextProvider>
+      <PageLayout>{pathname === "/" ? <Home /> : <Outlet />}</PageLayout>
+    </SelectedMemberContextProvider>
+  );
 }
 
 export default App;
