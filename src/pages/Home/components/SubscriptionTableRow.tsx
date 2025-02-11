@@ -1,35 +1,35 @@
-import { Link } from "react-router";
-import type { IMemberInfo } from "../../../types/dataTypes";
+import { Link } from 'react-router';
+import type { IMemberInfo } from '../../../types/dataTypes';
 
 interface Props {
   member: IMemberInfo;
 }
 
-export default function SubscriptionTableRow({
-  member,
-}: Props): React.JSX.Element {
+export default function SubscriptionTableRow({ member }: Props): React.JSX.Element {
   return (
     <tr
-      className="transition-transform delay-[300] duration-500 ease-in-out hover:scale-110"
+      className="transition-transform delay-[300] duration-500 ease-in-out hover:scale-[105%]"
       key={member.id}
     >
-      <td className="">
-        <div className="flex items-center gap-4 max-w-[400px]">
+      <td>
+        <div className="flex items-center justify-center">
           <img
             src={member.channel_image}
             alt="channel image"
-            height="70px"
-            width="70px"
+            height="60px"
+            width="60px"
             className="rounded-full"
           />
-          <span>{member.channel_name}</span>
         </div>
+      </td>
+      <td>
+        <span>{member.channel_name}</span>
       </td>
       <td>{member.generation}</td>
       <td>{member.subscribers.toLocaleString()}</td>
       <td>
         <Link
-          className="text-lg underline"
+          className="text-base underline"
           to={`https://www.youtube.com/${member.channel_handle}`}
           rel="noopener noreferrer"
           target="_blank"

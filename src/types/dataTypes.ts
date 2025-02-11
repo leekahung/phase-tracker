@@ -38,7 +38,7 @@ interface IChannelResponseItems {
 
 interface IChannelResponse {
   etag: string;
-  items: Array<IChannelResponseItems>;
+  items: IChannelResponseItems[];
   kind: string;
   pageInfo: {
     resultPerPage: number;
@@ -49,7 +49,7 @@ interface IChannelResponse {
 interface IMemberInfo {
   channel_handle: string;
   generation: string;
-  status: "active" | "retired";
+  status: 'active' | 'retired';
   id: number;
   subscribers: number;
   channel_image: string;

@@ -1,4 +1,4 @@
-import { IMemberInfo } from "./dataTypes";
+import { IMemberInfo } from './dataTypes';
 
 interface IUseChannels {
   items: IMemberInfo[] | undefined;

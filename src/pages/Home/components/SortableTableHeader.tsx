@@ -1,7 +1,7 @@
 interface Props {
   column: string;
   sortBy: string | null;
-  sortDirection: "asc" | "desc";
+  sortDirection: 'asc' | 'desc';
   handleSort: (columnName: string) => void;
 }
 
@@ -14,14 +14,10 @@ export default function SortableTableHeader({
   return (
     <th className="cursor-pointer" onClick={() => handleSort(column)}>
       {`${column
-        .split("_")
+        .split('_')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")} `}
-      {sortBy === column && sortDirection === "desc" ? (
-        <>&darr;</>
-      ) : (
-        <>&uarr;</>
-      )}
+        .join(' ')} `}
+      {sortBy === column && sortDirection === 'desc' ? <>&darr;</> : <>&uarr;</>}
     </th>
   );
 }

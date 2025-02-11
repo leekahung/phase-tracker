@@ -1,12 +1,12 @@
-import { supabase } from "../utils/setupDatabase.mts";
+import { supabase } from '../utils/setupDatabase.mts';
 
 export default async () => {
-  const { data, error } = await supabase.from("phase_channels").select("*");
+  const { data, error } = await supabase.from('phase_channels').select('*');
 
   if (error) {
     return new Response(
       JSON.stringify({
-        message: "Error fetching from database",
+        message: 'Error fetching from database',
         error: error.message,
       }),
       { status: 500 }

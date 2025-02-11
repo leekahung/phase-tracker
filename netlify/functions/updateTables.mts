@@ -1,11 +1,11 @@
-import { phaseConnectMembers } from "../utils/phaseMembers.mts";
-import { supabase } from "../utils/setupDatabase.mts";
-import fetchYouTubeData from "../utils/fetchYouTubeData.mts";
+import { phaseConnectMembers } from '../utils/phaseMembers.mts';
+import { supabase } from '../utils/setupDatabase.mts';
+import fetchYouTubeData from '../utils/fetchYouTubeData.mts';
 
 export default async () => {
   await Promise.all(
     phaseConnectMembers.map(async (member) => {
-      if (member.status === "active") {
+      if (member.status === 'active') {
         const results = await fetchYouTubeData(member.channelHandle);
         const { statistics, snippet } = results.items[0];
         const rowData = {
@@ -20,13 +20,13 @@ export default async () => {
           channel_image: snippet.thumbnails.default.url,
         };
         const { error } = await supabase
-          .from("phase_channels")
-          .upsert([rowData], { onConflict: "channel_handle" });
+          .from('phase_channels')
+          .upsert([rowData], { onConflict: 'channel_handle' });
 
         if (error) {
           return new Response(
             JSON.stringify({
-              message: "Error updating channel",
+              message: 'Error updating channel',
               error: error.message,
             }),
             {
@@ -37,7 +37,7 @@ export default async () => {
 
         return new Response(
           JSON.stringify({
-            message: "Channel fetched",
+            message: 'Channel fetched',
           }),
           {
             status: 200,
