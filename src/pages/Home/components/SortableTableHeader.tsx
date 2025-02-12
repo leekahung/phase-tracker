@@ -12,7 +12,10 @@ export default function SortableTableHeader({
   handleSort,
 }: Props): React.JSX.Element {
   return (
-    <th className="cursor-pointer" onClick={() => handleSort(column)}>
+    <th
+      className={`cursor-pointer sm:p-4 ${column === 'generation' ? 'hidden sm:table-cell' : 'p-2'}`}
+      onClick={() => handleSort(column)}
+    >
       {`${column
         .split('_')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
