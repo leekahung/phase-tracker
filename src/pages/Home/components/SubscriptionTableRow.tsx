@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import type { IMemberInfo } from '../../../types/dataTypes';
-import { useSelectedMember } from '../../../hooks/useSelectedMember';
+import type { IMemberInfo } from '@/types/dataTypes';
+import { useSelectedMember } from '@/hooks/useSelectedMember';
 
 interface Props {
   member: IMemberInfo;

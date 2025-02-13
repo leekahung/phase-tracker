@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import useChannels from '../../hooks/useChannels';
-import { IMemberInfo } from '../../types/dataTypes';
+import useChannels from '@/hooks/useChannels';
+import { IMemberInfo } from '@/types/dataTypes';
 import SortableTableHeader from './components/SortableTableHeader';
 import SubscriptionTableRow from './components/SubscriptionTableRow';
 

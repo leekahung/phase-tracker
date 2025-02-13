@@ -1,6 +1,6 @@
-import { createContext, useMemo, useState } from "react";
-import useChannels from "../hooks/useChannels";
-import { IMemberInfo } from "../types/dataTypes";
+import { createContext, useEffect, useMemo, useState } from 'react';
+import useChannels from '@/hooks/useChannels';
+import { IMemberInfo } from '@/types/dataTypes';
 
 export interface ISelectedMemberProps {
   selectedMember: string;
@@ -15,15 +15,24 @@ interface Props {
 }
 
 function SelectedMemberContextProvider({ children }: Props) {
-  const [selectedMember, setSelectedMember] = useState("");
+  const [selectedMember, setSelectedMember] = useState(() => {
+    const memberSelected = localStorage.getItem('selectedMember');
+    if (memberSelected === null || memberSelected === null) return '';
+    return memberSelected;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('selectedMember', selectedMember);
+  }, [selectedMember]);
+
   const { members } = useChannels();
   const selectedMemberObject = members?.find(
-    (member) => member.channel_handle === `${selectedMember}`,
+    (member) => member.channel_handle === `${selectedMember}`
   );
 
   const selectedMemberContextObject = useMemo(
     () => ({ selectedMember, setSelectedMember, selectedMemberObject }),
-    [selectedMember, selectedMemberObject],
+    [selectedMember, selectedMemberObject]
   );
 
   return (

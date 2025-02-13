@@ -13,6 +13,18 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* Hide scrollbar but allow scrolling */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 body {
   margin: 0;
   display: flex;
@@ -25,6 +37,7 @@ body {
   width: 100%;
 }
 
+/* Uncomment for CSS debugging */
 /* * {
   outline: 1px solid white;
 } */

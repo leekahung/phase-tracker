@@ -1,4 +1,5 @@
-import { useSelectedMember } from '../../hooks/useSelectedMember';
+import { useSelectedMember } from '@/hooks/useSelectedMember';
+import { Link } from 'react-router';
 
 export default function Member(): React.JSX.Element {
   const { selectedMemberObject } = useSelectedMember();
@@ -21,9 +22,22 @@ export default function Member(): React.JSX.Element {
             <th>View Count</th>
             <td>{selectedMemberObject?.viewCount.toLocaleString()}</td>
           </tr>
-          <tr>
+          <tr className="border-b border-slate-300">
             <th>Video Count</th>
             <td>{selectedMemberObject?.videoCount.toLocaleString()}</td>
+          </tr>
+          <tr>
+            <th>Link to Channel</th>
+            <td>
+              <Link
+                className="underline"
+                to={`https://www.youtube.com/${selectedMemberObject?.channel_handle}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Link
+              </Link>
+            </td>
           </tr>
         </tbody>
       </table>
