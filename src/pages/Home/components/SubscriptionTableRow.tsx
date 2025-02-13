@@ -27,7 +27,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
       <td className="p-2 sm:p-4">
         <div>
           <Link
-            className="flex flex-col items-center justify-center underline"
+            className="flex flex-col items-center justify-center underline hover:text-slate-100"
             to={`https://www.youtube.com/${member.channel_handle}`}
             rel="noopener noreferrer"
             target="_blank"
@@ -47,7 +47,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
       <td className="p-2 sm:p-4">{member.subscribers.toLocaleString()}</td>
       <td className="p-2 sm:p-4">
         <Link
-          className="hover:text-slate-10 underline"
+          className="underline hover:text-slate-100"
           to={`/member/${member.channel_handle.slice(1)}`}
           onClick={() => setSelectedMember(member.channel_handle)}
         >

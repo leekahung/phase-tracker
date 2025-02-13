@@ -26,7 +26,10 @@ export default function Sidebar(): React.JSX.Element {
     <aside className="drawer z-10">
       <input id="sidebar" type="checkbox" className="drawer-toggle" ref={inputRef} />
       <div className="drawer-content">
-        <label htmlFor="sidebar" className="btn btn-circle drawer-button border-0 bg-transparent">
+        <label
+          htmlFor="sidebar"
+          className="btn btn-circle drawer-button border-0 bg-transparent text-slate-300"
+        >
           <HamburgerMenuSVG />
         </label>
       </div>

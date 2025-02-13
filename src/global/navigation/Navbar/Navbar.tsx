@@ -9,7 +9,7 @@ export default function Navbar(): React.JSX.Element {
     <nav className="flex items-center justify-between p-4">
       <Sidebar />
       <Link
-        className="btn btn-circle border-0 bg-transparent text-slate-200"
+        className="btn btn-circle border-0 bg-transparent text-slate-300"
         to="/"
         onClick={() => setSelectedMember('')}
       >
