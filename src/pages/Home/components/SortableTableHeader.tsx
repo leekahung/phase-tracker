@@ -19,7 +19,7 @@ export default function SortableTableHeader({
       {`${column
         .split('_')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ')} `}
+        .join(' ')}`}
       {sortBy === column && sortDirection === 'desc' ? <>&darr;</> : <>&uarr;</>}
     </th>
   );

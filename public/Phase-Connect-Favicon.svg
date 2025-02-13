@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   sodipodi:docname="Phase-Connect-Favicon.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.1064442"
+     inkscape:cx="99.148731"
+     inkscape:cy="87.720874"
+     inkscape:window-width="1680"
+     inkscape:window-height="960"
+     inkscape:window-x="1717"
+     inkscape:window-y="177"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="logo background">
+    <rect
+       style="fill:#000000"
+       id="rect1"
+       width="200.22893"
+       height="200.22893"
+       x="0.32191122"
+       y="8.1510598e-07" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="logo icon">
+    <path
+       id="rect2-4"
+       style="fill:#ffffff;stroke-width:1.22717"
+       inkscape:label="rect2-4"
+       d="M 130.29039 50.815624 L 189.11365 100.28063 L 189.11169 149.7505 L 231.08044 149.7505 L 231.08283 100.28792 L 231.09064 100.28792 L 231.0824 100.28063 L 172.25914 50.815624 L 130.29039 50.815624 z "
+       transform="matrix(1,0,-0.59458512,0.80403267,0,0)" />
+    <path
+       style="fill:#ffffff;stroke-width:0.323095"
+       d="m 30.000275,159.84616 c -0.240916,-0.1543 4.686707,-7.07849 14.079785,-19.78461 l 14.450411,-19.54723 20.751056,-0.0832 c 17.286158,-0.0693 20.707692,-0.0108 20.491348,0.35029 -0.142837,0.2384 -6.729678,9.17958 -14.637421,19.8693 l -14.377714,19.43585 -20.193419,-0.002 c -11.106381,-3.4e-4 -20.360201,-0.10785 -20.564046,-0.2384 z"
+       id="path25"
+       inkscape:label="path25" />
+  </g>
+</svg>
