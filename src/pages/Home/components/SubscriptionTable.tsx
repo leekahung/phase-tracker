@@ -57,7 +57,6 @@ export default function SubscriptionTable(): React.JSX.Element {
             );
           })}
           <th className="p-2 sm:p-4 sm:text-base">Channel Info</th>
-          <th className="hidden sm:table-cell sm:p-4 sm:text-base">Data From</th>
         </tr>
       </thead>
       {isError ? (

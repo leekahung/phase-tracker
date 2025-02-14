@@ -20,13 +20,13 @@ export default function GenerationLinks({ generation, members }: Props): React.J
   }, [location]);
 
   return (
-    <div className="collapse collapse-arrow">
+    <div className="collapse collapse-arrow px-2">
       <input type="checkbox" ref={inputRef} />
       <div className="collapse-title flex items-center">
         <strong>{generation}</strong>
       </div>
       <div className="collapse-content">
-        <ul>
+        <ul className="flex flex-col gap-2">
           {members.map((member) => (
             <li key={member.id}>
               <NavLink
