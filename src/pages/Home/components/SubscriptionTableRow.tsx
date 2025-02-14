@@ -54,7 +54,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
           Info
         </Link>
       </td>
-      <td className="hidden w-[160px] sm:table-cell sm:p-4">
+      <td className="hidden sm:table-cell sm:p-4">
         <div className="flex flex-col">
           <span>{`${new Date(member.updated_at).toLocaleDateString()}`}</span>
           <span>{`${new Date(member.updated_at).toLocaleTimeString()}`}</span>

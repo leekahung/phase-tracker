@@ -1,8 +1,8 @@
-import { Outlet, useLocation } from "react-router";
-import PageLayout from "./layout/PageLayout";
-import { Home } from "./pages/Home/Home";
-import { useEffect } from "react";
-import { SelectedMemberContextProvider } from "./contexts/SelectedMemberContext";
+import { Outlet, useLocation } from 'react-router';
+import PageLayout from './layout/PageLayout';
+import { useEffect } from 'react';
+import { SelectedMemberContextProvider } from './contexts/SelectedMemberContext';
+import Home from './pages/Home/Home';
 
 function App() {
   const { pathname } = useLocation();
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <SelectedMemberContextProvider>
-      <PageLayout>{pathname === "/" ? <Home /> : <Outlet />}</PageLayout>
+      <PageLayout>{pathname === '/' ? <Home /> : <Outlet />}</PageLayout>
     </SelectedMemberContextProvider>
   );
 }
