@@ -26,7 +26,13 @@ export default function Sidebar(): React.JSX.Element {
 
   return (
     <aside className="drawer z-10">
-      <input id="sidebar" type="checkbox" className="drawer-toggle" ref={inputRef} />
+      <input
+        aria-label="toggle sidebar"
+        id="sidebar"
+        type="checkbox"
+        className="drawer-toggle"
+        ref={inputRef}
+      />
       <div className="drawer-content">
         <label
           htmlFor="sidebar"
@@ -38,7 +44,7 @@ export default function Sidebar(): React.JSX.Element {
       <div className="drawer-side">
         <label htmlFor="sidebar" aria-label="close sidebar" className="drawer-overlay" />
         <ul className="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
-          <strong className="flex flex-col gap-2 px-2 text-base">
+          <div className="flex flex-col gap-4 px-2 text-base">
             <li>
               <NavLink
                 to="/"
@@ -46,7 +52,7 @@ export default function Sidebar(): React.JSX.Element {
                   setSelectedMember('');
                 }}
               >
-                Home
+                <strong className="text-slate-300">Home</strong>
               </NavLink>
             </li>
             <li>
@@ -56,12 +62,11 @@ export default function Sidebar(): React.JSX.Element {
                   setSelectedMember('');
                 }}
               >
-                About
+                <strong className="text-slate-300">About</strong>
               </NavLink>
             </li>
-          </strong>
-          <div className="my-4 w-[95%] border-t border-slate-300" />
-          <strong className="px-2 pb-2 text-base">Generation</strong>
+          </div>
+          <hr className="my-4" />
           {groupedByGen !== undefined &&
             Object.entries(groupedByGen).map(([generation, members]) => (
               <GenerationLinks generation={generation} members={members} key={generation} />

@@ -21,8 +21,8 @@ export default function GenerationLinks({ generation, members }: Props): React.J
 
   return (
     <div className="collapse collapse-arrow px-2">
-      <input type="checkbox" ref={inputRef} />
-      <div className="collapse-title flex items-center">
+      <input aria-label="collapse links" type="checkbox" ref={inputRef} />
+      <div className="collapse-title flex items-center text-base">
         <strong>{generation}</strong>
       </div>
       <div className="collapse-content">

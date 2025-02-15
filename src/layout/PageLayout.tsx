@@ -45,6 +45,7 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
         type="button"
       >
         <ChevronUpSVG />
+        <span className="sr-only">scroll to top</span>
       </button>
     </>
   );

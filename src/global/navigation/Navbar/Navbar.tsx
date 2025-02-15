@@ -14,6 +14,7 @@ export default function Navbar(): React.JSX.Element {
         onClick={() => setSelectedMember('')}
       >
         <HomeIconSVG />
+        <span className="sr-only">to home</span>
       </Link>
     </nav>
   );
