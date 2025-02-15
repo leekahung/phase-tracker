@@ -1,6 +1,6 @@
 export default function About(): React.JSX.Element {
   return (
-    <div className="m-4 flex flex-col items-center gap-4 sm:h-[calc(100vh-80px-32px-100px)]">
+    <div className="m-4 flex flex-col items-center gap-4">
       <div className="flex w-[95%] flex-col gap-4">
         <h2 className="text-xl">
           <strong>Purpose</strong>

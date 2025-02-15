@@ -7,7 +7,7 @@ export default function Member(): React.JSX.Element {
   const { selectedMemberObject } = useSelectedMember();
 
   return (
-    <div className="flex h-[calc(100vh-80px-50px)] flex-col items-center justify-center gap-4 sm:h-[calc(100vh-80px-100px)]">
+    <div className="flex h-full flex-col items-center justify-center gap-4">
       {selectedMemberObject !== undefined ? (
         <>
           <div className="flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center text-slate-300 sm:w-[400px] sm:border sm:border-slate-300">

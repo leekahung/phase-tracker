@@ -1,0 +1,14 @@
+name: Update Supabase Tables
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # Runs every day at 12:00 UTC
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  trigger-netlify-function:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Netlify Function
+        run: |
+          curl -X GET "https://phase-connect-tracker.netlify.app/.netlify/functions/updateTables"

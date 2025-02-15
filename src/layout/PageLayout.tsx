@@ -27,24 +27,20 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
 
   return (
     <>
-      <div>
+      <div className="grid min-h-screen grid-rows-[80px_1fr_80px]">
         <header>
           <Navbar />
         </header>
         <main ref={mainRef}>{children}</main>
-        <footer className="relative p-4 pb-10">
-          <div className="flex h-10 flex-col items-center justify-center gap-2 text-sm">
-            <span>Created by leekahung</span>
-            <em className="text-center">
-              The creator is not affiliated with Phase Connect or any of their affiliated members
-            </em>
-          </div>
+        <footer className="flex flex-col items-center justify-center gap-2 text-sm">
+          <span>Created by leekahung</span>
         </footer>
       </div>
       <button
         className={`fixed bottom-0 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-slate-700 transition sm:h-12 sm:w-12 ${showButton ? '-translate-y-4 opacity-100' : 'pointer-events-none opacity-0'}`}
         onClick={() => {
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          setShowButton(false);
         }}
         type="button"
       >
