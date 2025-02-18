@@ -17,9 +17,8 @@ export default function About(): React.JSX.Element {
           <strong>Affiliation</strong>
         </h2>
         <p>
-          As stated in the footer from the main page, this fan site is not affiliated with Phase
-          Connect or any of its members. It's also not affiliated with any other projects/fan sites
-          that tracks VTuber subscription numbers.
+          This fan site is not affiliated with Phase Connect or any of its members nor is it
+          affiliated with any other projects/fan sites that tracks VTuber subscription numbers.
         </p>
       </div>
       <div className="my-4 w-[95%] border-t border-slate-300" />
