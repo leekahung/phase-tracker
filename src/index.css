@@ -25,16 +25,19 @@ body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
 
+html,
+body {
+  overflow-y: auto;
+  height: auto;
+}
+
 body {
   margin: 0;
-  display: flex;
-  min-width: 280px;
-  min-height: 100vh;
-  overscroll-behavior: none;
+  overscroll-behavior: auto;
 }
 
 #root {
-  width: 100%;
+  min-height: 100vh; /* Ensures body handles scrolling */
 }
 
 /* Uncomment for CSS debugging */

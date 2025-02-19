@@ -21,7 +21,7 @@ export default function useChannels(): IUseChannels {
       .map((member) => {
         return {
           ...member,
-          channel_name: member.channel_name.replace('【Phase Connect】', '').trim(),
+          channelName: member.channelName.replace('【Phase Connect】', '').trim(),
           generation: member.generation.replace('Phase', '').trim(),
         };
       }),

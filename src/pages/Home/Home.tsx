@@ -10,8 +10,8 @@ export default function Home(): React.JSX.Element {
       <h2 className="text-xl">YouTube Subscription Count</h2>
       {members !== undefined && (
         <em>
-          Last Updated: {new Date(members[0].updated_at).toLocaleDateString()} -{' '}
-          {new Date(members[0].updated_at).toLocaleTimeString()}
+          Last Updated: {new Date(members[0].updatedAt).toLocaleDateString()} -{' '}
+          {new Date(members[0].updatedAt).toLocaleTimeString()}
         </em>
       )}
       <SubscriptionTable />

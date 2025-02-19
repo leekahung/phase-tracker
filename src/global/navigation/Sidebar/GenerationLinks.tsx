@@ -30,12 +30,12 @@ export default function GenerationLinks({ generation, members }: Props): React.J
           {members.map((member) => (
             <li key={member.id}>
               <NavLink
-                to={`/member/${member.channel_handle.slice(1)}`}
+                to={`/member/${member.channelHandle.slice(1)}`}
                 onClick={() => {
-                  setSelectedMember(member.channel_handle);
+                  setSelectedMember(member.channelHandle);
                 }}
               >
-                {member.channel_name}
+                {member.channelName}
               </NavLink>
             </li>
           ))}

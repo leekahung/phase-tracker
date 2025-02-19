@@ -30,7 +30,7 @@ export default function MemberTable({ selectedMemberObject }: Props): React.JSX.
           <td>
             <Link
               className="underline"
-              to={`https://www.youtube.com/${selectedMemberObject?.channel_handle}`}
+              to={`https://www.youtube.com/${selectedMemberObject?.channelHandle}`}
               rel="noopener noreferrer"
               target="_blank"
             >

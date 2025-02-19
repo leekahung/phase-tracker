@@ -47,16 +47,18 @@ interface IChannelResponse {
 }
 
 interface IMemberInfo {
-  channel_handle: string;
+  channelHandle: string;
   generation: string;
   status: 'active' | 'retired';
   id: number;
   subscribers: number;
-  channel_image: string;
-  channel_name: string;
-  updated_at: string;
+  channelImage: string;
+  channelName: string;
+  updatedAt: string;
   viewCount: number;
   videoCount: number;
+  memberNameEN: string;
+  memberNameJP: string;
 }
 
 export type { IChannelStats, IChannelResponse, IMemberInfo };

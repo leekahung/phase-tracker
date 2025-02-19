@@ -13,10 +13,10 @@ export default function Member(): React.JSX.Element {
           <div className="flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center text-slate-300 sm:w-[400px] sm:border sm:border-slate-300">
             <img
               className="rounded-full"
-              src={selectedMemberObject?.channel_image}
+              src={selectedMemberObject?.channelImage}
               alt="channel image"
             />
-            <h1 className="text-3xl">{selectedMemberObject?.channel_name}</h1>
+            <h1 className="text-3xl">{selectedMemberObject?.channelName}</h1>
             <MemberTable selectedMemberObject={selectedMemberObject} />
           </div>
           <Link className="text-slate-300 underline" to="/">

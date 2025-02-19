@@ -3,47 +3,57 @@ import { supabase } from '../utils/setupDatabase.mts';
 import fetchYouTubeData from '../utils/fetchYouTubeData.mts';
 
 export default async () => {
+  const errors: { member: string; error: string }[] = [];
+
   await Promise.all(
     phaseConnectMembers.map(async (member) => {
       if (member.status === 'active') {
         const results = await fetchYouTubeData(member.channelHandle);
         const { statistics, snippet } = results.items[0];
         const rowData = {
-          channel_handle: member.channelHandle,
+          channelHandle: member.channelHandle,
           generation: member.generation,
           status: member.status,
+          memberNameEN: member.memberNameEN,
+          memberNameJP: member.memberNameJP,
           subscribers: statistics.subscriberCount,
           viewCount: statistics.viewCount,
           videoCount: statistics.videoCount,
-          updated_at: new Date().toISOString(),
-          channel_name: snippet.title,
-          channel_image: snippet.thumbnails.default.url,
+          updatedAt: new Date().toISOString(),
+          channelName: snippet.title,
+          channelImage: snippet.thumbnails.default.url,
         };
         const { error } = await supabase
           .from('phase_channels')
-          .upsert([rowData], { onConflict: 'channel_handle' });
+          .upsert([rowData], { onConflict: 'channelHandle' });
 
         if (error) {
-          return new Response(
-            JSON.stringify({
-              message: 'Error updating channel',
-              error: error.message,
-            }),
-            {
-              status: 500,
-            }
-          );
+          errors.push({ member: member.channelHandle, error: error.message });
         }
+      } else {
+        const { error } = await supabase
+          .from('phase_channels')
+          .delete()
+          .eq('channelHandle', member.channelHandle);
 
-        return new Response(
-          JSON.stringify({
-            message: 'Channel fetched',
-          }),
-          {
-            status: 200,
-          }
-        );
+        if (error) {
+          errors.push({ member: member.channelHandle, error: error.message });
+        }
       }
     })
   );
+
+  if (errors.length > 0) {
+    return new Response(
+      JSON.stringify({
+        message: 'Unable to update channel',
+        errors,
+      }),
+      { status: 500 }
+    );
+  }
+
+  return new Response(JSON.stringify({ message: 'Channels updated successfully' }), {
+    status: 200,
+  });
 };

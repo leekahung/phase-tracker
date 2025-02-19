@@ -45,7 +45,7 @@ export default function SubscriptionTable(): React.JSX.Element {
       <thead>
         <tr className="border-b border-slate-300 text-sm text-slate-300 sm:text-base">
           <th className="hidden sm:table-cell sm:p-4">Channel Icon</th>
-          {['channel_name', 'generation', 'subscribers'].map((header) => {
+          {['channel name', 'generation', 'subscribers'].map((header) => {
             return (
               <SortableTableHeader
                 column={header}

@@ -27,7 +27,7 @@ function SelectedMemberContextProvider({ children }: Props) {
 
   const { members } = useChannels();
   const selectedMemberObject = members?.find(
-    (member) => member.channel_handle === `${selectedMember}`
+    (member) => member.channelHandle === `${selectedMember}`
   );
 
   const selectedMemberContextObject = useMemo(

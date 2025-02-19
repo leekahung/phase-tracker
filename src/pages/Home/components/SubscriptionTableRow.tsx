@@ -16,7 +16,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
       <td className="hidden sm:table-cell sm:p-4">
         <div className="flex items-center justify-center">
           <img
-            src={member.channel_image}
+            src={member.channelImage}
             alt="channel image"
             height="60px"
             width="60px"
@@ -28,18 +28,18 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
         <div>
           <Link
             className="flex flex-col items-center justify-center underline hover:text-slate-100"
-            to={`https://www.youtube.com/${member.channel_handle}`}
+            to={`https://www.youtube.com/${member.channelHandle}`}
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
-              src={member.channel_image}
+              src={member.channelImage}
               alt="channel image"
               height="60px"
               width="60px"
               className="rounded-full sm:hidden"
             />
-            {member.channel_name}
+            {member.channelName}
           </Link>
         </div>
       </td>
@@ -48,8 +48,8 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
       <td className="p-2 sm:p-4">
         <Link
           className="underline hover:text-slate-100"
-          to={`/member/${member.channel_handle.slice(1)}`}
-          onClick={() => setSelectedMember(member.channel_handle)}
+          to={`/member/${member.channelHandle.slice(1)}`}
+          onClick={() => setSelectedMember(member.channelHandle)}
         >
           Info
         </Link>

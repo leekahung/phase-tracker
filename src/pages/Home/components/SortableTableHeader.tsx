@@ -17,7 +17,7 @@ export default function SortableTableHeader({
       onClick={() => handleSort(column)}
     >
       {`${column
-        .split('_')
+        .split(' ')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ')}`}
       {sortBy === column && <>{sortDirection === 'desc' ? <>&darr;</> : <>&uarr;</>}</>}
