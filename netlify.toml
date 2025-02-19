@@ -1,2 +1,7 @@
 [build]
   command = "npm run build && npm run postbuild"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
