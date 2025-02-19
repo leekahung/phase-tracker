@@ -10,6 +10,14 @@ export default function MemberTable({ selectedMemberObject }: Props): React.JSX.
     <table className="table max-w-sm text-center text-sm sm:text-base">
       <tbody>
         <tr className="border-b border-slate-300">
+          <th>Name (EN)</th>
+          <td>{selectedMemberObject?.memberNameEN}</td>
+        </tr>
+        <tr className="border-b border-slate-300">
+          <th>Name (JP)</th>
+          <td>{selectedMemberObject?.memberNameJP}</td>
+        </tr>
+        <tr className="border-b border-slate-300">
           <th>Generation</th>
           <td>{selectedMemberObject?.generation}</td>
         </tr>

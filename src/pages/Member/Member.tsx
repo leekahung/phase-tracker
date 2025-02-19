@@ -15,8 +15,10 @@ export default function Member(): React.JSX.Element {
               className="rounded-full"
               src={selectedMemberObject?.channelImage}
               alt="channel image"
+              height="80px"
+              width="80px"
             />
-            <h1 className="text-3xl">{selectedMemberObject?.channelName}</h1>
+            <h1 className="text-2xl">{selectedMemberObject?.channelName}</h1>
             <MemberTable selectedMemberObject={selectedMemberObject} />
           </div>
           <Link className="text-slate-300 underline" to="/">
@@ -26,9 +28,9 @@ export default function Member(): React.JSX.Element {
       ) : (
         <>
           <table className="table max-w-sm text-center text-sm sm:text-base">
-            <thead>
+            <tbody>
               <TableLoading />
-            </thead>
+            </tbody>
           </table>
         </>
       )}
