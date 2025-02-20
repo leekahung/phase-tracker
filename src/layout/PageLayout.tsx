@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import ChevronUpSVG from '@/assets/ChevronUpSVG';
 import Navbar from '@/global/navigation/Navbar/Navbar';
+import { useLocation } from 'react-router';
 
 interface Props {
   children: React.JSX.Element;
 }
 
 export default function PageLayout({ children }: Props): React.JSX.Element {
+  const { pathname } = useLocation();
   const [showButton, setShowButton] = useState(false);
   const mainRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setShowButton(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
