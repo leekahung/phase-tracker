@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import useChannels from '@/hooks/useChannels';
 import type { IMemberInfo } from '@/types/dataTypes';
 import SortableTableHeader from './SortableTableHeader';
 import SubscriptionTableRow from './SubscriptionTableRow';
 import TableError from '@/global/components/TableError';
-import TableLoading from '@/global/components/TableLoading';
+import TableLoadingRow from '@/global/components/TableLoadingRow';
 
 export default function SubscriptionTable(): React.JSX.Element {
   const { members, isLoading, isError } = useChannels();
@@ -63,13 +63,15 @@ export default function SubscriptionTable(): React.JSX.Element {
         <TableError />
       ) : (
         <tbody>
-          {isLoading ? (
-            <TableLoading />
-          ) : (
-            sortedData?.map((member) => {
-              return <SubscriptionTableRow member={member} key={member.id} />;
-            })
-          )}
+          {isLoading
+            ? Array.from({ length: 20 }, (_, i) => (
+                <Fragment key={i}>
+                  <TableLoadingRow />
+                </Fragment>
+              ))
+            : sortedData?.map((member) => {
+                return <SubscriptionTableRow member={member} key={member.id} />;
+              })}
         </tbody>
       )}
     </table>

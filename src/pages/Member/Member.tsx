@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
-import TableLoading from '@/global/components/TableLoading';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 import MemberTable from './components/MemberTable';
+import CardLoading from '@/global/components/CardLoading';
 
 export default function Member(): React.JSX.Element {
   const { selectedMemberObject } = useSelectedMember();
@@ -31,7 +31,7 @@ export default function Member(): React.JSX.Element {
             <div className="h-6 w-[200px] animate-pulse rounded-full bg-slate-700" />
             <table className="table max-w-sm text-center text-sm sm:text-base">
               <tbody>
-                <TableLoading small />
+                <CardLoading />
               </tbody>
             </table>
           </>
