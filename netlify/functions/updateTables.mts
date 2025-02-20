@@ -31,21 +31,6 @@ export default async () => {
         if (channelsError) {
           errors.push({ member: member.channelHandle, error: channelsError.message });
         }
-
-        const { error: countError } = await supabase.from('subscriber_count').upsert(
-          [
-            {
-              channelId: id,
-              dateCollected: rowData.updatedAt.split('T')[0],
-              subscriberCount: rowData.subscribers,
-            },
-          ],
-          { onConflict: 'channelId' }
-        );
-
-        if (countError) {
-          errors.push({ member: member.channelHandle, error: countError.message });
-        }
       } else {
         const { error } = await supabase
           .from('phase_channels')
