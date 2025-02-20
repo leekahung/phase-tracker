@@ -9,7 +9,7 @@ export default async () => {
     phaseConnectMembers.map(async (member) => {
       if (member.status === 'active') {
         const results = await fetchYouTubeData(member.channelHandle);
-        const { statistics, snippet } = results.items[0];
+        const { statistics, snippet, id } = results.items[0];
         const rowData = {
           channelHandle: member.channelHandle,
           generation: member.generation,
@@ -22,13 +22,29 @@ export default async () => {
           updatedAt: new Date().toISOString(),
           channelName: snippet.title,
           channelImage: snippet.thumbnails.default.url,
+          channelId: id,
         };
-        const { error } = await supabase
+        const { error: channelsError } = await supabase
           .from('phase_channels')
           .upsert([rowData], { onConflict: 'channelHandle' });
 
-        if (error) {
-          errors.push({ member: member.channelHandle, error: error.message });
+        if (channelsError) {
+          errors.push({ member: member.channelHandle, error: channelsError.message });
+        }
+
+        const { error: countError } = await supabase.from('subscriber_count').upsert(
+          [
+            {
+              collectionTime: rowData.updatedAt.split('T')[0],
+              channelId: id,
+              subscriberCount: rowData.subscribers,
+            },
+          ],
+          { onConflict: 'collectionTime, channelId' }
+        );
+
+        if (countError) {
+          errors.push({ member: member.channelHandle, error: countError.message });
         }
       } else {
         const { error } = await supabase
