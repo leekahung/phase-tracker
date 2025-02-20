@@ -13,15 +13,16 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
   useEffect(() => {
     const handleScroll = () => {
       if (mainRef.current !== null) {
-        const elementPositionTop = mainRef.current.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        setShowButton(
-          window.scrollY > elementPositionTop + mainRef.current.offsetHeight - windowHeight
-        );
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollPercentage = ((window.scrollY + windowHeight) / documentHeight) * 100;
+
+        setShowButton(scrollPercentage > 80 && window.scrollY > 0);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
