@@ -14,7 +14,7 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setShowButton(false);
+    requestAnimationFrame(() => setShowButton(false));
   }, [pathname]);
 
   useEffect(() => {
@@ -24,14 +24,18 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
         const documentHeight = document.documentElement.scrollHeight;
         const scrollPercentage = ((window.scrollY + windowHeight) / documentHeight) * 100;
 
-        setShowButton(scrollPercentage > 80 && window.scrollY > 0);
+        if (documentHeight < 1000) {
+          setShowButton(scrollPercentage > 95);
+        } else {
+          setShowButton(scrollPercentage > 40);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
