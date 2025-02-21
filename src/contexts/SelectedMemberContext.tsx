@@ -1,7 +1,7 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 import useChannels from '@/hooks/useChannels';
 import { IMemberData, IMemberInfo } from '@/types/dataTypes';
-import { useQuery } from '@tanstack/react-query';
+import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
 
 async function fetchMemberData(channelId: string) {
   const response = await fetch('/.netlify/functions/getMemberData', {
@@ -18,6 +18,7 @@ export interface ISelectedMemberProps {
   setSelectedMember: React.Dispatch<React.SetStateAction<string>>;
   selectedMemberObject: IMemberInfo | undefined;
   subscriberData: IMemberData[] | undefined;
+  refetchData: (options?: RefetchOptions) => Promise<QueryObserverResult<unknown, Error>>;
 }
 
 const SelectedMemberContext = createContext<ISelectedMemberProps | null>(null);
@@ -46,21 +47,24 @@ function SelectedMemberContextProvider({ children }: Props) {
     localStorage.setItem('channelId', selectedMemberObject?.channelId as string);
   }, [selectedMemberObject?.channelId]);
 
-  const { data: subscriberData } = useQuery({
+  const { data: subscriberData, refetch: refetchData } = useQuery({
     queryKey: ['member-data', selectedMember],
     queryFn: async () => {
       const channelId = localStorage.getItem('channelId');
-      if (channelId !== undefined) {
-        return await fetchMemberData(channelId as string);
-      }
+      return await fetchMemberData(channelId as string);
     },
+    refetchOnWindowFocus: true,
   });
 
-  console.log(subscriberData);
-
   const selectedMemberContextObject = useMemo(
-    () => ({ selectedMember, setSelectedMember, selectedMemberObject, subscriberData }),
-    [selectedMember, selectedMemberObject, subscriberData]
+    () => ({
+      selectedMember,
+      setSelectedMember,
+      selectedMemberObject,
+      subscriberData,
+      refetchData,
+    }),
+    [selectedMember, selectedMemberObject, subscriberData, refetchData]
   );
 
   return (

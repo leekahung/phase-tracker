@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 import MemberTable from './components/MemberTable';
 import CardLoading from '@/global/components/CardLoading';
-import LineChart from '@/global/components/LineChart';
+import LineChart from '@/global/components/D3Objects/LineChart';
 
 export default function Member(): React.JSX.Element {
   const { selectedMemberObject, subscriberData } = useSelectedMember();

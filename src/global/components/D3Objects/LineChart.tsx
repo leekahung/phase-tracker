@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { IMemberData } from '@/types/dataTypes';
 import { useEffect, useRef } from 'react';
+import { useSelectedMember } from '@/hooks/useSelectedMember';
 
 const margin = { top: 20, right: 80, bottom: 40, left: 80 };
 
@@ -11,6 +12,18 @@ interface Props {
 export default function LineChart({ data }: Props): React.JSX.Element {
   const width = 700;
   const height = 500;
+  const { refetchData } = useSelectedMember();
+
+  useEffect(() => {
+    const navigationEntries = performance.getEntriesByType('navigation');
+    if (
+      data.length === 0 &&
+      navigationEntries.length > 0 &&
+      (navigationEntries[0] as PerformanceNavigationTiming).type === 'reload'
+    ) {
+      setTimeout(refetchData, 20);
+    }
+  }, [data, refetchData]);
 
   const chartRef = useRef<SVGSVGElement | null>(null);
   const dataArray = data?.map((item) => {
@@ -100,12 +113,8 @@ export default function LineChart({ data }: Props): React.JSX.Element {
         tooltip.style('display', 'none');
       });
 
-    svg
-      .attr('viewBox', `0 0 ${width} ${height}`)
-      .attr('preserveAspectRatio', 'xMinYMin meet')
-      .attr('width', '100%')
-      .attr('height', 'auto');
+    svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
   }, [dataArray, height, width]);
 
-  return <svg ref={chartRef} width={width} height={height} />;
+  return <svg ref={chartRef} className="h-auto w-[90%] sm:w-[70%]" />;
 }

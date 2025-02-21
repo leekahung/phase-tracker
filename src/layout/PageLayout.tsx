@@ -27,7 +27,7 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
         if (documentHeight < 1000) {
           setShowButton(scrollPercentage > 95);
         } else {
-          setShowButton(scrollPercentage > 40);
+          setShowButton(scrollPercentage > 70);
         }
       }
     };
