@@ -5,6 +5,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 export default function Navbar(): React.JSX.Element {
   const { setSelectedMember } = useSelectedMember();
+
   return (
     <nav className="flex items-center justify-between p-4">
       <Sidebar />

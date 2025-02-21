@@ -59,6 +59,13 @@ interface IMemberInfo {
   videoCount: number;
   memberNameEN: string;
   memberNameJP: string;
+  channelId: string;
 }
 
-export type { IChannelStats, IChannelResponse, IMemberInfo };
+interface IMemberData {
+  channelId: string;
+  subscribers: number;
+  dateCollected: string;
+}
+
+export type { IChannelStats, IChannelResponse, IMemberInfo, IMemberData };

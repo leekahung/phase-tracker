@@ -2,9 +2,10 @@ import { Link } from 'react-router';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 import MemberTable from './components/MemberTable';
 import CardLoading from '@/global/components/CardLoading';
+import LineChart from '@/global/components/LineChart';
 
 export default function Member(): React.JSX.Element {
-  const { selectedMemberObject } = useSelectedMember();
+  const { selectedMemberObject, subscriberData } = useSelectedMember();
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
@@ -40,6 +41,21 @@ export default function Member(): React.JSX.Element {
       <Link className="text-slate-300 underline" to="/">
         Back
       </Link>
+      <hr className="my-4 h-[1px] w-[95%]" />
+      {subscriberData !== null && subscriberData !== undefined ? (
+        <>
+          <h2 className="text-2xl">Subscriber Count</h2>
+          <LineChart data={subscriberData} />
+        </>
+      ) : (
+        <>
+          <h2 className="text-2xl">Subscriber Count</h2>
+          <div className="flex h-[500px] w-screen flex-col items-center justify-center gap-4">
+            Loading plot...
+            <div className="loading loading-ring h-10 w-10" />
+          </div>
+        </>
+      )}
     </div>
   );
 }
