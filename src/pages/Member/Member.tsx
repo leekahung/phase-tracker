@@ -3,9 +3,10 @@ import { useSelectedMember } from '@/hooks/useSelectedMember';
 import MemberTable from './components/MemberTable';
 import CardLoading from '@/global/components/CardLoading';
 import LineChart from '@/global/components/D3Objects/LineChart';
+import RefreshIconSVG from '@/assets/RefreshIconSVG';
 
 export default function Member(): React.JSX.Element {
-  const { selectedMemberObject, subscriberData } = useSelectedMember();
+  const { selectedMemberObject, subscriberData, refetchData } = useSelectedMember();
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
@@ -44,7 +45,16 @@ export default function Member(): React.JSX.Element {
       <hr className="my-4 h-[1px] w-[95%]" />
       {subscriberData !== null && subscriberData !== undefined ? (
         <>
-          <h2 className="text-2xl">Subscriber Count</h2>
+          <div className="relative flex items-center">
+            <h2 className="text-2xl">Subscriber Count</h2>
+            <button
+              className="btn absolute -right-14 rounded-full border-0 bg-transparent"
+              type="button"
+              onClick={() => refetchData()}
+            >
+              <RefreshIconSVG />
+            </button>
+          </div>
           <LineChart data={subscriberData} />
         </>
       ) : (

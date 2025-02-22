@@ -21,7 +21,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       navigationEntries.length > 0 &&
       (navigationEntries[0] as PerformanceNavigationTiming).type === 'reload'
     ) {
-      setTimeout(refetchData, 20);
+      setTimeout(refetchData, 100);
     }
   }, [data, refetchData]);
 
