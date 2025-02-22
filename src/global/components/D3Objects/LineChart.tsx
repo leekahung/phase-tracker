@@ -29,6 +29,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
   const dataArray = data?.map((item) => {
     return { dateCollected: new Date(item.dateCollected), subscribers: item.subscribers };
   });
+  console.log(dataArray);
 
   useEffect(() => {
     const svg = d3.select(chartRef.current);
@@ -43,6 +44,10 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .scaleLinear()
       .domain([0, d3.max(dataArray, (d) => 2 * d.subscribers) || 1])
       .range([height - margin.bottom, margin.top]);
+    const line = d3
+      .line<{ dateCollected: Date; subscribers: number }>()
+      .x((d) => x(d.dateCollected))
+      .y((d) => y(d.subscribers));
 
     // Create X axis and grid lines
     svg
@@ -51,7 +56,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .call(
         d3
           .axisBottom(x)
-          .ticks(dateExtent.length)
+          .tickValues(dataArray.map((d) => d.dateCollected))
           .tickSizeOuter(2)
           .tickSize(-height + margin.top + margin.bottom)
           .tickFormat(null)
@@ -82,11 +87,12 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .attr('class', 'tooltip')
       .style('position', 'absolute')
       .style('padding', '5px 10px')
-      .style('background', 'rgba(0, 0,0,0.2)')
+      .style('background', 'rgba(0,0,0)')
       .style('color', 'white')
       .style('border-radius', '4px')
       .style('font-size', '12px')
-      .style('display', 'none');
+      .style('display', 'none')
+      .style('z-index', 50);
 
     // Create data and dot on data point
     svg
@@ -99,7 +105,8 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .attr('cy', (d) => y(d.subscribers))
       .attr('r', 4)
       .attr('fill', 'white')
-      .attr('stroke-width', 1)
+      .attr('stroke', 'white')
+      .attr('stroke-width', 2)
       .on('mouseover', function (event: MouseEvent, d) {
         tooltip
           .style('display', 'inline-block')
@@ -113,8 +120,16 @@ export default function LineChart({ data }: Props): React.JSX.Element {
         tooltip.style('display', 'none');
       });
 
+    svg
+      .append('path')
+      .datum(dataArray)
+      .attr('fill', 'none')
+      .attr('stroke', 'white')
+      .attr('stroke-width', 2)
+      .attr('d', line);
+
     svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
   }, [dataArray, height, width]);
 
-  return <svg ref={chartRef} className="h-auto w-[90%] sm:w-[70%]" />;
+  return <svg ref={chartRef} className="h-auto w-[90%] max-w-[1000px] sm:w-[70%]" />;
 }
