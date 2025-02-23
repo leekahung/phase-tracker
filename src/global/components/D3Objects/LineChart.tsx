@@ -3,7 +3,7 @@ import { IMemberData } from '@/types/dataTypes';
 import { useEffect, useRef } from 'react';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 
-const margin = { top: 20, right: 80, bottom: 40, left: 80 };
+const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 
 interface Props {
   data: IMemberData[];
@@ -62,9 +62,9 @@ export default function LineChart({ data }: Props): React.JSX.Element {
           .tickFormat(null)
       )
       .selectAll('text')
-      .style('font-size', '12px')
-      .text((d) => d3.timeFormat('%m/%d/%Y')(d as Date))
-      .attr('transform', 'translate(0, 5)');
+      .attr('class', 'text-xl sm:text-base')
+      .text((d) => d3.timeFormat('%m/%d/%y')(d as Date))
+      .attr('transform', 'translate(0, 10)');
 
     // Create Y axis and grid lines
     svg
@@ -79,20 +79,15 @@ export default function LineChart({ data }: Props): React.JSX.Element {
           .tickFormat(null)
       )
       .selectAll('text')
-      .style('font-size', '12px');
+      .attr('class', 'text-xl sm:text-base')
+      .attr('transform', 'translate(-5, 0)');
 
     const tooltip = d3
       .select('body')
       .append('div')
-      .attr('class', 'tooltip')
-      .style('position', 'absolute')
-      .style('padding', '5px 10px')
-      .style('background', 'rgba(0,0,0)')
-      .style('color', 'white')
+      .attr('class', 'tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm z-50')
       .style('border-radius', '4px')
-      .style('font-size', '12px')
-      .style('display', 'none')
-      .style('z-index', 50);
+      .style('display', 'none');
 
     // Create data and dot on data point
     svg
@@ -100,12 +95,12 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .data(dataArray)
       .enter()
       .append('circle')
-      .attr('class', 'dot')
+      .attr('class', 'dot cursor-pointer')
       .attr('cx', (d) => x(d.dateCollected))
       .attr('cy', (d) => y(d.subscribers))
       .attr('r', 4)
-      .attr('fill', 'white')
-      .attr('stroke', 'white')
+      .attr('fill', 'lightgray')
+      .attr('stroke', 'lightgray')
       .attr('stroke-width', 2)
       .on('mouseover', function (event: MouseEvent, d) {
         tooltip
@@ -124,7 +119,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .append('path')
       .datum(dataArray)
       .attr('fill', 'none')
-      .attr('stroke', 'white')
+      .attr('stroke', 'lightgray')
       .attr('stroke-width', 2)
       .attr('d', line);
 
