@@ -50,6 +50,7 @@ export default function Member(): React.JSX.Element {
             <button
               className="btn absolute -right-14 rounded-full border-0 bg-transparent"
               type="button"
+              aria-label="refresh data"
               onClick={() => refetchData()}
             >
               <RefreshIconSVG />
