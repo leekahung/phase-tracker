@@ -2,6 +2,14 @@ import { phaseConnectMembers } from '../utils/phaseMembers.mts';
 import { supabase } from '../utils/setupDatabase.mts';
 import fetchYouTubeData from '../utils/fetchYouTubeData.mts';
 
+function camelToSnakeCase(object: Record<string, unknown>) {
+  return Object.fromEntries(
+    Object.entries(object).map(([key, value]) => {
+      return [key.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`), value];
+    })
+  );
+}
+
 export default async () => {
   const errors: { member: string; error: string }[] = [];
 
@@ -14,10 +22,10 @@ export default async () => {
           channelHandle: member.channelHandle,
           generation: member.generation,
           status: member.status,
-          memberNameEN: member.memberNameEN,
-          memberNameJP: member.memberNameJP,
+          memberNameEn: member.memberNameEn,
+          memberNameJp: member.memberNameJp,
           subscribers: statistics.subscriberCount,
-          viewCount: statistics.viewCount,
+          views: statistics.viewCount,
           videoCount: statistics.videoCount,
           updatedAt: new Date().toISOString(),
           channelName: snippet.title,
@@ -25,8 +33,8 @@ export default async () => {
           channelId: id,
         };
         const { error: channelsError } = await supabase
-          .from('phase_channels')
-          .upsert([rowData], { onConflict: 'channelHandle' });
+          .from('phase_members')
+          .upsert([camelToSnakeCase(rowData)], { onConflict: 'channel_handle' });
 
         if (channelsError) {
           errors.push({ member: member.channelHandle, error: channelsError.message });
@@ -36,11 +44,14 @@ export default async () => {
           channelId: id,
           dateCollected: rowData.updatedAt.split('T')[0],
           subscribers: rowData.subscribers,
+          viewCount: rowData.views,
         };
 
         const { error: countError } = await supabase
-          .from('subscriber_count')
-          .upsert([rowDataSubscibers], { onConflict: 'dateCollected,channelId' });
+          .from('member_data')
+          .upsert([camelToSnakeCase(rowDataSubscibers)], {
+            onConflict: 'date_collected,channel_id',
+          });
 
         if (countError) {
           errors.push({ member: member.channelHandle, error: countError.message });
@@ -49,7 +60,7 @@ export default async () => {
         const { error } = await supabase
           .from('phase_channels')
           .delete()
-          .eq('channelHandle', member.channelHandle);
+          .eq('channel_handle', member.channelHandle);
 
         if (error) {
           errors.push({ member: member.channelHandle, error: error.message });

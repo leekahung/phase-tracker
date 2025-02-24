@@ -11,11 +11,11 @@ export default function MemberTable({ selectedMemberObject }: Props): React.JSX.
       <tbody>
         <tr className="border-b border-slate-300">
           <th>Name (EN)</th>
-          <td>{selectedMemberObject?.memberNameEN}</td>
+          <td>{selectedMemberObject?.memberNameEn}</td>
         </tr>
         <tr className="border-b border-slate-300">
           <th>Name (JP)</th>
-          <td>{selectedMemberObject?.memberNameJP}</td>
+          <td>{selectedMemberObject?.memberNameJp}</td>
         </tr>
         <tr className="border-b border-slate-300">
           <th>Generation</th>

@@ -55,7 +55,7 @@ export default function Member(): React.JSX.Element {
               <RefreshIconSVG />
             </button>
           </div>
-          <LineChart data={subscriberData} />
+          <LineChart data={subscriberData} dataLabel="subscribers" />
         </>
       ) : (
         <>

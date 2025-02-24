@@ -57,8 +57,8 @@ interface IMemberInfo {
   updatedAt: string;
   viewCount: number;
   videoCount: number;
-  memberNameEN: string;
-  memberNameJP: string;
+  memberNameEn: string;
+  memberNameJp: string;
   channelId: string;
 }
 

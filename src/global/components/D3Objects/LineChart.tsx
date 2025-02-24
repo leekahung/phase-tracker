@@ -7,9 +7,10 @@ const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 
 interface Props {
   data: IMemberData[];
+  dataLabel: string;
 }
 
-export default function LineChart({ data }: Props): React.JSX.Element {
+export default function LineChart({ data, dataLabel }: Props): React.JSX.Element {
   const width = 700;
   const height = 500;
   const { refetchData } = useSelectedMember();
@@ -27,9 +28,11 @@ export default function LineChart({ data }: Props): React.JSX.Element {
 
   const chartRef = useRef<SVGSVGElement | null>(null);
   const dataArray = data?.map((item) => {
-    return { dateCollected: new Date(item.dateCollected), subscribers: item.subscribers };
+    return {
+      dateCollected: new Date(item.dateCollected.replace('-', '/')),
+      value: item[dataLabel as keyof IMemberData] as number,
+    };
   });
-  console.log(dataArray);
 
   useEffect(() => {
     const svg = d3.select(chartRef.current);
@@ -37,17 +40,20 @@ export default function LineChart({ data }: Props): React.JSX.Element {
     const dateExtent = d3.extent(dataArray, (d) => d.dateCollected) as [Date, Date];
 
     const x = d3
-      .scaleUtc()
+      .scaleTime()
       .domain(dateExtent)
       .range([margin.left, width - margin.right]);
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(dataArray, (d) => 2 * d.subscribers) || 1])
+      .domain([
+        d3.min(dataArray, (d) => 0.9 * d.value) || 0,
+        d3.max(dataArray, (d) => 1.1 * d.value) || 1,
+      ])
       .range([height - margin.bottom, margin.top]);
     const line = d3
-      .line<{ dateCollected: Date; subscribers: number }>()
+      .line<{ dateCollected: Date; value: number }>()
       .x((d) => x(d.dateCollected))
-      .y((d) => y(d.subscribers));
+      .y((d) => y(d.value));
 
     // Create X axis and grid lines
     svg
@@ -97,7 +103,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .append('circle')
       .attr('class', 'dot cursor-pointer')
       .attr('cx', (d) => x(d.dateCollected))
-      .attr('cy', (d) => y(d.subscribers))
+      .attr('cy', (d) => y(d.value))
       .attr('r', 4)
       .attr('fill', 'lightgray')
       .attr('stroke', 'lightgray')
@@ -106,7 +112,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
         tooltip
           .style('display', 'inline-block')
           .html(
-            `Date: ${d.dateCollected.toLocaleDateString()} <br>Subscribers: ${d.subscribers.toLocaleString()}`
+            `Date: ${d.dateCollected.toLocaleDateString()} <br>${dataLabel[0].toUpperCase() + dataLabel.slice(1)}: ${d.value.toLocaleString()}`
           )
           .style('left', `${event.pageX + 5}px`)
           .style('top', `${event.pageY + 5}px`);
@@ -124,7 +130,7 @@ export default function LineChart({ data }: Props): React.JSX.Element {
       .attr('d', line);
 
     svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
-  }, [dataArray, height, width]);
+  }, [dataLabel, dataArray, height, width]);
 
   return <svg ref={chartRef} className="h-auto w-[90%] max-w-[1000px] sm:w-[70%]" />;
 }
