@@ -7,7 +7,10 @@ export default async (event) => {
 
   const { channelId } = await event.json();
 
-  const { data, error } = await supabase.from('member_data').select('*').eq('channelId', channelId);
+  const { data, error } = await supabase
+    .from('member_data')
+    .select('*')
+    .eq('channel_id', channelId);
 
   if (error) {
     return new Response(

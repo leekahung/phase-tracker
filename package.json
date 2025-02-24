@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "postbuild": "curl -X GET https://phase-connect-tracker.netlify.app/.netlify/functions/updateTables",
+    "postbuild": "curl -X GET http://localhost:8888/.netlify/functions/updateTables",
     "lint": "eslint .",
     "prettier": "prettier . --write",
     "preview": "vite preview"

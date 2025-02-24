@@ -2,6 +2,7 @@ import { createContext, useEffect, useMemo, useState } from 'react';
 import useChannels from '@/hooks/useChannels';
 import { IMemberData, IMemberInfo } from '@/types/dataTypes';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
+import snakeToCamelCase from '@/global/utils/snakeToCamelCase';
 
 async function fetchMemberData(channelId: string) {
   const response = await fetch('/.netlify/functions/getMemberData', {
@@ -10,7 +11,7 @@ async function fetchMemberData(channelId: string) {
     body: JSON.stringify({ channelId: channelId }),
   });
   const results = await response.json();
-  return results;
+  return results.map((item: Record<string, unknown>) => snakeToCamelCase(item));
 }
 
 export interface ISelectedMemberProps {

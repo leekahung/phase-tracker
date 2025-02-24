@@ -1,14 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { IUseChannels } from '@/types/hookTypes';
 import { IMemberInfo } from '@/types/dataTypes';
-
-function snakeToCamelCase(object: Record<string, unknown>) {
-  return Object.fromEntries(
-    Object.entries(object).map(([key, value]) => {
-      return [key.replace(/_([a-z])/g, (_, letter) => `${letter.toUpperCase()}`), value];
-    })
-  );
-}
+import snakeToCamelCase from '@/global/utils/snakeToCamelCase';
 
 async function fetchMembers(): Promise<IMemberInfo[]> {
   const response = await fetch('/.netlify/functions/getMembers');

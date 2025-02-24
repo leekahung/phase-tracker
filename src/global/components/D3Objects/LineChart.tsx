@@ -29,7 +29,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
   const chartRef = useRef<SVGSVGElement | null>(null);
   const dataArray = data?.map((item) => {
     return {
-      dateCollected: new Date(item.dateCollected.replace('-', '/')),
+      dateCollected: new Date(item.dateCollected),
       value: item[dataLabel as keyof IMemberData] as number,
     };
   });
@@ -95,6 +95,10 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       .style('border-radius', '4px')
       .style('display', 'none');
 
+    const tooltipLabel =
+      dataLabel.charAt(0).toLocaleUpperCase() +
+      dataLabel.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1);
+
     // Create data and dot on data point
     svg
       .selectAll('.dot')
@@ -112,7 +116,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
         tooltip
           .style('display', 'inline-block')
           .html(
-            `Date: ${d.dateCollected.toLocaleDateString()} <br>${dataLabel[0].toUpperCase() + dataLabel.slice(1)}: ${d.value.toLocaleString()}`
+            `Date: ${d.dateCollected.toLocaleDateString()} <br>${tooltipLabel}: ${d.value.toLocaleString()}`
           )
           .style('left', `${event.pageX + 5}px`)
           .style('top', `${event.pageY + 5}px`);

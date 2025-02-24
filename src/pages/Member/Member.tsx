@@ -56,10 +56,26 @@ export default function Member(): React.JSX.Element {
             </button>
           </div>
           <LineChart data={subscriberData} dataLabel="subscribers" />
+          <div className="relative flex items-center">
+            <h2 className="text-2xl">View Count</h2>
+            <button
+              className="btn absolute -right-14 rounded-full border-0 bg-transparent"
+              type="button"
+              onClick={() => refetchData()}
+            >
+              <RefreshIconSVG />
+            </button>
+          </div>
+          <LineChart data={subscriberData} dataLabel="viewCount" />
         </>
       ) : (
         <>
           <h2 className="text-2xl">Subscriber Count</h2>
+          <div className="flex h-[500px] w-screen flex-col items-center justify-center gap-4">
+            Loading plot...
+            <div className="loading loading-ring h-10 w-10" />
+          </div>
+          <h2 className="text-2xl">View Count</h2>
           <div className="flex h-[500px] w-screen flex-col items-center justify-center gap-4">
             Loading plot...
             <div className="loading loading-ring h-10 w-10" />
