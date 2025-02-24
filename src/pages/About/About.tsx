@@ -28,13 +28,14 @@ export default function About(): React.JSX.Element {
         </h2>
         <p>
           "Phase Tracker" currently collects data gather from YouTube's Data API for active Phase
-          Connect VTubers at a daily basis (~12:00 AM UTC), namely their subscription count, view
-          count, video count, channel profile image, and channel name. Data from non-active member
-          (e.g. "graduated"/"retired") are not being tracked.
+          Connect VTubers at a daily basis (~12:00 AM UTC) or whenever changes are made for
+          deployment. The tracked data include their subscription count, view count, video count,
+          channel profile image, and channel name. Data from non-active member (e.g.
+          "graduated"/"retired") are not being tracked.
         </p>
         <p>
-          It currently store historical data related to subscription count starting from Feb. 20,
-          2025 and displayed as a time series.
+          It currently stores historical data related to subscription or view count starting from
+          Feb. 23, 2025 and are displayed as time series.
         </p>
       </div>
     </div>
