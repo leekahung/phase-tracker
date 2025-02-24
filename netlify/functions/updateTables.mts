@@ -34,7 +34,7 @@ export default async () => {
         };
         const { error: channelsError } = await supabase
           .from('phase_members')
-          .upsert([camelToSnakeCase(rowData)], { onConflict: 'channel_handle' });
+          .upsert([camelToSnakeCase(rowData)], { onConflict: 'channel_id' });
 
         if (channelsError) {
           errors.push({ member: member.channelHandle, error: channelsError.message });
