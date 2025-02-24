@@ -35,7 +35,8 @@ export default function About(): React.JSX.Element {
         </p>
         <p>
           It currently stores historical data related to subscription or view count starting from
-          Feb. 23, 2025 and are displayed as time series.
+          Feb. 23, 2025 and are displayed as time series. Only the latest value pull from the
+          database would be displayed.
         </p>
       </div>
     </div>
