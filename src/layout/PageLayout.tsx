@@ -10,24 +10,26 @@ interface Props {
 export default function PageLayout({ children }: Props): React.JSX.Element {
   const { pathname } = useLocation();
   const [showButton, setShowButton] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const mainRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
-    requestAnimationFrame(() => setShowButton(false));
   }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (mainRef.current !== null) {
-        const windowHeight = window.innerHeight;
+        const viewportHeight = window.visualViewport?.height || window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-        const scrollPercentage = ((window.scrollY + windowHeight) / documentHeight) * 100;
-
-        if (documentHeight < 1000) {
-          setShowButton(scrollPercentage > 95);
+        const progress = (window.scrollY / (documentHeight - viewportHeight)) * 100;
+        if (Number.isNaN(progress)) {
+          setScrollProgress(0);
+          setShowButton(false);
         } else {
-          setShowButton(scrollPercentage > 70);
+          setScrollProgress(progress);
+          setShowButton(progress > 50);
         }
       }
     };
@@ -39,6 +41,10 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
 
   return (
     <>
+      <div
+        className={`fixed top-0 z-50 h-1 bg-blue-400`}
+        style={{ width: `${scrollProgress.toFixed(0)}%` }}
+      />
       <div className="grid min-h-screen grid-rows-[80px_1fr_80px]">
         <header>
           <Navbar />

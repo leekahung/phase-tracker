@@ -1,6 +1,6 @@
 export default function CardLoading(): React.JSX.Element {
   return (
-    <tr className="h-[calc(100vh-80px-250px-250px)]">
+    <tr className="h-[320px] sm:h-[350px]">
       <td colSpan={6}>
         <div className="flex items-center justify-center">
           Fetching Data...
