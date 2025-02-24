@@ -25,7 +25,7 @@ export default async () => {
           memberNameEn: member.memberNameEn,
           memberNameJp: member.memberNameJp,
           subscribers: statistics.subscriberCount,
-          views: statistics.viewCount,
+          view_count: statistics.viewCount,
           videoCount: statistics.videoCount,
           updatedAt: new Date().toISOString(),
           channelName: snippet.title,
@@ -44,7 +44,7 @@ export default async () => {
           channelId: id,
           dateCollected: rowData.updatedAt.split('T')[0],
           subscribers: rowData.subscribers,
-          viewCount: rowData.views,
+          viewCount: rowData.view_count,
         };
 
         const { error: countError } = await supabase
@@ -58,7 +58,7 @@ export default async () => {
         }
       } else {
         const { error } = await supabase
-          .from('phase_channels')
+          .from('phase_members')
           .delete()
           .eq('channel_handle', member.channelHandle);
 

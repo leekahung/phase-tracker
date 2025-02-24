@@ -1,7 +1,7 @@
 import { supabase } from '../utils/setupDatabase.mts';
 
 export default async () => {
-  const { data, error } = await supabase.from('phase_channels').select('*');
+  const { data, error } = await supabase.from('phase_members').select('*');
 
   if (error) {
     return new Response(
