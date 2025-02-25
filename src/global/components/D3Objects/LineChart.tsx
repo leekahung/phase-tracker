@@ -4,6 +4,11 @@ import { useEffect, useRef } from 'react';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
+const formatNumber = (num: number) => {
+  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(
+    num
+  );
+};
 
 interface Props {
   data: IMemberData[];
@@ -46,8 +51,8 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
     const y = d3
       .scaleLinear()
       .domain([
-        d3.min(dataArray, (d) => 0.9 * d.value) || 0,
-        d3.max(dataArray, (d) => 1.1 * d.value) || 1,
+        d3.min(dataArray, (d) => 0.99 * d.value) || 0,
+        d3.max(dataArray, (d) => 1.01 * d.value) || 1,
       ])
       .range([height - margin.bottom, margin.top]);
     const line = d3
@@ -82,7 +87,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
           .ticks(5)
           .tickSizeOuter(2)
           .tickSize(-width + margin.left + margin.right)
-          .tickFormat(null)
+          .tickFormat((value) => formatNumber(value as number))
       )
       .selectAll('text')
       .attr('class', 'text-xl sm:text-base')

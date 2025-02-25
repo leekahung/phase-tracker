@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChevronUpSVG from '@/assets/ChevronUpSVG';
 import Navbar from '@/global/navigation/Navbar/Navbar';
 import { useLocation } from 'react-router';
@@ -11,7 +11,6 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
   const { pathname } = useLocation();
   const [showButton, setShowButton] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const mainRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -20,7 +19,7 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (mainRef.current !== null) {
+      requestAnimationFrame(() => {
         const viewportHeight = window.visualViewport?.height || window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         const progress = (window.scrollY / (documentHeight - viewportHeight)) * 100;
@@ -31,7 +30,7 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
           setScrollProgress(progress);
           setShowButton(progress > 50);
         }
-      }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -43,13 +42,13 @@ export default function PageLayout({ children }: Props): React.JSX.Element {
     <>
       <div
         className={`fixed top-0 z-50 h-1 bg-blue-400`}
-        style={{ width: `${scrollProgress.toFixed(0)}%` }}
+        style={{ width: `${scrollProgress.toFixed(0)}vw` }}
       />
       <div className="grid min-h-screen grid-rows-[80px_1fr_80px]">
         <header>
           <Navbar />
         </header>
-        <main ref={mainRef}>{children}</main>
+        <main>{children}</main>
         <footer className="flex flex-col items-center justify-center gap-2 text-sm">
           <span>Created by leekahung</span>
         </footer>
