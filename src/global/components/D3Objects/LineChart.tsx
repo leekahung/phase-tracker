@@ -4,10 +4,11 @@ import { useEffect, useRef } from 'react';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
-const formatNumber = (num: number) => {
-  return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(
-    num
-  );
+const formatNumber = (num: number, digits: number) => {
+  return new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    maximumFractionDigits: digits,
+  }).format(num);
 };
 
 interface Props {
@@ -86,10 +87,10 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       .call(
         d3
           .axisLeft(y)
-          .ticks(5)
+          .ticks(3)
           .tickSizeOuter(2)
           .tickSize(-width + margin.left + margin.right)
-          .tickFormat((value) => formatNumber(value as number))
+          .tickFormat((value) => formatNumber(value as number, 2))
       )
       .selectAll('text')
       .attr('class', 'text-xl sm:text-base')

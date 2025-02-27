@@ -10,7 +10,9 @@ export default async (event) => {
   const { data, error } = await supabase
     .from('member_data')
     .select('*')
-    .eq('channel_id', channelId);
+    .eq('channel_id', channelId)
+    .order('date_collected', { ascending: false })
+    .limit(14);
 
   if (error) {
     return new Response(
