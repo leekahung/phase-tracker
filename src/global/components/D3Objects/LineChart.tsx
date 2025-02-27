@@ -32,12 +32,14 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
   }, [data, refetchData]);
 
   const chartRef = useRef<SVGSVGElement | null>(null);
-  const dataArray = data?.map((item) => {
-    return {
-      dateCollected: new Date(item.dateCollected),
-      value: item[dataLabel as keyof IMemberData] as number,
-    };
-  });
+  const dataArray = data
+    ?.map((item) => {
+      return {
+        dateCollected: new Date(item.dateCollected),
+        value: item[dataLabel as keyof IMemberData] as number,
+      };
+    })
+    .sort((a, b) => a.dateCollected.getTime() - b.dateCollected.getTime());
 
   useEffect(() => {
     const svg = d3.select(chartRef.current);
