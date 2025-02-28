@@ -9,7 +9,7 @@ interface Props {
  * The `IconSVG` component is a component that includes both the svg element and
  * the svg path with input `svgPathDef` being defined by a string
  */
-function IconSVG({
+export default function IconSVG({
   svgPathDef,
   svgClassName,
   svgStrokeSize,
@@ -39,5 +39,3 @@ function IconSVG({
     </svg>
   );
 }
-
-export default IconSVG;

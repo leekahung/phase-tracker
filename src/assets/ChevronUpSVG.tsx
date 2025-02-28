@@ -1,6 +1,6 @@
 import IconSVG from './IconSVG';
 
-function ChevronUpSVG(): React.JSX.Element {
+export default function ChevronUpSVG(): React.JSX.Element {
   return (
     <IconSVG
       svgPathDef="m4.5 15.75 7.5-7.5 7.5 7.5"
@@ -9,5 +9,3 @@ function ChevronUpSVG(): React.JSX.Element {
     />
   );
 }
-
-export default ChevronUpSVG;

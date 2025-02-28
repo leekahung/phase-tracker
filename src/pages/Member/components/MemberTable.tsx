@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import type { IMemberInfo } from '@/types/dataTypes';
+import MemberTableRow from './MemberTableRow';
 
 interface Props {
   selectedMemberObject: IMemberInfo;
@@ -9,30 +10,21 @@ export default function MemberTable({ selectedMemberObject }: Props): React.JSX.
   return (
     <table className="table max-w-sm text-center text-sm sm:text-base">
       <tbody>
-        <tr className="border-b border-slate-300">
-          <th>Name (EN)</th>
-          <td>{selectedMemberObject?.memberNameEn}</td>
-        </tr>
-        <tr className="border-b border-slate-300">
-          <th>Name (JP)</th>
-          <td>{selectedMemberObject?.memberNameJp}</td>
-        </tr>
-        <tr className="border-b border-slate-300">
-          <th>Generation</th>
-          <td>{selectedMemberObject?.generation}</td>
-        </tr>
-        <tr className="border-b border-slate-300">
-          <th>Subscribers</th>
-          <td>{selectedMemberObject?.subscribers.toLocaleString()}</td>
-        </tr>
-        <tr className="border-b border-slate-300">
-          <th>View Count</th>
-          <td>{selectedMemberObject?.viewCount.toLocaleString()}</td>
-        </tr>
-        <tr className="border-b border-slate-300">
-          <th>Video Count</th>
-          <td>{selectedMemberObject?.videoCount.toLocaleString()}</td>
-        </tr>
+        <MemberTableRow topic="Name (EN)" value={selectedMemberObject?.memberNameEn} />
+        <MemberTableRow topic="Name (JP)" value={selectedMemberObject?.memberNameJp} />
+        <MemberTableRow topic="Generation" value={selectedMemberObject?.generation} />
+        <MemberTableRow
+          topic="Subscribers"
+          value={selectedMemberObject?.subscribers.toLocaleString()}
+        />
+        <MemberTableRow
+          topic="View Count"
+          value={selectedMemberObject?.viewCount.toLocaleString()}
+        />
+        <MemberTableRow
+          topic="Video Count"
+          value={selectedMemberObject?.videoCount.toLocaleString()}
+        />
         <tr>
           <th>Link to Channel</th>
           <td>

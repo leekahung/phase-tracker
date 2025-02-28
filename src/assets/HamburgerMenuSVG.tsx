@@ -1,6 +1,6 @@
 import IconSVG from './IconSVG';
 
-function HamburgerMenuSVG(): React.JSX.Element {
+export default function HamburgerMenuSVG(): React.JSX.Element {
   return (
     <IconSVG
       svgPathDef="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
@@ -9,5 +9,3 @@ function HamburgerMenuSVG(): React.JSX.Element {
     />
   );
 }
-
-export default HamburgerMenuSVG;
