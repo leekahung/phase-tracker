@@ -9,7 +9,7 @@ interface Props {
 export default function MemberCard({ selectedMemberObject }: Props): React.JSX.Element {
   return (
     <>
-      <Avatar htmlSrc={selectedMemberObject?.channelImage} height={80} />
+      <Avatar src={selectedMemberObject?.channelImage} height={80} />
       <h1
         className={`text-2xl ${selectedMemberObject !== undefined ? 'opacity-100' : 'opacity-0'}`}
       >

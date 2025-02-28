@@ -16,7 +16,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
     >
       <td className="hidden sm:table-cell sm:p-4">
         <div className="flex items-center justify-center">
-          <Avatar htmlSrc={member.channelImage} height={60} />
+          <Avatar src={member.channelImage} height={60} />
         </div>
       </td>
       <td className="p-2 sm:p-4">
@@ -27,7 +27,7 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
             rel="noopener noreferrer"
             target="_blank"
           >
-            <Avatar htmlSrc={member.channelImage} height={60} additionalClassName="sm:hidden" />
+            <Avatar src={member.channelImage} height={60} className="sm:hidden" />
             {member.channelName}
           </Link>
         </div>
