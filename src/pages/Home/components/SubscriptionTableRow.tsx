@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import type { IMemberInfo } from '@/types/dataTypes';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
-import Avatar from '@/global/components/Avatar';
 
 interface Props {
   member: IMemberInfo;
@@ -16,7 +15,13 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
     >
       <td className="hidden sm:table-cell sm:p-4">
         <div className="flex items-center justify-center">
-          <Avatar src={member.channelHandle} height={60} />
+          <img
+            src={member.channelImage}
+            alt="channel image"
+            height="60px"
+            width="60px"
+            className="rounded-full"
+          />
         </div>
       </td>
       <td className="p-2 sm:p-4">
@@ -27,7 +32,13 @@ export default function SubscriptionTableRow({ member }: Props): React.JSX.Eleme
             rel="noopener noreferrer"
             target="_blank"
           >
-            <Avatar src={member.channelHandle} height={60} />
+            <img
+              src={member.channelImage}
+              alt="channel image"
+              height="60px"
+              width="60px"
+              className="rounded-full sm:hidden"
+            />
             {member.channelName}
           </Link>
         </div>

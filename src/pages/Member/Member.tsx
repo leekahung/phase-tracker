@@ -4,7 +4,6 @@ import MemberTable from './components/MemberTable';
 import CardLoading from '@/global/components/CardLoading';
 import LineChart from '@/global/components/D3Objects/LineChart';
 import RefreshIconSVG from '@/assets/RefreshIconSVG';
-import Avatar from '@/global/components/Avatar';
 
 export default function Member(): React.JSX.Element {
   const { selectedMemberObject, subscriberData, refetchData } = useSelectedMember();
@@ -14,7 +13,13 @@ export default function Member(): React.JSX.Element {
       <div className="flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center text-slate-300 sm:w-[400px] sm:border sm:border-slate-300">
         {selectedMemberObject !== undefined ? (
           <>
-            <Avatar src={selectedMemberObject?.channelImage} height={80} />
+            <img
+              src={selectedMemberObject?.channelImage}
+              alt="channel image"
+              height="80px"
+              width="80px"
+              className="rounded-full"
+            />
             <h1
               className={`text-2xl ${selectedMemberObject !== undefined ? 'opacity-100' : 'opacity-0'}`}
             >
