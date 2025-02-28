@@ -1,4 +1,4 @@
-export default function CardLoading(): React.JSX.Element {
+export default function LoadingCardTable(): React.JSX.Element {
   return (
     <tr className="h-[320px] sm:h-[350px]">
       <td colSpan={6}>

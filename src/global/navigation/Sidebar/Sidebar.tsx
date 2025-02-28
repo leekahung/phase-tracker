@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import GenerationLinks from './GenerationLinks';
 import { useSelectedMember } from '@/hooks/useSelectedMember';
+import Divider from '@/global/components/Divider';
 
 export default function Sidebar(): React.JSX.Element {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -66,7 +67,7 @@ export default function Sidebar(): React.JSX.Element {
               </NavLink>
             </li>
           </div>
-          <hr className="my-4" />
+          <Divider />
           {groupedByGen !== undefined &&
             Object.entries(groupedByGen).map(([generation, members]) => (
               <GenerationLinks generation={generation} members={members} key={generation} />
