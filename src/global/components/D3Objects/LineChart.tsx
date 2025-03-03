@@ -77,7 +77,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       )
       .selectAll('text')
       .attr('class', 'text-xl sm:text-base')
-      .text((d) => d3.timeFormat('%m/%d/%y')(d as Date))
+      .text((d) => d3.timeFormat('%m/%d')(d as Date))
       .attr('transform', 'translate(0, 10)');
 
     // Create Y axis and grid lines
