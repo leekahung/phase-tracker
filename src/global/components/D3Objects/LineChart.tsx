@@ -96,10 +96,19 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       .attr('class', 'text-xl sm:text-base')
       .attr('transform', 'translate(-5, 0)');
 
+    // Create data line
+    svg
+      .append('path')
+      .datum(dataArray)
+      .attr('fill', 'none')
+      .attr('stroke', 'lightgray')
+      .attr('stroke-width', 2)
+      .attr('d', line);
+
     const tooltip = d3
       .select('body')
       .append('div')
-      .attr('class', 'tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm z-50')
+      .attr('class', 'tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm')
       .style('border-radius', '4px')
       .style('display', 'none');
 
@@ -107,7 +116,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       dataLabel.charAt(0).toLocaleUpperCase() +
       dataLabel.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1);
 
-    // Create data and dot on data point
+    // Create dot on data point
     svg
       .selectAll('.dot')
       .data(dataArray)
@@ -116,7 +125,7 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       .attr('class', 'dot cursor-pointer')
       .attr('cx', (d) => x(d.dateCollected))
       .attr('cy', (d) => y(d.value))
-      .attr('r', 4)
+      .attr('r', 3)
       .attr('fill', 'lightgray')
       .attr('stroke', 'lightgray')
       .attr('stroke-width', 2)
@@ -132,14 +141,6 @@ export default function LineChart({ data, dataLabel }: Props): React.JSX.Element
       .on('mouseout', () => {
         tooltip.style('display', 'none');
       });
-
-    svg
-      .append('path')
-      .datum(dataArray)
-      .attr('fill', 'none')
-      .attr('stroke', 'lightgray')
-      .attr('stroke-width', 2)
-      .attr('d', line);
 
     svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
   }, [dataLabel, dataArray, height, width]);
