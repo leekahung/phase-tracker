@@ -32,9 +32,8 @@ export default function about() {
           tracked.
         </p>
         <p>
-          It currently stores historical data related to subscription or view count starting from
-          Feb. 23, 2025 and are displayed as time series. Only the latest value pull from the
-          database would be displayed.
+          It currently stores historical data related to subscription and view count starting from
+          Feb. 23, 2025.
         </p>
       </AboutSection>
     </div>
