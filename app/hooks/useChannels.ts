@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import type { IMemberInfo } from '~/types/dataTypes';
 import snakeCaseToCamel from '~/utils/dbHelpers';
 
 async function getMembers() {

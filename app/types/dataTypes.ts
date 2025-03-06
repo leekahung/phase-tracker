@@ -15,9 +15,11 @@ interface IMemberInfo {
 }
 
 interface IMemberData {
+  id: number;
   channelId: string;
   subscribers: number;
   dateCollected: string;
+  viewCount: number;
 }
 
 export type { IMemberData, IMemberInfo };
