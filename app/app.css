@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+html,
+body {
+  @apply bg-white dark:bg-slate-700;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+html {
+  overflow-y: scroll;
+}

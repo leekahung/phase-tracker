@@ -1,7 +1,6 @@
 [build]
-  command = "npm run build && npm run postbuild"
+command = "react-router build"
+publish = "build/client"
 
-[[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200
+[dev]
+command = "react-router dev"
