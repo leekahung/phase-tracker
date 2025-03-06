@@ -1,16 +1,19 @@
-import { useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router";
-import HamburgerMenuSVG from "../icons/HamburgerMenuSVG";
-import Divider from "../Divider";
-import useChannels from "~/hooks/useChannels";
-import GenerationLinks from "./GenerationLinks";
+import { useEffect, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router';
+import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
+import Divider from '../Divider';
+import useChannels from '~/hooks/useChannels';
+import GenerationLinks from './GenerationLinks';
 
 export default function Sidebar() {
   const { members } = useChannels();
-  const groupByGen = members?.reduce((group, member) => {
-    (group[member.generation] ||= []).push(member);
-    return group;
-  }, {} as Record<string, typeof members>);
+  const groupByGen = members?.reduce(
+    (group, member) => {
+      (group[member.generation] ||= []).push(member);
+      return group;
+    },
+    {} as Record<string, typeof members>
+  );
   const genLists = Object.entries(groupByGen ?? {}).map(([key, value]) => ({
     generation: key,
     members: value,
@@ -27,33 +30,22 @@ export default function Sidebar() {
   return (
     <>
       <aside className="drawer z-50">
-        <input
-          id="sidebar-drawer"
-          type="checkbox"
-          className="drawer-toggle"
-          ref={sidebarRef}
-        />
+        <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" ref={sidebarRef} />
         <label
           htmlFor="sidebar-drawer"
-          className="rounded-full cursor-pointer w-10 h-10 flex items-center justify-center hover:bg-slate-600"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-600"
         >
           <HamburgerMenuSVG />
         </label>
         <div className="drawer-side">
-          <label
-            htmlFor="sidebar-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          />
-          <div className="bg-slate-800 min-h-full w-80">
-            <ul className="menu p-4 pb-0 text-base text-base-content w-full gap-4">
+          <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" />
+          <div className="min-h-full w-80 bg-slate-800">
+            <ul className="menu text-base-content w-full gap-4 p-4 pb-0 text-base">
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `${
-                      isActive ? "bg-slate-700" : "bg-transparent"
-                    } active:!bg-slate-600/50`
+                    `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
                   }
                 >
                   Home
@@ -63,9 +55,7 @@ export default function Sidebar() {
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>
-                    `${
-                      isActive ? "bg-slate-700" : "bg-transparent"
-                    } active:!bg-slate-600/50`
+                    `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
                   }
                 >
                   About
@@ -75,7 +65,7 @@ export default function Sidebar() {
             <div className="flex justify-center">
               <Divider />
             </div>
-            <div className="menu p-4 pt-0 text-base text-base-content w-full">
+            <div className="menu text-base-content w-full p-4 pt-0 text-base">
               {genLists.map((gen) => {
                 return <GenerationLinks key={gen.generation} genList={gen} />;
               })}

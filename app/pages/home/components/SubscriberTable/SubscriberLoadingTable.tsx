@@ -1,5 +1,5 @@
-import CircleSkeleton from "~/components/animation/CircleSkeleton";
-import LineSkeleton from "~/components/animation/LineSkeleton";
+import CircleSkeleton from '~/components/animation/CircleSkeleton';
+import LineSkeleton from '~/components/animation/LineSkeleton';
 
 export default function SubscriberLoadingTable() {
   return Array.from({ length: 20 }).map((_, index) => {

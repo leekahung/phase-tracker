@@ -1,6 +1,7 @@
-import LineChart from "~/components/d3/LineChart";
-import RefreshIconSVG from "~/components/icons/RefreshIconSVG";
-import useMemberData from "~/hooks/useMemberData";
+import LineChart from '~/components/d3/LineChart';
+import RefreshIconSVG from '~/components/icons/RefreshIconSVG';
+import useMemberData from '~/hooks/useMemberData';
+import type { IMemberInfo } from '~/types/dataTypes';
 
 interface Props {
   selectedMember: IMemberInfo | undefined;
@@ -14,7 +15,7 @@ export default function DataCharts({ selectedMember }: Props) {
       <div className="relative flex items-center">
         <h2 className="text-2xl">Subscribers</h2>
         <button
-          className="absolute -right-12 rounded-full cursor-pointer w-10 h-10 flex items-center justify-center hover:bg-slate-600 hover:rotate-90 transition"
+          className="absolute -right-12 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition hover:rotate-90 hover:bg-slate-600"
           type="button"
           aria-label="refresh data"
           onClick={() => refetch}
@@ -23,7 +24,7 @@ export default function DataCharts({ selectedMember }: Props) {
         </button>
       </div>
       {memberData == undefined ? (
-        <div className="h-[500px] w-[95%] flex flex-col items-center justify-center gap-4">
+        <div className="flex h-[500px] w-[95%] flex-col items-center justify-center gap-4">
           <div className="loading loading-spinner loading-lg" />
           Loading...
         </div>
@@ -34,7 +35,7 @@ export default function DataCharts({ selectedMember }: Props) {
         <h2 className="text-2xl">Views</h2>
       </div>
       {memberData == undefined ? (
-        <div className="h-[500px] w-[95%] flex flex-col items-center justify-center gap-4">
+        <div className="flex h-[500px] w-[95%] flex-col items-center justify-center gap-4">
           <div className="loading loading-spinner loading-lg" />
           Loading...
         </div>

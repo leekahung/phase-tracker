@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import snakeCaseToCamel from "~/utils/dbHelpers";
+import { useQuery } from '@tanstack/react-query';
+import snakeCaseToCamel from '~/utils/dbHelpers';
 
 async function getMembers() {
-  const response = await fetch("/.netlify/functions/getMembers");
+  const response = await fetch('/.netlify/functions/getMembers');
   const results = await response.json();
   return results.map((item: Record<string, unknown>) => snakeCaseToCamel(item));
 }
@@ -13,7 +13,7 @@ function useChannels() {
     isLoading,
     isError,
   } = useQuery<IMemberInfo[]>({
-    queryKey: ["members-list"],
+    queryKey: ['members-list'],
     queryFn: getMembers,
     refetchInterval: 1000 * 60 * 60 * 24,
   });
@@ -25,8 +25,8 @@ function useChannels() {
       })
       .map((member) => ({
         ...member,
-        channelName: member.channelName.split("【Phase Connect】")[0].trim(),
-        generation: member.generation.split("Phase")[1].trim(),
+        channelName: member.channelName.split('【Phase Connect】')[0].trim(),
+        generation: member.generation.split('Phase')[1].trim(),
       })),
     isLoading,
     isError,

@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router";
+import { useEffect, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router';
 
 interface Props {
   genList: {
@@ -19,19 +19,17 @@ export default function GenerationLinks({ genList }: Props) {
   }, [location]);
 
   return (
-    <div key={genList.generation} className="collapse collapse-arrow">
+    <div key={genList.generation} className="collapse-arrow collapse">
       <input type="checkbox" ref={collapseRef} />
       <span className="collapse-title">{genList.generation}</span>
-      <ul className="menu collapse-content text-sm w-[95%] py-0 before:invisible">
+      <ul className="menu collapse-content w-[95%] py-0 text-sm before:invisible">
         {genList.members.map((member) => {
           return (
-            <li key={member.id} className="first:pt-0 pt-4">
+            <li key={member.id} className="pt-4 first:pt-0">
               <NavLink
                 to={`/member/${member.channelHandle}`}
                 className={({ isActive }) =>
-                  `${
-                    isActive ? "bg-slate-700" : "bg-transparent"
-                  } active:!bg-slate-600/50`
+                  `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
                 }
               >
                 {member.channelName}

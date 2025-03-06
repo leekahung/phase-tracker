@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import ChevronUpSVG from "~/components/icons/ChevronUpSVG";
-import Navbar from "~/components/navigation/Navbar";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import ChevronUpSVG from '~/components/icons/ChevronUpSVG';
+import Navbar from '~/components/navigation/Navbar';
 
 interface Props {
   children: React.ReactNode;
@@ -13,18 +13,16 @@ export default function PageLayout({ children }: Props) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    window.history.scrollRestoration = "manual";
+    window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
   }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       requestAnimationFrame(() => {
-        const viewportHeight =
-          window.visualViewport?.height || window.innerHeight;
+        const viewportHeight = window.visualViewport?.height || window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-        const progress =
-          (window.scrollY / (documentHeight - viewportHeight)) * 100;
+        const progress = (window.scrollY / (documentHeight - viewportHeight)) * 100;
         if (Number.isNaN(progress)) {
           setScrollProgress(0);
           setShowButton(false);
@@ -35,9 +33,9 @@ export default function PageLayout({ children }: Props) {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname]);
 
   return (
@@ -56,13 +54,11 @@ export default function PageLayout({ children }: Props) {
         </footer>
       </div>
       <button
-        className={`fixed bottom-0 right-4 cursor-pointer flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-slate-700 transition sm:h-12 sm:w-12 ${
-          showButton
-            ? "-translate-y-4 opacity-100"
-            : "pointer-events-none opacity-0"
+        className={`fixed right-4 bottom-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-200 text-slate-700 transition sm:h-12 sm:w-12 ${
+          showButton ? '-translate-y-4 opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => {
-          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           setShowButton(false);
         }}
         type="button"

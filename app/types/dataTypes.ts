@@ -7,7 +7,7 @@ interface IMemberInfo {
   id: number;
   memberNameEn: string;
   memberNameJp: string;
-  status: "active" | "retired";
+  status: 'active' | 'retired';
   subscribers: number;
   updatedAt: string;
   videoCount: number;
@@ -19,3 +19,5 @@ interface IMemberData {
   subscribers: number;
   dateCollected: string;
 }
+
+export type { IMemberData, IMemberInfo };

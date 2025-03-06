@@ -1,3 +1,3 @@
 export default function Divider() {
-  return <div className="w-[95%] border-t-1 my-4" />;
+  return <div className="my-4 w-[95%] border-t-1" />;
 }

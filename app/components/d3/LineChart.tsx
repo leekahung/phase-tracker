@@ -1,11 +1,11 @@
-import * as d3 from "d3";
-import { useEffect, useRef } from "react";
-import { useLocation } from "react-router";
+import * as d3 from 'd3';
+import { useEffect, useRef } from 'react';
+import type { IMemberData } from '~/types/dataTypes';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 const formatNumber = (num: number, digits: number) => {
-  return new Intl.NumberFormat("en-US", {
-    notation: "compact",
+  return new Intl.NumberFormat('en-US', {
+    notation: 'compact',
     maximumFractionDigits: digits,
   }).format(num);
 };
@@ -32,11 +32,8 @@ export default function LineChart({ data, dataLabel }: Props) {
 
   useEffect(() => {
     const svg = d3.select(chartRef.current);
-    svg.selectAll("*").remove();
-    const dateExtent = d3.extent(dataArray, (d) => d.dateCollected) as [
-      Date,
-      Date
-    ];
+    svg.selectAll('*').remove();
+    const dateExtent = d3.extent(dataArray, (d) => d.dateCollected) as [Date, Date];
 
     const x = d3
       .scaleTime()
@@ -56,8 +53,8 @@ export default function LineChart({ data, dataLabel }: Props) {
 
     // Create X axis and grid lines
     svg
-      .append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .append('g')
+      .attr('transform', `translate(0,${height - margin.bottom})`)
       .call(
         d3
           .axisBottom(x)
@@ -66,15 +63,15 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickSize(-height + margin.top + margin.bottom)
           .tickFormat(null)
       )
-      .selectAll("text")
-      .attr("class", "text-xl sm:text-base")
-      .text((d) => d3.timeFormat("%m/%d")(d as Date))
-      .attr("transform", "translate(0, 10)");
+      .selectAll('text')
+      .attr('class', 'text-xl sm:text-base')
+      .text((d) => d3.timeFormat('%m/%d')(d as Date))
+      .attr('transform', 'translate(0, 10)');
 
     // Create Y axis and grid lines
     svg
-      .append("g")
-      .attr("transform", `translate(${margin.left},0)`)
+      .append('g')
+      .attr('transform', `translate(${margin.left},0)`)
       .call(
         d3
           .axisLeft(y)
@@ -83,70 +80,66 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickSize(-width + margin.left + margin.right)
           .tickFormat((value) => formatNumber(value as number, 2))
       )
-      .selectAll("text")
-      .attr("class", "text-xl sm:text-base")
-      .attr("transform", "translate(-5, 0)");
+      .selectAll('text')
+      .attr('class', 'text-xl sm:text-base')
+      .attr('transform', 'translate(-5, 0)');
 
     // Create data line
     svg
-      .append("path")
+      .append('path')
       .datum(dataArray)
-      .attr("fill", "none")
-      .attr("stroke", "lightgray")
-      .attr("stroke-width", 2)
-      .attr("d", line);
+      .attr('fill', 'none')
+      .attr('stroke', 'lightgray')
+      .attr('stroke-width', 2)
+      .attr('d', line);
 
     // Removes any old tooltips
-    d3.select(".tooltip").remove();
+    d3.select('.tooltip').remove();
 
     // Creates new tooltips
     const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("class", "tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm")
-      .style("border-radius", "4px")
-      .style("display", "none");
+      .select('body')
+      .append('div')
+      .attr('class', 'tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm')
+      .style('border-radius', '4px')
+      .style('display', 'none');
 
     const tooltipLabel =
       dataLabel.charAt(0).toLocaleUpperCase() +
-      dataLabel.replace(/([a-z])([A-Z])/g, "$1 $2").slice(1);
+      dataLabel.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1);
 
     // Create dot on data point
     svg
-      .selectAll(".dot")
+      .selectAll('.dot')
       .data(dataArray)
       .enter()
-      .append("circle")
-      .attr("class", "dot cursor-pointer")
-      .attr("cx", (d) => x(d.dateCollected))
-      .attr("cy", (d) => y(d.value))
-      .attr("r", 3)
-      .attr("fill", "lightgray")
-      .attr("stroke", "lightgray")
-      .attr("stroke-width", 2)
-      .on("mouseover", function (event: MouseEvent, d) {
+      .append('circle')
+      .attr('class', 'dot cursor-pointer')
+      .attr('cx', (d) => x(d.dateCollected))
+      .attr('cy', (d) => y(d.value))
+      .attr('r', 3)
+      .attr('fill', 'lightgray')
+      .attr('stroke', 'lightgray')
+      .attr('stroke-width', 2)
+      .on('mouseover', function (event: MouseEvent, d) {
         tooltip
-          .style("display", "inline-block")
+          .style('display', 'inline-block')
           .html(
             `Date: ${d.dateCollected.toLocaleDateString()} <br>${tooltipLabel}: ${d.value.toLocaleString()}`
           )
-          .style("left", `${event.pageX + 5}px`)
-          .style("top", `${event.pageY + 5}px`);
+          .style('left', `${event.pageX + 5}px`)
+          .style('top', `${event.pageY + 5}px`);
       })
-      .on("mouseout", () => {
-        tooltip.style("display", "none");
+      .on('mouseout', () => {
+        tooltip.style('display', 'none');
       });
 
-    svg
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .attr("preserveAspectRatio", "xMinYMin meet");
+    svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
 
     return () => {
-      d3.select(".tooltip").remove();
+      d3.select('.tooltip').remove();
     };
   }, [dataLabel, dataArray, height, width]);
 
-  return (
-    <svg ref={chartRef} className="h-auto w-[90%] max-w-[1000px] sm:w-[70%]" />
-  );
+  return <svg ref={chartRef} className="h-auto w-[90%] max-w-[1000px] sm:w-[70%]" />;
 }

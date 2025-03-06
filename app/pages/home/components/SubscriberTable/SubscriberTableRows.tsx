@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { Link } from 'react-router';
+import type { IMemberInfo } from '~/types/dataTypes';
 
 interface Props {
   member: IMemberInfo;
@@ -9,7 +10,7 @@ export default function SubscriberTableRows({ member }: Props) {
     <tr key={member.channelId}>
       <td className="hidden sm:table-cell">
         <img
-          className="avatar rounded-full h-15 w-15"
+          className="avatar h-15 w-15 rounded-full"
           alt="channel icon"
           src={member.channelImage}
         />
@@ -17,7 +18,7 @@ export default function SubscriberTableRows({ member }: Props) {
       <td>
         <div className="flex flex-col items-center gap-2">
           <img
-            className="avatar rounded-full h-15 w-15 visible sm:hidden"
+            className="avatar visible h-15 w-15 rounded-full sm:hidden"
             alt="channel icon"
             src={member.channelImage}
           />

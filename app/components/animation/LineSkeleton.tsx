@@ -1,5 +1,5 @@
 interface Props {
-  variant?: "dynamic";
+  variant?: 'dynamic';
 }
 
 export default function LineSkeleton({ variant }: Props) {
@@ -7,8 +7,8 @@ export default function LineSkeleton({ variant }: Props) {
     <div className="flex items-center justify-center">
       <div
         className={`${
-          variant === "dynamic" ? "w-[60px] sm:w-[150px]" : "w-[100px]"
-        } bg-slate-600 h-4 animate-pulse rounded-full`}
+          variant === 'dynamic' ? 'w-[60px] sm:w-[150px]' : 'w-[100px]'
+        } h-4 animate-pulse rounded-full bg-slate-600`}
       />
     </div>
   );

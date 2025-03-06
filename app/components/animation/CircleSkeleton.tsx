@@ -1,5 +1,5 @@
 interface Props {
-  variant?: "dynamic";
+  variant?: 'dynamic';
 }
 
 export default function CircleSkeleton({ variant }: Props) {
@@ -7,8 +7,8 @@ export default function CircleSkeleton({ variant }: Props) {
     <div className="flex items-center justify-center">
       <div
         className={`${
-          variant === "dynamic" ? "visible sm:hidden" : null
-        } w-15 h-15 animate-pulse bg-slate-600 rounded-full`}
+          variant === 'dynamic' ? 'visible sm:hidden' : null
+        } h-15 w-15 animate-pulse rounded-full bg-slate-600`}
       />
     </div>
   );

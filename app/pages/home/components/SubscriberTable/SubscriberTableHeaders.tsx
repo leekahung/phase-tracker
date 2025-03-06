@@ -1,14 +1,12 @@
+import type { IMemberInfo } from '~/types/dataTypes';
+
 interface Props {
   handleSortBy: (key: keyof IMemberInfo) => void;
   sortBy: keyof IMemberInfo;
-  sortDirection: "asc" | "desc";
+  sortDirection: 'asc' | 'desc';
 }
 
-export default function SubscriberTableHeaders({
-  handleSortBy,
-  sortBy,
-  sortDirection,
-}: Props) {
+export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirection }: Props) {
   return (
     <thead>
       <tr>
@@ -19,13 +17,13 @@ export default function SubscriberTableHeaders({
               className="cursor-pointer"
               type="button"
               onClick={() => {
-                handleSortBy("channelName");
+                handleSortBy('channelName');
               }}
             >
               Channel
             </button>
-            {sortBy === "channelName" && (
-              <span>{sortDirection === "desc" ? "\u2193" : "\u2191"}</span>
+            {sortBy === 'channelName' && (
+              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
             )}
           </div>
         </th>
@@ -35,13 +33,13 @@ export default function SubscriberTableHeaders({
               className="cursor-pointer"
               type="button"
               onClick={() => {
-                handleSortBy("generation");
+                handleSortBy('generation');
               }}
             >
               Generation
             </button>
-            {sortBy === "generation" && (
-              <span>{sortDirection === "desc" ? "\u2193" : "\u2191"}</span>
+            {sortBy === 'generation' && (
+              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
             )}
           </div>
         </th>
@@ -51,13 +49,13 @@ export default function SubscriberTableHeaders({
               className="cursor-pointer"
               type="button"
               onClick={() => {
-                handleSortBy("subscribers");
+                handleSortBy('subscribers');
               }}
             >
               Subscribers
             </button>
-            {sortBy === "subscribers" && (
-              <span>{sortDirection === "desc" ? "\u2193" : "\u2191"}</span>
+            {sortBy === 'subscribers' && (
+              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
             )}
           </div>
         </th>

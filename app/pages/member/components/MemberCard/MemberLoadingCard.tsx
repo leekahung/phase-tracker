@@ -1,5 +1,5 @@
-import CircleSkeleton from "~/components/animation/CircleSkeleton";
-import LineSkeleton from "~/components/animation/LineSkeleton";
+import CircleSkeleton from '~/components/animation/CircleSkeleton';
+import LineSkeleton from '~/components/animation/LineSkeleton';
 
 export default function MemberLoadingCard() {
   return (
