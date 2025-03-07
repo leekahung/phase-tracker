@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
+import type { IMemberInfo } from '~/types/dataTypes';
 
 interface Props {
   genList: {
@@ -20,7 +21,7 @@ export default function GenerationLinks({ genList }: Props) {
 
   return (
     <div key={genList.generation} className="collapse-arrow collapse">
-      <input type="checkbox" ref={collapseRef} />
+      <input type="checkbox" aria-label="toggle menu" ref={collapseRef} />
       <span className="collapse-title">{genList.generation}</span>
       <ul className="menu collapse-content w-[95%] py-0 text-sm before:invisible">
         {genList.members.map((member) => {
