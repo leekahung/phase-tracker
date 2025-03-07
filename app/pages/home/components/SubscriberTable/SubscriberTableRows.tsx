@@ -9,16 +9,12 @@ export default function SubscriberTableRows({ member }: Props) {
   return (
     <tr key={member.channelId}>
       <td className="hidden sm:table-cell">
-        <img
-          className="avatar h-15 w-15 rounded-full"
-          alt="channel icon"
-          src={member.channelImage}
-        />
+        <img className="h-15 w-15 rounded-full" alt="channel icon" src={member.channelImage} />
       </td>
       <td>
         <div className="flex flex-col items-center gap-2">
           <img
-            className="avatar visible h-15 w-15 rounded-full sm:hidden"
+            className="visible h-15 w-15 rounded-full sm:hidden"
             alt="channel icon"
             src={member.channelImage}
           />
