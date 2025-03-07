@@ -12,6 +12,7 @@ import {
 } from 'd3';
 import { useEffect, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
+import LoadingChart from '../animation/LoadingChart';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 const formatNumber = (num: number, digits: number) => {
@@ -27,7 +28,7 @@ interface Props {
 }
 
 export default function LineChart({ data, dataLabel }: Props) {
-  if (data === undefined) return;
+  if (data === undefined) return <LoadingChart />;
   const width = 700;
   const height = 500;
 
@@ -71,7 +72,7 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickFormat(null)
       )
       .selectAll('text')
-      .attr('class', 'text-xl sm:text-base')
+      .attr('class', (_, index) => (index % 2 !== 0 ? 'hidden' : 'text-lg sm:text-sm'))
       .text((d) => timeFormat('%m/%d')(d as Date))
       .attr('transform', 'translate(0, 10)');
 
@@ -87,7 +88,7 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickFormat((value) => formatNumber(value as number, 2))
       )
       .selectAll('text')
-      .attr('class', 'text-xl sm:text-base')
+      .attr('class', 'text-lg sm:text-sm')
       .attr('transform', 'translate(-5, 0)');
 
     // Create data line

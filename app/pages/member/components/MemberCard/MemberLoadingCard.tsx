@@ -1,6 +1,16 @@
 import CircleSkeleton from '~/components/animation/CircleSkeleton';
 import LineSkeleton from '~/components/animation/LineSkeleton';
 
+const rows = [
+  'Member Name (EN)',
+  'Member Name (JP)',
+  'Generation',
+  'Subscribers',
+  'Views',
+  'Videos',
+  'Link to Channel',
+];
+
 export default function MemberLoadingCard() {
   return (
     <>
@@ -10,48 +20,14 @@ export default function MemberLoadingCard() {
       </div>
       <table className="table">
         <tbody>
-          <tr>
-            <th>Member Name (EN)</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Member Name (JP)</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Generation</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Subscribers</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Views</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Videos</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
-          <tr>
-            <th>Link to Channel</th>
-            <td>
-              <LineSkeleton />
-            </td>
-          </tr>
+          {rows.map((row) => (
+            <tr key={row}>
+              <th>{row}</th>
+              <td>
+                <LineSkeleton />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

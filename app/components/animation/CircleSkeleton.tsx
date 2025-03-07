@@ -8,7 +8,7 @@ export default function CircleSkeleton({ variant }: Props) {
       <div
         className={`${
           variant === 'dynamic' ? 'visible sm:hidden' : null
-        } h-15 w-15 animate-pulse rounded-full bg-slate-600`}
+        } h-15 w-15 animate-pulse rounded-full bg-slate-400`}
       />
     </div>
   );

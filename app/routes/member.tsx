@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router';
 import DataCharts from '~/pages/member/components/DataCharts/DataCharts';
 import useChannels from '~/hooks/useChannels';
 import { useState } from 'react';
+import LoadingChart from '~/components/animation/LoadingChart';
 
 export function meta() {
   const { memberHandle } = useParams();
@@ -35,7 +36,9 @@ export default function member() {
       </Link>
       <Divider />
       {isLoading ? (
-        <div className="flex h-auto w-[95%] items-center justify-center">Loading...</div>
+        <div className="flex h-auto w-[95%] items-center justify-center">
+          <LoadingChart />
+        </div>
       ) : (
         <DataCharts selectedMember={selectedMember} handleDailyChange={handleDailyChange} />
       )}

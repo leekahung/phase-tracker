@@ -8,7 +8,7 @@ export default function LineSkeleton({ variant }: Props) {
       <div
         className={`${
           variant === 'dynamic' ? 'w-[60px] sm:w-[150px]' : 'w-[100px]'
-        } h-4 animate-pulse rounded-full bg-slate-600`}
+        } h-4 animate-pulse rounded-full bg-slate-400`}
       />
     </div>
   );
