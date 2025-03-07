@@ -1,4 +1,15 @@
-import * as d3 from 'd3';
+import {
+  select,
+  extent,
+  scaleTime,
+  scaleLinear,
+  min,
+  max,
+  line as d3Line,
+  timeFormat,
+  axisBottom,
+  axisLeft,
+} from 'd3';
 import { useEffect, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
 
@@ -31,23 +42,20 @@ export default function LineChart({ data, dataLabel }: Props) {
     .sort((a, b) => a.dateCollected.getTime() - b.dateCollected.getTime());
 
   useEffect(() => {
-    const svg = d3.select(chartRef.current);
+    const svg = select(chartRef.current);
     svg.selectAll('*').remove();
-    const dateExtent = d3.extent(dataArray, (d) => d.dateCollected) as [Date, Date];
+    const dateExtent = extent(dataArray, (d) => d.dateCollected) as [Date, Date];
 
-    const x = d3
-      .scaleTime()
+    const x = scaleTime()
       .domain(dateExtent)
       .range([margin.left, width - margin.right]);
-    const y = d3
-      .scaleLinear()
+    const y = scaleLinear()
       .domain([
-        d3.min(dataArray, (d) => 0.99 * d.value) || 0,
-        d3.max(dataArray, (d) => 1.01 * d.value) || 1,
+        min(dataArray, (d) => 0.99 * d.value) || 0,
+        max(dataArray, (d) => 1.01 * d.value) || 1,
       ])
       .range([height - margin.bottom, margin.top]);
-    const line = d3
-      .line<{ dateCollected: Date; value: number }>()
+    const line = d3Line<{ dateCollected: Date; value: number }>()
       .x((d) => x(d.dateCollected))
       .y((d) => y(d.value));
 
@@ -56,8 +64,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       .append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
       .call(
-        d3
-          .axisBottom(x)
+        axisBottom(x)
           .tickValues(dataArray.map((d) => d.dateCollected))
           .tickSizeOuter(2)
           .tickSize(-height + margin.top + margin.bottom)
@@ -65,7 +72,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       )
       .selectAll('text')
       .attr('class', 'text-xl sm:text-base')
-      .text((d) => d3.timeFormat('%m/%d')(d as Date))
+      .text((d) => timeFormat('%m/%d')(d as Date))
       .attr('transform', 'translate(0, 10)');
 
     // Create Y axis and grid lines
@@ -73,8 +80,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       .append('g')
       .attr('transform', `translate(${margin.left},0)`)
       .call(
-        d3
-          .axisLeft(y)
+        axisLeft(y)
           .ticks(5)
           .tickSizeOuter(2)
           .tickSize(-width + margin.left + margin.right)
@@ -94,13 +100,13 @@ export default function LineChart({ data, dataLabel }: Props) {
       .attr('d', line);
 
     // Removes any old tooltips
-    d3.select('.tooltip').remove();
+    const tooltipClass = `tooltip-${dataLabel}`;
+    select(`.${tooltipClass}`).remove();
 
     // Creates new tooltips
-    const tooltip = d3
-      .select('body')
+    const tooltip = select('body')
       .append('div')
-      .attr('class', 'tooltip p-2 text-slate-200 bg-slate-900 absolute text-sm')
+      .attr('class', `${tooltipClass} p-2 text-slate-200 bg-slate-900 absolute text-sm`)
       .style('border-radius', '4px')
       .style('display', 'none');
 
@@ -121,7 +127,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       .attr('fill', 'lightgray')
       .attr('stroke', 'lightgray')
       .attr('stroke-width', 2)
-      .on('mouseover', function (event: MouseEvent, d) {
+      .on('mouseenter', function (event: MouseEvent, d) {
         tooltip
           .style('display', 'inline-block')
           .html(
@@ -130,14 +136,14 @@ export default function LineChart({ data, dataLabel }: Props) {
           .style('left', `${event.pageX + 5}px`)
           .style('top', `${event.pageY + 5}px`);
       })
-      .on('mouseout', () => {
+      .on('mouseleave', () => {
         tooltip.style('display', 'none');
       });
 
     svg.attr('viewBox', `0 0 ${width} ${height}`).attr('preserveAspectRatio', 'xMinYMin meet');
 
     return () => {
-      d3.select('.tooltip').remove();
+      select(`.${tooltipClass}`).remove();
     };
   }, [dataLabel, dataArray, height, width]);
 
