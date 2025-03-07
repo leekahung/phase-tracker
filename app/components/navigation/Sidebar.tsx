@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
-import Divider from '../Divider';
+import Divider from '../../layouts/Divider';
 import useChannels from '~/hooks/useChannels';
 import GenerationLinks from './GenerationLinks';
 
