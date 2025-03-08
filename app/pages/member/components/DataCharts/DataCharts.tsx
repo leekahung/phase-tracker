@@ -3,6 +3,7 @@ import LineChart from '~/components/d3/LineChart';
 import RefreshIconSVG from '~/components/icons/RefreshIconSVG';
 import useMemberData from '~/hooks/useMemberData';
 import type { IMemberInfo } from '~/types/dataTypes';
+import ChartTitle from './ChartTitle';
 
 interface Props {
   selectedMember: IMemberInfo | undefined;
@@ -22,8 +23,7 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
 
   return (
     <>
-      <div className="relative flex items-center">
-        <h2 className="text-lg sm:text-2xl">Subscribers</h2>
+      <ChartTitle title="Subscribers">
         <button
           className="absolute -right-12 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition hover:rotate-90 hover:bg-slate-600"
           type="button"
@@ -32,11 +32,9 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
         >
           <RefreshIconSVG />
         </button>
-      </div>
+      </ChartTitle>
       <LineChart data={memberData} dataLabel="subscribers" />
-      <div className="relative flex items-center">
-        <h2 className="text-lg sm:text-2xl">Views</h2>
-      </div>
+      <ChartTitle title="Views" />
       <LineChart data={memberData} dataLabel="viewCount" />
     </>
   );

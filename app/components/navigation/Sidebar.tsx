@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router';
 import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
 import Divider from '../../layouts/Divider';
 import useChannels from '~/hooks/useChannels';
-import GenerationLinks from './GenerationLinks';
+import MenuLinks from './MenuLinks';
 
 export default function Sidebar() {
   const { members } = useChannels();
@@ -39,7 +39,7 @@ export default function Sidebar() {
         </label>
         <div className="drawer-side">
           <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" />
-          <div className="min-h-full w-80 bg-slate-800">
+          <div className="flex min-h-full w-80 flex-col items-center bg-slate-600">
             <ul className="menu text-base-content w-full gap-4 p-4 pb-0 text-base">
               <li>
                 <NavLink
@@ -62,12 +62,10 @@ export default function Sidebar() {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex justify-center">
-              <Divider />
-            </div>
+            <Divider />
             <div className="menu text-base-content w-full p-4 pt-0 text-base">
               {genLists.map((gen) => {
-                return <GenerationLinks key={gen.generation} genList={gen} />;
+                return <MenuLinks key={gen.generation} itemList={gen} />;
               })}
             </div>
           </div>

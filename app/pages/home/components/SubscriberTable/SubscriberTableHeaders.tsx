@@ -1,4 +1,5 @@
 import type { IMemberInfo } from '~/types/dataTypes';
+import SubscriberTableHeaderButtons from './SubscriberTableHeaderButtons';
 
 interface Props {
   handleSortBy: (key: keyof IMemberInfo) => void;
@@ -12,52 +13,34 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
       <tr>
         <th className="hidden sm:table-cell">Icon</th>
         <th>
-          <div>
-            <button
-              className="cursor-pointer"
-              type="button"
-              onClick={() => {
-                handleSortBy('channelName');
-              }}
-            >
-              Channel
-            </button>
-            {sortBy === 'channelName' && (
-              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
-            )}
-          </div>
+          <SubscriberTableHeaderButtons
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            columnName={'channelName'}
+            onClick={() => handleSortBy('channelName')}
+          >
+            Channel
+          </SubscriberTableHeaderButtons>
         </th>
         <th className="hidden sm:table-cell">
-          <div>
-            <button
-              className="cursor-pointer"
-              type="button"
-              onClick={() => {
-                handleSortBy('generation');
-              }}
-            >
-              Generation
-            </button>
-            {sortBy === 'generation' && (
-              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
-            )}
-          </div>
+          <SubscriberTableHeaderButtons
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            columnName={'generation'}
+            onClick={() => handleSortBy('generation')}
+          >
+            Generation
+          </SubscriberTableHeaderButtons>
         </th>
         <th>
-          <div>
-            <button
-              className="cursor-pointer"
-              type="button"
-              onClick={() => {
-                handleSortBy('subscribers');
-              }}
-            >
-              Subscribers
-            </button>
-            {sortBy === 'subscribers' && (
-              <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>
-            )}
-          </div>
+          <SubscriberTableHeaderButtons
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            columnName={'subscribers'}
+            onClick={() => handleSortBy('subscribers')}
+          >
+            Subscribers
+          </SubscriberTableHeaderButtons>
         </th>
         <th>Channel Info</th>
       </tr>

@@ -1,7 +1,9 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import useChannels from '~/hooks/useChannels';
 import MemberLoadingCard from './MemberLoadingCard';
 import formatChangeNumbers from '~/utils/numberHelpers';
+import Avatar from '~/components/global/Avatar';
+import ExternalLink from '~/components/global/ExternalLink';
 
 interface Props {
   dailyChange: Record<string, number>;
@@ -20,11 +22,7 @@ export default function MemberCard({ dailyChange }: Props) {
         ) : (
           <>
             <div className="flex flex-col items-center gap-4">
-              <img
-                className="h-20 w-20 rounded-full"
-                alt="channel icon"
-                src={selectedMember?.channelImage}
-              />
+              <Avatar className="h-20 w-20 rounded-full" src={selectedMember?.channelImage} />
               <h1 className="text-2xl">{selectedMember?.channelName}</h1>
             </div>
             <table className="table">
@@ -66,14 +64,9 @@ export default function MemberCard({ dailyChange }: Props) {
                 <tr>
                   <th>Link to Channel</th>
                   <td className="text-center">
-                    <Link
-                      to={`https://www.youtube.com/${selectedMember?.channelHandle}`}
-                      className="underline"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
+                    <ExternalLink to={`https://www.youtube.com/${selectedMember?.channelHandle}`}>
                       Link
-                    </Link>
+                    </ExternalLink>
                   </td>
                 </tr>
               </tbody>

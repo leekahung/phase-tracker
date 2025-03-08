@@ -6,13 +6,15 @@ export default function Navbar() {
   return (
     <>
       <Sidebar />
-      <Link
-        to="/"
-        aria-label="home link"
-        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-600"
-      >
-        <HomeIconSVG />
-      </Link>
+      <div>
+        <Link
+          to="/"
+          aria-label="home link"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-600"
+        >
+          <HomeIconSVG />
+        </Link>
+      </div>
     </>
   );
 }
