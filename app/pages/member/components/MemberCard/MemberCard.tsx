@@ -15,8 +15,8 @@ export default function MemberCard({ dailyChange }: Props) {
   const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
 
   return (
-    <div className="card w-[375px] sm:w-96 sm:bg-slate-600 sm:shadow-sm">
-      <div className="card-body">
+    <div className="sm:card w-[375px] sm:w-[25rem] sm:bg-slate-600 sm:shadow-sm">
+      <div className="sm:card-body">
         {isLoading ? (
           <MemberLoadingCard />
         ) : (
@@ -26,23 +26,23 @@ export default function MemberCard({ dailyChange }: Props) {
               <h1 className="text-2xl">{selectedMember?.channelName}</h1>
             </div>
             <table className="table">
-              <tbody>
+              <tbody className="table-fixed text-center">
                 <tr>
-                  <th>Member Name (EN)</th>
-                  <td className="text-center">{selectedMember?.memberNameEn}</td>
+                  <th>Name (EN)</th>
+                  <td>{selectedMember?.memberNameEn}</td>
                 </tr>
                 <tr>
-                  <th>Member Name (JP)</th>
-                  <td className="text-center">{selectedMember?.memberNameJp}</td>
+                  <th>Name (JP)</th>
+                  <td>{selectedMember?.memberNameJp}</td>
                 </tr>
                 <tr>
                   <th>Generation</th>
-                  <td className="text-center">{selectedMember?.generation}</td>
+                  <td>{selectedMember?.generation}</td>
                 </tr>
                 <tr>
                   <th>Subscribers</th>
-                  <td className="text-center">
-                    <div className="flex justify-center gap-2">
+                  <td>
+                    <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.subscribers.toLocaleString()}</span>
                       <span>({formatChangeNumbers(dailyChange.subs)})</span>
                     </div>
@@ -50,8 +50,8 @@ export default function MemberCard({ dailyChange }: Props) {
                 </tr>
                 <tr>
                   <th>Views</th>
-                  <td className="text-center">
-                    <div className="flex justify-center gap-2">
+                  <td>
+                    <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.viewCount.toLocaleString()}</span>
                       <span>({formatChangeNumbers(dailyChange.views)})</span>
                     </div>
@@ -59,11 +59,11 @@ export default function MemberCard({ dailyChange }: Props) {
                 </tr>
                 <tr>
                   <th>Videos</th>
-                  <td className="text-center">{selectedMember?.videoCount.toLocaleString()}</td>
+                  <td>{selectedMember?.videoCount.toLocaleString()}</td>
                 </tr>
                 <tr>
                   <th>Link to Channel</th>
-                  <td className="text-center">
+                  <td>
                     <ExternalLink to={`https://www.youtube.com/${selectedMember?.channelHandle}`}>
                       Link
                     </ExternalLink>

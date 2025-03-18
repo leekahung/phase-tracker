@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
 import Divider from '../../layouts/Divider';
 import useChannels from '~/hooks/useChannels';
 import MenuLinks from './MenuLinks';
+import NavButton from '../global/NavButton';
 
 export default function Sidebar() {
   const { members } = useChannels();
@@ -42,24 +43,10 @@ export default function Sidebar() {
           <div className="flex min-h-full w-80 flex-col items-center bg-slate-600">
             <ul className="menu text-base-content w-full gap-4 p-4 pb-0 text-base">
               <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
-                  }
-                >
-                  Home
-                </NavLink>
+                <NavButton to="/">Home</NavButton>
               </li>
               <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
-                  }
-                >
-                  About
-                </NavLink>
+                <NavButton to="/about">About</NavButton>
               </li>
             </ul>
             <Divider />

@@ -1,5 +1,7 @@
 import type { IMemberInfo } from '~/types/dataTypes';
-import SubscriberTableHeaderButtons from './SubscriberTableHeaderButtons';
+import SubscriberTableHeaderButton from './SubscriberTableHeaderButton';
+
+const interactiveColumns: (keyof IMemberInfo)[] = ['channelName', 'generation', 'subscribers'];
 
 interface Props {
   handleSortBy: (key: keyof IMemberInfo) => void;
@@ -12,36 +14,20 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
     <thead>
       <tr>
         <th className="hidden sm:table-cell">Icon</th>
-        <th>
-          <SubscriberTableHeaderButtons
-            sortBy={sortBy}
-            sortDirection={sortDirection}
-            columnName={'channelName'}
-            onClick={() => handleSortBy('channelName')}
-          >
-            Channel
-          </SubscriberTableHeaderButtons>
-        </th>
-        <th className="hidden sm:table-cell">
-          <SubscriberTableHeaderButtons
-            sortBy={sortBy}
-            sortDirection={sortDirection}
-            columnName={'generation'}
-            onClick={() => handleSortBy('generation')}
-          >
-            Generation
-          </SubscriberTableHeaderButtons>
-        </th>
-        <th>
-          <SubscriberTableHeaderButtons
-            sortBy={sortBy}
-            sortDirection={sortDirection}
-            columnName={'subscribers'}
-            onClick={() => handleSortBy('subscribers')}
-          >
-            Subscribers
-          </SubscriberTableHeaderButtons>
-        </th>
+        {interactiveColumns.map((column) => (
+          <th key={column}>
+            <SubscriberTableHeaderButton
+              sortBy={sortBy}
+              sortDirection={sortDirection}
+              columnName={column}
+              onClick={() => handleSortBy(column)}
+            >
+              {column === 'channelName'
+                ? 'Channel'
+                : `${column.charAt(0).toUpperCase() + column.slice(1)}`}
+            </SubscriberTableHeaderButton>
+          </th>
+        ))}
         <th>Channel Info</th>
       </tr>
     </thead>

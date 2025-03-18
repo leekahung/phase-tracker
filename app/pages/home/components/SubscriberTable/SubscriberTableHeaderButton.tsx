@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   columnName: keyof IMemberInfo;
 }
 
-export default function SubscriberTableHeaderButtons({
+export default function SubscriberTableHeaderButton({
   children,
   sortBy,
   sortDirection,

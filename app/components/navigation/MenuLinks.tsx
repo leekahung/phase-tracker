@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import type { IMemberInfo } from '~/types/dataTypes';
+import NavButton from '../global/NavButton';
 
 interface Props {
   itemList: {
@@ -20,21 +21,14 @@ export default function MenuLinks({ itemList }: Props) {
   }, [location]);
 
   return (
-    <div key={itemList.generation} className="collapse-arrow collapse">
+    <div key={itemList.generation} className="collapse-arrow collapse hover:bg-slate-500">
       <input type="checkbox" aria-label="toggle menu" ref={collapseRef} />
       <span className="collapse-title">{itemList.generation}</span>
       <ul className="menu collapse-content w-[95%] py-0 text-sm before:invisible">
         {itemList.members.map((member) => {
           return (
             <li key={member.id} className="pt-4 first:pt-0">
-              <NavLink
-                to={`/member/${member.channelHandle}`}
-                className={({ isActive }) =>
-                  `${isActive ? 'bg-slate-700' : 'bg-transparent'} active:!bg-slate-600/50`
-                }
-              >
-                {member.channelName}
-              </NavLink>
+              <NavButton to={`/member/${member.channelHandle}`}>{member.channelName}</NavButton>
             </li>
           );
         })}

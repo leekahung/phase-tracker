@@ -28,7 +28,7 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
           className="absolute -right-12 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition hover:rotate-90 hover:bg-slate-600"
           type="button"
           aria-label="refresh data"
-          onClick={() => refetch}
+          onClick={() => refetch()}
         >
           <RefreshIconSVG />
         </button>
