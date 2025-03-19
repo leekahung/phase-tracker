@@ -50,7 +50,11 @@ export default function PageLayout({ children }: Props) {
         </header>
         <main>{children}</main>
         <footer className="footer items-center justify-center">
-          <em>Created by leekahung</em>
+          <div className="flex items-center gap-2">
+            <span>Created by leekahung</span>
+            <span className="text-lg">|</span>
+            <span>Powered by Netlify</span>
+          </div>
         </footer>
       </div>
       <button

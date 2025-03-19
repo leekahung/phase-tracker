@@ -15,7 +15,7 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
       <tr>
         <th className="hidden sm:table-cell">Icon</th>
         {interactiveColumns.map((column) => (
-          <th key={column}>
+          <th key={column} className={column === 'generation' ? 'hidden sm:table-cell' : ''}>
             <SubscriberTableHeaderButton
               sortBy={sortBy}
               sortDirection={sortDirection}
