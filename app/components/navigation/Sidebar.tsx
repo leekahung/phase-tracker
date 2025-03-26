@@ -40,7 +40,7 @@ export default function Sidebar() {
         </label>
         <div className="drawer-side">
           <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" />
-          <div className="flex min-h-full w-80 flex-col items-center bg-slate-600">
+          <nav className="flex min-h-full w-80 flex-col items-center bg-slate-600">
             <ul className="menu text-base-content w-full gap-4 p-4 pb-0 text-base">
               <li>
                 <NavButton to="/">Home</NavButton>
@@ -55,7 +55,7 @@ export default function Sidebar() {
                 return <MenuLinks key={gen.generation} itemList={gen} />;
               })}
             </div>
-          </div>
+          </nav>
         </div>
       </aside>
     </>
