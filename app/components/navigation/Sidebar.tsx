@@ -48,6 +48,9 @@ export default function Sidebar() {
               <li>
                 <NavButton to="/about">About</NavButton>
               </li>
+              <li>
+                <NavButton to="/group-view">Group View</NavButton>
+              </li>
             </ul>
             <Divider />
             <div className="menu text-base-content w-full p-4 pt-0 text-base">

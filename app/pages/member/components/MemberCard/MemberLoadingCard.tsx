@@ -14,12 +14,12 @@ const rows = [
 export default function MemberLoadingCard() {
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center gap-4">
         <CircleSkeleton />
         <LineSkeleton />
       </div>
       <table className="table">
-        <tbody>
+        <tbody className="table-fixed text-center">
           {rows.map((row) => (
             <tr key={row}>
               <th>{row}</th>

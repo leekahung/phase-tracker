@@ -51,9 +51,9 @@ export default function PageLayout({ children }: Props) {
         <main>{children}</main>
         <footer className="footer items-center justify-center">
           <div className="flex items-center gap-2">
-            <span>Created by leekahung</span>
+            <em>Created by leekahung</em>
             <span className="text-lg">|</span>
-            <span>Powered by Netlify</span>
+            <em>Powered by Netlify</em>
           </div>
         </footer>
       </div>

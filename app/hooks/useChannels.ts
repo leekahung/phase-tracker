@@ -28,7 +28,7 @@ function useChannels() {
         ...member,
         channelName: member.channelName.split('【Phase Connect】')[0].trim(),
         generation: member.generation.split('Phase')[1].trim(),
-      })),
+      })) as IMemberInfo[] | undefined,
     isLoading,
     isError,
   };
