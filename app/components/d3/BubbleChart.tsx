@@ -11,6 +11,11 @@ interface HierarchyNode {
   children?: HierarchyNode[];
 }
 
+interface SimulatedHierarchyNode extends d3.HierarchyCircularNode<HierarchyNode> {
+  vx: number;
+  vy: number;
+}
+
 interface Props {
   data: IMemberInfo[] | undefined;
 }
@@ -91,6 +96,7 @@ export default function BubbleChart({ data }: Props) {
       .attr('font-size', (d) => `${calculateFontSize(d.r)}px`)
       .attr('width', (d) => `${d.r}px`)
       .attr('text-anchor', 'middle')
+      .attr('class', 'opacity-0 transition-opacity duration-700')
       .text((d) => `${d.data.name?.split(' ')[0]}`);
 
     const labelNamePart2 = svg
@@ -103,6 +109,7 @@ export default function BubbleChart({ data }: Props) {
       .attr('font-size', (d) => `${calculateFontSize(d.r)}px`)
       .attr('width', (d) => `${d.r}px`)
       .attr('text-anchor', 'middle')
+      .attr('class', 'opacity-0 transition-opacity duration-700')
       .text((d) => `${d.data.name?.split(' ')[1]}`);
 
     const labelValues = svg
@@ -114,7 +121,12 @@ export default function BubbleChart({ data }: Props) {
       .attr('fill', 'white')
       .attr('font-size', (d) => `${calculateFontSize(d.r)}px`)
       .attr('text-anchor', 'middle')
+      .attr('class', 'opacity-0 transition-opacity duration-700')
       .text((d) => `${d.data.value?.toLocaleString()}`);
+
+    setTimeout(() => {
+      d3.selectAll('text').classed('opacity-100', true).classed('opacity-0', false);
+    }, 700);
 
     simulation.on('tick', () => {
       node.attr('cx', (d) => d.x).attr('cy', (d) => d.y);
@@ -165,7 +177,7 @@ function centroid(nodes: d3.HierarchyCircularNode<HierarchyNode>[]): { x: number
 
 function forceCluster() {
   const strength = 0.2;
-  let nodes: d3.HierarchyCircularNode<HierarchyNode>[];
+  let nodes: SimulatedHierarchyNode[];
 
   function force(alpha: number) {
     const centroids = d3.rollup(nodes, centroid, (d) => d.data.generation);
@@ -177,7 +189,7 @@ function forceCluster() {
     }
   }
 
-  force.initialize = (_: d3.HierarchyCircularNode<HierarchyNode>[]) => (nodes = _);
+  force.initialize = (_: SimulatedHierarchyNode[]) => (nodes = _);
 
   return force;
 }
@@ -186,7 +198,7 @@ function forceCollide() {
   const alpha = 0.4;
   const paddingWithinGroup = 2;
   const paddingBetweenGroups = 4;
-  let nodes: d3.HierarchyCircularNode<HierarchyNode>[];
+  let nodes: SimulatedHierarchyNode[];
   let maxRadius: number;
 
   function force() {
@@ -228,7 +240,7 @@ function forceCollide() {
     }
   }
 
-  force.initialize = (_: d3.HierarchyCircularNode<HierarchyNode>[]) =>
+  force.initialize = (_: SimulatedHierarchyNode[]) =>
     (maxRadius =
       (d3.max((nodes = _), (d) => d.r) ?? 0) + Math.max(paddingWithinGroup, paddingBetweenGroups));
 
@@ -236,7 +248,7 @@ function forceCollide() {
 }
 
 function forceBoundaries(width: number, height: number) {
-  let nodes: d3.HierarchyCircularNode<HierarchyNode>[];
+  let nodes: SimulatedHierarchyNode[];
 
   function force() {
     for (const d of nodes) {
@@ -245,7 +257,7 @@ function forceBoundaries(width: number, height: number) {
     }
   }
 
-  force.initialize = (_: d3.HierarchyCircularNode<HierarchyNode>[]) => (nodes = _);
+  force.initialize = (_: SimulatedHierarchyNode[]) => (nodes = _);
 
   return force;
 }
