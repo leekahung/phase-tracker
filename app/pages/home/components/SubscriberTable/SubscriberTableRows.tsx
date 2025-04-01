@@ -9,9 +9,14 @@ interface Props {
 
 export default function SubscriberTableRows({ member }: Props) {
   return (
-    <tr key={member.channelId}>
+    <tr
+      className="sm:transition sm:delay-50 sm:duration-500 sm:hover:scale-[105%]"
+      key={member.channelId}
+    >
       <td className="hidden sm:table-cell">
-        <Avatar className="h-15 w-15 rounded-full" src={member.channelImage} />
+        <div className="flex items-center justify-center">
+          <Avatar className="h-15 w-15 rounded-full" src={member.channelImage} />
+        </div>
       </td>
       <td>
         <div className="flex flex-col items-center gap-2">

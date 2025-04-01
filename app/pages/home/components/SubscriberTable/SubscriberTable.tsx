@@ -35,6 +35,17 @@ export default function SubscriberTable({ members, isLoading }: Props) {
     }
   });
 
+  const tableRows =
+    members?.length === 0 ? (
+      <tr className="h-20">
+        <td colSpan={5}>
+          <em>Member not in list...</em>
+        </td>
+      </tr>
+    ) : (
+      sortedMembers?.map((member) => <SubscriberTableRows key={member.channelId} member={member} />)
+    );
+
   return (
     <table className="table w-[95%] max-w-3xl text-center">
       <SubscriberTableHeaders
@@ -42,17 +53,7 @@ export default function SubscriberTable({ members, isLoading }: Props) {
         sortBy={sortBy}
         sortDirection={sortDirection}
       />
-      <tbody>
-        {isLoading ? (
-          <SubscriberLoadingTable />
-        ) : (
-          <>
-            {sortedMembers?.map((member) => (
-              <SubscriberTableRows key={member.channelId} member={member} />
-            ))}
-          </>
-        )}
-      </tbody>
+      <tbody>{isLoading ? <SubscriberLoadingTable /> : tableRows}</tbody>
     </table>
   );
 }

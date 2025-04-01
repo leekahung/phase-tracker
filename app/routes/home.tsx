@@ -1,6 +1,8 @@
 import useChannels from '~/hooks/useChannels';
 import SubscriberTable from '~/pages/home/components/SubscriberTable/SubscriberTable';
 import LineSkeleton from '~/components/animation/LineSkeleton';
+import FilterIconSVG from '~/components/icons/FilterIconSVG';
+import { useState } from 'react';
 
 export function meta() {
   return [
@@ -11,6 +13,15 @@ export function meta() {
 
 export default function home() {
   const { members, isLoading, isError } = useChannels();
+  const [search, setSearch] = useState('');
+
+  const filteredMembers = members?.filter((member) => {
+    const searchTerm = search.toLowerCase();
+    return (
+      member.memberNameEn.toLowerCase().includes(searchTerm) ||
+      member.memberNameJp.toLowerCase().includes(searchTerm)
+    );
+  });
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -30,7 +41,21 @@ export default function home() {
             </em>
             {isLoading && <LineSkeleton />}
           </div>
-          <SubscriberTable members={members} isLoading={isLoading} />
+          <div>
+            <label className="input rounded-3xl outline-none!">
+              <FilterIconSVG />
+              <input
+                type="search"
+                required
+                defaultValue={search}
+                placeholder="Filter by name"
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                }}
+              />
+            </label>
+          </div>
+          <SubscriberTable members={filteredMembers} isLoading={isLoading} />
         </>
       )}
     </div>
