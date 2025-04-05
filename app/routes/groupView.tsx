@@ -11,10 +11,8 @@ export default function groupView() {
   const { members, isError } = useChannels();
   const [refresh, setRefresh] = useState(0);
 
-  return isError ? (
-    <div />
-  ) : (
-    <div className="flex h-full flex-col items-center justify-center gap-4">
+  return (
+    <div className="m-auto flex flex-col items-center justify-center gap-4 sm:h-full sm:max-w-[2200px]">
       <div className="relative flex items-center justify-center">
         <h2 className="text-lg sm:text-2xl">Subscriber Count</h2>
         <button
@@ -26,7 +24,7 @@ export default function groupView() {
           <RefreshIconSVG />
         </button>
       </div>
-      <BubbleChart data={members} key={refresh} />
+      {isError ? <em>Unable to fetch data...</em> : <BubbleChart data={members} key={refresh} />}
     </div>
   );
 }
