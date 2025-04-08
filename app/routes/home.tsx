@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import useChannels from '~/hooks/useChannels';
 import SubscriberTable from '~/pages/home/components/SubscriberTable/SubscriberTable';
 import LineSkeleton from '~/components/animation/LineSkeleton';
 import FilterIconSVG from '~/components/icons/FilterIconSVG';
-import { useState } from 'react';
 
 export function meta() {
   return [

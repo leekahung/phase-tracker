@@ -60,6 +60,15 @@ export default function LineChart({ data, dataLabel }: Props) {
       .x((d) => x(d.dateCollected))
       .y((d) => y(d.value));
 
+    svg
+      .append('rect')
+      .attr('x', `${margin.left}`)
+      .attr('y', `${margin.top}`)
+      .attr('width', `${width - margin.left - margin.right}`)
+      .attr('height', `${height - margin.bottom - margin.top}`)
+      .attr('fill', 'rgba(255, 255, 255, 0.4)')
+      .attr('filter', 'url(#blur)');
+
     // Create X axis and grid lines
     svg
       .append('g')

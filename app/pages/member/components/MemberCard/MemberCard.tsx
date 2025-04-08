@@ -15,7 +15,7 @@ export default function MemberCard({ dailyChange }: Props) {
   const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
 
   return (
-    <div className="sm:card w-[375px] sm:w-[25rem] sm:bg-slate-600 sm:shadow-sm">
+    <div className="sm:card z-10 w-[375px] sm:w-[25rem] sm:bg-slate-600 sm:shadow-sm">
       <div className="sm:card-body">
         {isLoading ? (
           <MemberLoadingCard />

@@ -23,15 +23,21 @@ export default function member() {
   const { members, isLoading } = useChannels();
   const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
   const [dailyChange, setDailyChange] = useState({ subs: 0, views: 0 });
+  const cloudinaryName = import.meta.env.VITE_CLOUDINARY_NAME;
+  const selectedMemberUrlString = selectedMember?.memberNameEn.replace(' ', '%20');
 
   const handleDailyChange = (subChange: number, viewChange: number): void => {
     setDailyChange({ subs: subChange, views: viewChange });
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="relative flex flex-col items-center gap-4 overflow-hidden">
       <MemberCard dailyChange={dailyChange} />
-      <Link to="/" className="underline">
+      <img
+        src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_png/${selectedMemberUrlString}.png`}
+        className="fixed right-10 -bottom-50 z-0 h-[600px] opacity-10"
+      />
+      <Link to="/" className="z-10 underline">
         Back
       </Link>
       <Divider />
