@@ -35,8 +35,8 @@ export default function member() {
       <MemberCard dailyChange={dailyChange} />
       {!isLoading && (
         <img
-          src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_png/${selectedMemberUrlString}.png`}
-          className="animate-fade fixed right-10 -bottom-50 z-0 h-[600px]"
+          src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_webp/${selectedMemberUrlString}.webp`}
+          className="animate-fade fixed right-10 -bottom-50 z-0 h-[500px] opacity-0"
           key={selectedMemberUrlString}
         />
       )}
