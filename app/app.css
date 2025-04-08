@@ -1,5 +1,23 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+@theme {
+  --animate-fade: fadeUp 1s ease-in-out forwards;
+
+  @keyframes fadeUp {
+    0% {
+      transform: translateY(80%);
+      opacity: 10%;
+    }
+    50% {
+      transform: translateY(-20%);
+      opacity: 15%;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 20%;
+    }
+  }
+}
 
 html,
 body {

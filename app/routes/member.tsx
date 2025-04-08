@@ -33,10 +33,13 @@ export default function member() {
   return (
     <div className="relative flex flex-col items-center gap-4 overflow-hidden">
       <MemberCard dailyChange={dailyChange} />
-      <img
-        src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_png/${selectedMemberUrlString}.png`}
-        className="fixed right-10 -bottom-50 z-0 h-[600px] opacity-10"
-      />
+      {!isLoading && (
+        <img
+          src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_png/${selectedMemberUrlString}.png`}
+          className="animate-fade fixed right-10 -bottom-50 z-0 h-[600px]"
+          key={selectedMemberUrlString}
+        />
+      )}
       <Link to="/" className="z-10 underline">
         Back
       </Link>
