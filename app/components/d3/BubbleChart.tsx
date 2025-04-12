@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { IMemberInfo } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { calculateFontSize } from '~/utils/d3Helpers';
@@ -23,6 +23,17 @@ interface Props {
 
 export default function BubbleChart({ data }: Props) {
   if (data === undefined) return <LoadingChart />;
+  const [genSelected, setGenSelected] = useState<string[]>([]);
+
+  const handleGenSelected = (generation: string): void => {
+    setGenSelected((prev) => {
+      if ([...prev].includes(generation)) {
+        return prev.filter((gen) => gen !== generation);
+      }
+      return [...prev, generation];
+    });
+  };
+
   const groupByGen = data?.reduce(
     (group, member) => {
       (group[member.generation] ||= []).push(member);
@@ -50,11 +61,17 @@ export default function BubbleChart({ data }: Props) {
     const color = d3.scaleOrdinal().domain(generations).range(d3.schemeCategory10);
 
     const inputObject: HierarchyNode = {
-      children: data.map((member) => ({
-        name: member.memberNameEn,
-        value: member.subscribers,
-        generation: member.generation,
-      })),
+      children: data
+        .map((member) => ({
+          name: member.memberNameEn,
+          value: member.subscribers,
+          generation: member.generation,
+        }))
+        .filter((gen) => {
+          const filterCondition = genSelected.includes(gen.generation);
+          if (genSelected.length === 0) return !filterCondition;
+          return filterCondition;
+        }),
     };
 
     const hierarchy = d3.hierarchy<HierarchyNode>(inputObject).sum((d) => d.value ?? 0);
@@ -135,12 +152,17 @@ export default function BubbleChart({ data }: Props) {
       labelNamePart2.attr('x', (d) => d.x).attr('y', (d) => d.y);
       labelValues.attr('x', (d) => d.x).attr('y', (d) => d.y);
     });
-  }, [height, width]);
+  }, [height, width, genSelected]);
 
   return (
     <>
       <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-500 sm:w-[70%]" />
-      <DataTable genList={generations} groupObject={groupByGen} />{' '}
+      <DataTable
+        genList={generations}
+        groupObject={groupByGen}
+        genSelected={genSelected}
+        handleGenSelected={handleGenSelected}
+      />
     </>
   );
 }
