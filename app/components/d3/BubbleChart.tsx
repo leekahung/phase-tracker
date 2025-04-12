@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import type { IMemberInfo } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { calculateFontSize } from '~/utils/d3Helpers';
+import DataTable from '~/pages/member/components/DataCharts/DataTable';
 
 interface HierarchyNode {
   name?: string;
@@ -32,7 +33,7 @@ export default function BubbleChart({ data }: Props) {
   const generations = Object.keys(groupByGen);
 
   const width = Math.min(window.innerWidth * 0.9, 1200);
-  const height = Math.min(window.innerHeight - 160, 800);
+  const height = Math.min(window.innerHeight - 200, 800);
 
   const chartRef = useRef<SVGSVGElement | null>(null);
 
@@ -136,7 +137,12 @@ export default function BubbleChart({ data }: Props) {
     });
   }, [height, width]);
 
-  return <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-500 sm:w-[70%]" />;
+  return (
+    <>
+      <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-500 sm:w-[70%]" />
+      <DataTable genList={generations} groupObject={groupByGen} />{' '}
+    </>
+  );
 }
 
 const drag = (simulation) => {

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import LineChart from '~/components/d3/LineChart';
-import RefreshIconSVG from '~/components/icons/RefreshIconSVG';
 import useMemberData from '~/hooks/useMemberData';
 import type { IMemberInfo } from '~/types/dataTypes';
 import ChartTitle from './ChartTitle';
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export default function DataCharts({ selectedMember, handleDailyChange }: Props) {
-  const { memberData, refetch } = useMemberData(selectedMember);
+  const { memberData } = useMemberData(selectedMember);
 
   useEffect(() => {
     if (typeof memberData !== 'undefined') {
@@ -23,16 +22,7 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
 
   return (
     <>
-      <ChartTitle title="Subscribers">
-        <button
-          className="absolute -right-12 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition hover:rotate-90 hover:bg-slate-600"
-          type="button"
-          aria-label="refresh data"
-          onClick={() => refetch()}
-        >
-          <RefreshIconSVG />
-        </button>
-      </ChartTitle>
+      <ChartTitle title="Subscribers" />
       <LineChart data={memberData} dataLabel="subscribers" />
       <ChartTitle title="Views" />
       <LineChart data={memberData} dataLabel="viewCount" />

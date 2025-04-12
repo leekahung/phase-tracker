@@ -2,15 +2,19 @@ import { Link } from 'react-router';
 import Avatar from '~/components/global/Avatar';
 import ExternalLink from '~/components/global/ExternalLink';
 import type { IMemberInfo } from '~/types/dataTypes';
+import { getRowColor } from '~/utils/tableHelpers';
 
 interface Props {
   member: IMemberInfo;
 }
 
 export default function SubscriberTableRows({ member }: Props) {
+  const generation = member.generation;
+  const bgColor = getRowColor(generation);
+
   return (
     <tr
-      className="sm:transition sm:delay-50 sm:duration-500 sm:hover:scale-[105%]"
+      className={`sm:transition sm:delay-50 sm:duration-500 sm:hover:scale-[105%] ${bgColor}`}
       key={member.channelId}
     >
       <td className="hidden sm:table-cell">

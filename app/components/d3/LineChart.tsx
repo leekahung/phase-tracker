@@ -105,7 +105,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       .append('path')
       .datum(dataArray)
       .attr('fill', 'none')
-      .attr('stroke', 'lightgray')
+      .attr('stroke', 'orange')
       .attr('stroke-width', 2)
       .attr('d', line);
 
@@ -134,8 +134,8 @@ export default function LineChart({ data, dataLabel }: Props) {
       .attr('cx', (d) => x(d.dateCollected))
       .attr('cy', (d) => y(d.value))
       .attr('r', 3)
-      .attr('fill', 'lightgray')
-      .attr('stroke', 'lightgray')
+      .attr('fill', 'orange')
+      .attr('stroke', 'orange')
       .attr('stroke-width', 2)
       .on('mouseenter', function (event: MouseEvent, d) {
         tooltip
