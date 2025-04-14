@@ -28,7 +28,7 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
             </SubscriberTableHeaderButton>
           </th>
         ))}
-        <th>Channel Info</th>
+        <th>Stats</th>
       </tr>
     </thead>
   );

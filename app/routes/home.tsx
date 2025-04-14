@@ -26,7 +26,7 @@ export default function home() {
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-3xl">Phase Connect</h1>
-      <h2 className="text-xl">YouTube Subscription Count</h2>
+      <h2 className="text-xl">YouTube Subscriber Count</h2>
       {isError ? (
         <>
           <em>Unable to fetch</em>
