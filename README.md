@@ -9,5 +9,6 @@ The stack used includes:
 - React Query (Data fetching)
 - D3.js (Data visualization)
 - Tailwind CSS (UI customization)
+- Framer Motion (Page Transition Animations)
 - Supabase (Database storage)
 - Netlify functions (Micro-backend/API)
