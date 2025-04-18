@@ -1,4 +1,4 @@
-import Divider from '~/layouts/Divider';
+import Divider from '~/layouts/components/Divider';
 import AboutSection from '~/pages/about/components/AboutSection';
 
 export function meta() {

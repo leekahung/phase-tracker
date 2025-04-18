@@ -1,4 +1,4 @@
-import Divider from '~/layouts/Divider';
+import Divider from '~/layouts/components/Divider';
 import MemberCard from '~/pages/member/components/MemberCard/MemberCard';
 import { Link, useParams } from 'react-router';
 import DataCharts from '~/pages/member/components/DataCharts/DataCharts';

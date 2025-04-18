@@ -2,6 +2,8 @@
 @plugin "daisyui";
 @theme {
   --animate-fade: fadeUp 1s ease-in-out 500ms forwards;
+  --animate-wipe-in: wipeIn 1s ease-in-out 500ms forwards;
+  --animate-wipe-out: wipeOut 1s ease-in-out 500ms forwards;
 
   @keyframes fadeUp {
     0% {
@@ -15,6 +17,24 @@
     100% {
       transform: translateY(0);
       opacity: 10%;
+    }
+  }
+
+  @keyframes wipeIn {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes wipeOut {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
     }
   }
 }
