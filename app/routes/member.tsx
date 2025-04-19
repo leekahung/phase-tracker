@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router';
 import useChannels from '~/hooks/useChannels';
 import Divider from '~/layouts/components/Divider';
 import MemberCard from '~/pages/member/components/MemberCard/MemberCard';
@@ -8,18 +8,17 @@ import LoadingChart from '~/components/animation/LoadingChart';
 import TransitionLayout from '~/layouts/TransitionLayout';
 
 export function meta() {
-  const { memberHandle } = useParams();
-
   return [
-    { title: `Member Info - ${memberHandle}` },
+    { title: 'Member Info' },
     {
       name: 'description',
-      content: `Data and info related to ${memberHandle}`,
+      content: 'Page on stats related to the following Phase Connect member',
     },
   ];
 }
 
 export default function member() {
+  const location = useLocation();
   const { memberHandle } = useParams();
   const { members, isLoading } = useChannels();
   const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
@@ -30,6 +29,10 @@ export default function member() {
   const handleDailyChange = (subChange: number, viewChange: number): void => {
     setDailyChange({ subs: subChange, views: viewChange });
   };
+
+  useEffect(() => {
+    document.title = `Member Info - ${memberHandle}`;
+  }, [location.pathname]);
 
   return (
     <TransitionLayout>
