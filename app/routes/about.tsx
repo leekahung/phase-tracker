@@ -9,7 +9,7 @@ export function meta() {
 export default function about() {
   return (
     <TransitionLayout>
-      <div className="flex flex-col items-center gap-4">
+      <div className="m-auto flex w-[80%] flex-col items-center gap-4">
         <AboutSection title="Purpose">
           <p>
             Phase Connect Tracker (aka "Phase Tracker") is an unofficial fan site developed to
