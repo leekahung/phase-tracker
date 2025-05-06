@@ -203,4 +203,25 @@ export const phaseConnectMembers: IMemberInfo[] = [
     generation: 'Phase KALEiDO',
     status: 'active',
   },
+  {
+    memberNameEn: 'Clio Aite',
+    memberNameJp: 'クリオ・アイテ',
+    channelHandle: '@ClioAite',
+    generation: 'Phase Invaders QUEST',
+    status: 'active',
+  },
+  {
+    memberNameEn: 'MariMari',
+    memberNameJp: 'マリマリ',
+    channelHandle: '@MARIMARI_EN',
+    generation: 'Phase Invaders QUEST',
+    status: 'active',
+  },
+  {
+    memberNameEn: 'Eepy Sleepy',
+    memberNameJp: 'イーピー・スリーピー',
+    channelHandle: '@EepySleepyCh',
+    generation: 'Phase Invaders QUEST',
+    status: 'active',
+  },
 ];
