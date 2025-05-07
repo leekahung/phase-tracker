@@ -115,7 +115,7 @@ export default function BubbleChart({ data }: Props) {
       .attr('width', (d) => `${d.r}px`)
       .attr('text-anchor', 'middle')
       .attr('class', 'opacity-0 transition-opacity duration-700')
-      .text((d) => `${d.data.name?.split(' ')[0]}`);
+      .text((d) => `${d.data.name === 'MariMari' ? 'Mari' : d.data.name?.split(' ')[0]}`);
 
     const labelNamePart2 = svg
       .append('g')
@@ -128,7 +128,7 @@ export default function BubbleChart({ data }: Props) {
       .attr('width', (d) => `${d.r}px`)
       .attr('text-anchor', 'middle')
       .attr('class', 'opacity-0 transition-opacity duration-700')
-      .text((d) => `${d.data.name?.split(' ')[1]}`);
+      .text((d) => `${d.data.name === 'MariMari' ? 'Mari' : d.data.name?.split(' ')[1]}`);
 
     const labelValues = svg
       .append('g')

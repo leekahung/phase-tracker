@@ -14,8 +14,15 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
 
   useEffect(() => {
     if (typeof memberData !== 'undefined') {
-      const subChange = memberData[0].subscribers - memberData[1].subscribers;
-      const viewChange = memberData[0].viewCount - memberData[1].viewCount;
+      let subChange = 0;
+      let viewChange = 0;
+      if (memberData.length == 1) {
+        subChange = memberData[0].subscribers;
+        viewChange = memberData[0].viewCount;
+      } else {
+        subChange = memberData[0].subscribers - memberData[1].subscribers;
+        viewChange = memberData[0].viewCount - memberData[1].viewCount;
+      }
       handleDailyChange(subChange, viewChange);
     }
   }, [memberData]);

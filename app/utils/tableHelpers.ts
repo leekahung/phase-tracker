@@ -9,6 +9,8 @@ function getRowColor(generation: string): string {
     case 'KALEiDO':
       return 'bg-red-300/50';
     case 'Euphoria':
+      return 'bg-[#795548]/50';
+    case 'Invaders QUEST':
       return 'bg-purple-300/50';
     default:
       return 'bg-transparent';

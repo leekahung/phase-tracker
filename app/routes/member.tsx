@@ -41,6 +41,9 @@ export default function member() {
         {!isLoading && (
           <img
             src={`https://res.cloudinary.com/${cloudinaryName}/image/upload/f_webp/${selectedMemberUrlString}.webp`}
+            onError={(event) => {
+              event.currentTarget.style.display = 'none';
+            }}
             className="animate-fade fixed right-10 -bottom-50 z-0 h-[500px] opacity-0"
             key={selectedMemberUrlString}
           />
