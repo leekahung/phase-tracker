@@ -35,7 +35,8 @@ export default function about() {
           </p>
           <p>
             It currently stores historical data related to subscription and view count starting from
-            Feb. 23, 2025.
+            Feb. 23, 2025, although for newer members, the starting date might start later depending
+            on their debut date.
           </p>
         </AboutSection>
       </div>
