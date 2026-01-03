@@ -27,7 +27,7 @@ export default function MenuLinks({ itemList }: Props) {
       <ul className="menu collapse-content w-[95%] py-0 text-sm before:invisible">
         {itemList.members.map((member) => {
           return (
-            <li key={member.id} className="pt-4 first:pt-0">
+            <li key={member.id} className="pt-3 first:pt-0 last:pb-4">
               <NavButton to={`/member/${member.channelHandle}`}>{member.channelName}</NavButton>
             </li>
           );

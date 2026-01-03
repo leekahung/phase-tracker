@@ -3,12 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "netlify dev",
+    "build": "bun --bun react-router build",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "prettier": "prettier --write .",
-    "lint": "eslint ."
+    "typecheck": "bun --bun react-router typegen && bunx tsc",
+    "prettier": "bunx prettier --write .",
+    "lint": "bunx eslint ."
   },
   "dependencies": {
     "@netlify/functions": "^3.0.0",

@@ -41,7 +41,7 @@ export default function Sidebar() {
         <div className="drawer-side">
           <label htmlFor="sidebar-drawer" aria-label="close sidebar" className="drawer-overlay" />
           <nav className="flex min-h-full w-80 flex-col items-center bg-slate-600">
-            <ul className="menu text-base-content w-full gap-4 p-4 pb-0 text-base">
+            <ul className="menu text-base-content w-full gap-2 p-4 pb-0 text-base">
               <li>
                 <NavButton to="/">Home</NavButton>
               </li>
@@ -53,7 +53,7 @@ export default function Sidebar() {
               </li>
             </ul>
             <Divider />
-            <div className="menu text-base-content w-full p-4 pt-0 text-base">
+            <div className="menu text-base-content w-full gap-2 p-4 pt-0 text-base">
               {genLists.map((gen) => {
                 return <MenuLinks key={gen.generation} itemList={gen} />;
               })}

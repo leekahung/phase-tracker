@@ -1,9 +1,9 @@
 [build]
-command = "react-router build"
+command = "bun run build"
 publish = "build/client"
 
 [build.environment]
-NODE_VERSION = "20"
+NETLIFY_USE_BUN = "true"
 
 [dev]
-command = "react-router dev"
+command = "bun --bun react-router dev"

@@ -8,7 +8,7 @@ export default function NavButton({ children, ...props }: Props) {
   return (
     <NavLink
       className={({ isActive }) =>
-        `${isActive ? 'bg-slate-700' : 'bg-transparent hover:bg-slate-400/50'} active:!bg-slate-600/50`
+        `${isActive ? 'bg-slate-700' : 'bg-transparent hover:bg-slate-400/50'} rounded-lg p-4 active:!bg-slate-600/50`
       }
       {...props}
     >
