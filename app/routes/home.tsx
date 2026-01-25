@@ -40,7 +40,7 @@ export default function home() {
           <>
             <div className="flex gap-2">
               <span>
-                Last daily updated:{' '}
+                Last daily update:{' '}
                 {members !== undefined && new Date(members[0].updatedAt).toLocaleDateString()}
               </span>
               {isLoading && <LineSkeleton />}
