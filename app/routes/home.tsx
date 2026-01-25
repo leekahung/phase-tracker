@@ -27,8 +27,10 @@ export default function home() {
   return (
     <TransitionLayout>
       <div className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl">Phase Connect</h1>
-        <h2 className="text-xl">YouTube Subscriber Count</h2>
+        <h1 className="text-3xl font-semibold">Phase Connect</h1>
+        <h2 className="text-xl italic">
+          Live YouTube subscriber rankings for Phase Connect talents
+        </h2>
         {isError ? (
           <>
             <em>Unable to fetch</em>
@@ -37,10 +39,10 @@ export default function home() {
         ) : (
           <>
             <div className="flex gap-2">
-              <em>
-                Last updated:{' '}
+              <span>
+                Last daily updated:{' '}
                 {members !== undefined && new Date(members[0].updatedAt).toLocaleDateString()}
-              </em>
+              </span>
               {isLoading && <LineSkeleton />}
             </div>
             <div>
@@ -50,11 +52,18 @@ export default function home() {
                   type="search"
                   required
                   defaultValue={search}
-                  placeholder="Filter by name"
+                  placeholder="Find talent by name"
                   onChange={(event) => {
                     setSearch(event.target.value);
                   }}
                 />
+                {search && (
+                  <span>
+                    {filteredMembers?.length === 0
+                      ? 'No results'
+                      : `Showing ${filteredMembers?.length} of ${members?.length}`}
+                  </span>
+                )}
               </label>
             </div>
             <SubscriberTable members={filteredMembers} isLoading={isLoading} />

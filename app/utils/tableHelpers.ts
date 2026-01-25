@@ -1,20 +1,10 @@
-function getRowColor(generation: string): string {
-  switch (generation) {
-    case 'OriginS':
-      return 'bg-blue-300/50';
-    case 'ALiAS':
-      return 'bg-orange-300/50';
-    case 'Invaders':
-      return 'bg-green-300/50';
-    case 'KALEiDO':
-      return 'bg-red-300/50';
-    case 'Euphoria':
-      return 'bg-[#795548]/50';
-    case 'Invaders QUEST':
-      return 'bg-purple-300/50';
-    default:
-      return 'bg-transparent';
-  }
-}
+const generationColors: Record<string, string> = {
+  OriginS: '#4C90BF',
+  ALiAS: '#D6865B',
+  Invaders: '#4CAF4D',
+  KALEiDO: '#C45254',
+  Euphoria: '#876455',
+  'Invaders QUEST': '#9371BD',
+};
 
-export { getRowColor };
+export { generationColors };

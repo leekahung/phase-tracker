@@ -14,7 +14,7 @@ export default function groupView() {
 
   return (
     <TransitionLayout>
-      <div className="m-auto flex flex-col items-center justify-center gap-4 sm:h-full sm:max-w-[2200px]">
+      <div className="m-auto flex flex-col items-center justify-center gap-4 sm:h-full sm:max-w-550">
         <div className="relative flex items-center justify-center">
           <h2 className="text-lg sm:text-2xl">Subscriber Count</h2>
           <button

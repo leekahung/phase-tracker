@@ -15,7 +15,7 @@ export default function MemberCard({ dailyChange }: Props) {
   const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
 
   return (
-    <div className="sm:card z-10 w-[375px] sm:w-[25rem] sm:bg-slate-600 sm:shadow-sm">
+    <div className="sm:card z-10 w-93.75 sm:w-100 sm:bg-slate-600 sm:shadow-sm">
       <div className="sm:card-body">
         {isLoading ? (
           <MemberLoadingCard />
@@ -44,7 +44,17 @@ export default function MemberCard({ dailyChange }: Props) {
                   <td>
                     <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.subscribers.toLocaleString()}</span>
-                      <span>({formatChangeNumbers(dailyChange.subs)})</span>
+                      <span
+                        className={
+                          dailyChange.subs > 0
+                            ? 'text-green-300'
+                            : dailyChange.subs < 0
+                              ? 'text-red-300'
+                              : 'text-gray-300'
+                        }
+                      >
+                        ({formatChangeNumbers(dailyChange.subs)})
+                      </span>
                     </div>
                   </td>
                 </tr>
@@ -53,7 +63,17 @@ export default function MemberCard({ dailyChange }: Props) {
                   <td>
                     <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.viewCount.toLocaleString()}</span>
-                      <span>({formatChangeNumbers(dailyChange.views)})</span>
+                      <span
+                        className={
+                          dailyChange.views > 0
+                            ? 'text-green-300'
+                            : dailyChange.views < 0
+                              ? 'text-red-300'
+                              : 'text-gray-300'
+                        }
+                      >
+                        ({formatChangeNumbers(dailyChange.views)})
+                      </span>
                     </div>
                   </td>
                 </tr>

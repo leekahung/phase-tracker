@@ -4,6 +4,7 @@ import type { IMemberInfo } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { calculateFontSize } from '~/utils/d3Helpers';
 import DataTable from '~/pages/member/components/DataCharts/DataTable';
+import { generationColors } from '~/utils/tableHelpers';
 
 interface HierarchyNode {
   name?: string;
@@ -58,8 +59,6 @@ export default function BubbleChart({ data }: Props) {
       .attr('viewBox', [0, 0, width, height])
       .attr('text-anchor', 'middle');
 
-    const color = d3.scaleOrdinal().domain(generations).range(d3.schemeCategory10);
-
     const inputObject: HierarchyNode = {
       children: data
         .map((member) => ({
@@ -92,7 +91,7 @@ export default function BubbleChart({ data }: Props) {
       .join('circle')
       .attr('cx', (d) => d.x)
       .attr('cy', (d) => d.y)
-      .attr('fill', (d) => color(d.data.generation || 'default') as string)
+      .attr('fill', (d) => generationColors[d.data.generation] || '#ccc')
       .call(drag(simulation));
 
     node

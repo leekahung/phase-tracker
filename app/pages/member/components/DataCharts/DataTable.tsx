@@ -1,5 +1,5 @@
 import type { IMemberInfo } from '~/types/dataTypes';
-import { getRowColor } from '~/utils/tableHelpers';
+import { generationColors } from '~/utils/tableHelpers';
 
 interface Props {
   genList: string[];
@@ -23,7 +23,6 @@ export default function DataTable({ genList, groupObject, genSelected, handleGen
             (total, member) => total + member.subscribers,
             0
           );
-          const genColor = getRowColor(generation);
           const bgColor = genSelected.includes(generation) ? 'bg-slate-500/50' : '';
 
           return (
@@ -38,8 +37,11 @@ export default function DataTable({ genList, groupObject, genSelected, handleGen
               key={generation}
             >
               <td className="flex items-center justify-center gap-4">
-                <div className={`h-6 w-6 rounded-full ${genColor}`} />
-                <p className="w-[60px]">{generation}</p>
+                <div
+                  className="h-6 w-6 rounded-full"
+                  style={{ backgroundColor: generationColors[generation] }}
+                />
+                <p className="w-15">{generation}</p>
               </td>
               <td>{totalSubscribers.toLocaleString()}</td>
             </tr>

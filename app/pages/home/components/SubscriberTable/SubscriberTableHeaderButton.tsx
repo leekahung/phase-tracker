@@ -19,8 +19,10 @@ export default function SubscriberTableHeaderButton({
     <>
       <button className="cursor-pointer" type="button" {...props}>
         {children}
+        <span className="pl-1">
+          {sortBy === columnName ? `${sortDirection === 'desc' ? '\u2193' : '\u2191'}` : '\u2195'}
+        </span>
       </button>
-      {sortBy === columnName && <span>{sortDirection === 'desc' ? '\u2193' : '\u2191'}</span>}
     </>
   );
 }

@@ -13,6 +13,7 @@ import {
 import { useEffect, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
+import { generationColors } from '~/utils/tableHelpers';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 const formatNumber = (num: number, digits: number) => {
@@ -106,7 +107,7 @@ export default function LineChart({ data, dataLabel }: Props) {
       .datum(dataArray)
       .attr('fill', 'none')
       .attr('stroke', 'orange')
-      .attr('stroke-width', 2)
+      .attr('stroke-width', 2.5)
       .attr('d', line);
 
     // Removes any old tooltips
@@ -157,5 +158,5 @@ export default function LineChart({ data, dataLabel }: Props) {
     };
   }, [dataLabel, dataArray, height, width]);
 
-  return <svg ref={chartRef} className="h-auto w-[90%] max-w-[1000px] sm:w-[70%]" />;
+  return <svg ref={chartRef} className="h-auto w-[90%] max-w-250 sm:w-[70%]" />;
 }

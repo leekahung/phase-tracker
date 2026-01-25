@@ -20,23 +20,20 @@ export default function about() {
         <Divider />
         <AboutSection title="Affiliation">
           <p>
-            This fan site is not affiliated with Phase Connect or any of its members nor is it
-            affiliated with any other projects/fan sites that tracks VTuber subscription numbers.
+            This fan site is not affiliated with Phase Connect, any of its members, or other fan
+            sites that track VTuber subscription numbers.
           </p>
         </AboutSection>
         <Divider />
         <AboutSection title="Collection">
           <p>
-            "Phase Tracker" currently collects data gather from YouTube's Data API for active Phase
-            Connect VTubers at a daily basis or whenever changes are made for deployment. The
-            tracked data include their subscription count, view count, video count, channel profile
-            image, and channel name. Data from non-active member (e.g. "graduated"/"retired") are
-            not being tracked.
+            Data is collected from YouTube's Data API on a daily basis or whenever updates are
+            deployed. Tracked data includes subscription count, view count, video count, channel
+            profile image, and channel name. Historical data is stored starting from Feb. 23, 2025.
           </p>
           <p>
-            It currently stores historical data related to subscription and view count starting from
-            Feb. 23, 2025, although for newer members, the starting date might start later depending
-            on their debut date.
+            For newer members, tracking begins from their debut date or whenever they're added to
+            the database.
           </p>
         </AboutSection>
       </div>
