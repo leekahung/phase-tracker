@@ -3,7 +3,7 @@ const generationColors: Record<string, string> = {
   ALiAS: '#D6865B',
   Invaders: '#4CAF4D',
   KALEiDO: '#C45254',
-  Euphoria: '#876455',
+  Euphoria: '#A07862',
   'Invaders QUEST': '#9371BD',
   Saga: '#D4A843',
 };

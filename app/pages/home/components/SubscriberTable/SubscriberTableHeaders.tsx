@@ -13,7 +13,7 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
   return (
     <thead>
       <tr>
-        <th className="hidden sm:table-cell">Icon</th>
+        <th className="hidden w-24 sm:table-cell">Icon</th>
         {interactiveColumns.map((column) => (
           <th
             key={column}
@@ -31,7 +31,7 @@ export default function SubscriberTableHeaders({ handleSortBy, sortBy, sortDirec
             </SubscriberTableHeaderButton>
           </th>
         ))}
-        <th>Stats</th>
+        <th className="w-24">Stats</th>
       </tr>
     </thead>
   );

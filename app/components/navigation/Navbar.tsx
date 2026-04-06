@@ -10,7 +10,7 @@ export default function Navbar() {
         <Link
           to="/"
           aria-label="home link"
-          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-600"
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-600"
         >
           <HomeIconSVG />
         </Link>

@@ -10,18 +10,34 @@
     }
     50% {
       transform: translateY(-20%);
-      opacity: 5%;
+      opacity: 8%;
     }
     100% {
       transform: translateY(0);
-      opacity: 10%;
+      opacity: 15%;
     }
+  }
+}
+
+:root {
+  --chart-line-color: #3b82f6;
+  --chart-text-color: #374151;
+  --chart-bg: rgba(0, 0, 0, 0.04);
+  --chart-grid-color: rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --chart-line-color: #60a5fa;
+    --chart-text-color: #cbd5e1;
+    --chart-bg: rgba(255, 255, 255, 0.06);
+    --chart-grid-color: rgba(255, 255, 255, 0.12);
   }
 }
 
 html,
 body {
-  @apply bg-white dark:bg-slate-700;
+  @apply bg-slate-100 dark:bg-slate-700;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;

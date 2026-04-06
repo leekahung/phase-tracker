@@ -44,6 +44,12 @@ export default function LineChart({ data, dataLabel }: Props) {
     .sort((a, b) => a.dateCollected.getTime() - b.dateCollected.getTime());
 
   useEffect(() => {
+    const rootStyle = getComputedStyle(document.documentElement);
+    const lineColor = rootStyle.getPropertyValue('--chart-line-color').trim() || '#3b82f6';
+    const textColor = rootStyle.getPropertyValue('--chart-text-color').trim() || '#374151';
+    const chartBg = rootStyle.getPropertyValue('--chart-bg').trim() || 'rgba(0,0,0,0.04)';
+    const gridColor = rootStyle.getPropertyValue('--chart-grid-color').trim() || 'rgba(0,0,0,0.12)';
+
     const svg = select(chartRef.current);
     svg.selectAll('*').remove();
     const dateExtent = extent(dataArray, (d) => d.dateCollected) as [Date, Date];
@@ -67,11 +73,10 @@ export default function LineChart({ data, dataLabel }: Props) {
       .attr('y', `${margin.top}`)
       .attr('width', `${width - margin.left - margin.right}`)
       .attr('height', `${height - margin.bottom - margin.top}`)
-      .attr('fill', 'rgba(255, 255, 255, 0.4)')
-      .attr('filter', 'url(#blur)');
+      .attr('fill', chartBg);
 
     // Create X axis and grid lines
-    svg
+    const xAxisGroup = svg
       .append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
       .call(
@@ -80,14 +85,24 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickSizeOuter(2)
           .tickSize(-height + margin.top + margin.bottom)
           .tickFormat(null)
-      )
+      );
+
+    xAxisGroup
+      .selectAll('.tick line')
+      .attr('stroke', gridColor)
+      .attr('stroke-dasharray', '4,4');
+
+    xAxisGroup
       .selectAll('text')
-      .attr('class', (_, index) => (index % 2 !== 0 ? 'hidden' : 'text-lg sm:text-sm'))
-      .text((d) => timeFormat('%m/%d')(d as Date))
+      .attr('fill', textColor)
+      .attr('font-size', '11px')
+      .text((d, index) => (index % 2 !== 0 ? '' : timeFormat('%m/%d')(d as Date)))
       .attr('transform', 'translate(0, 10)');
 
+    xAxisGroup.select('.domain').attr('stroke', gridColor);
+
     // Create Y axis and grid lines
-    svg
+    const yAxisGroup = svg
       .append('g')
       .attr('transform', `translate(${margin.left},0)`)
       .call(
@@ -96,17 +111,27 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickSizeOuter(2)
           .tickSize(-width + margin.left + margin.right)
           .tickFormat((value) => formatNumber(value as number, 2))
-      )
+      );
+
+    yAxisGroup
+      .selectAll('.tick line')
+      .attr('stroke', gridColor)
+      .attr('stroke-dasharray', '4,4');
+
+    yAxisGroup
       .selectAll('text')
-      .attr('class', 'text-lg sm:text-sm')
+      .attr('fill', textColor)
+      .attr('font-size', '11px')
       .attr('transform', 'translate(-5, 0)');
+
+    yAxisGroup.select('.domain').attr('stroke', gridColor);
 
     // Create data line
     svg
       .append('path')
       .datum(dataArray)
       .attr('fill', 'none')
-      .attr('stroke', 'orange')
+      .attr('stroke', lineColor)
       .attr('stroke-width', 2.5)
       .attr('d', line);
 
@@ -117,8 +142,10 @@ export default function LineChart({ data, dataLabel }: Props) {
     // Creates new tooltips
     const tooltip = select('body')
       .append('div')
-      .attr('class', `${tooltipClass} p-2 text-slate-200 bg-slate-900 absolute text-sm`)
-      .style('border-radius', '4px')
+      .attr(
+        'class',
+        `${tooltipClass} pointer-events-none px-3 py-2 text-slate-200 bg-slate-800 absolute text-sm rounded-lg shadow-lg`
+      )
       .style('display', 'none');
 
     const tooltipLabel =
@@ -135,19 +162,21 @@ export default function LineChart({ data, dataLabel }: Props) {
       .attr('cx', (d) => x(d.dateCollected))
       .attr('cy', (d) => y(d.value))
       .attr('r', 3)
-      .attr('fill', 'orange')
-      .attr('stroke', 'orange')
+      .attr('fill', lineColor)
+      .attr('stroke', lineColor)
       .attr('stroke-width', 2)
       .on('mouseenter', function (event: MouseEvent, d) {
+        select(this).attr('r', 5);
         tooltip
           .style('display', 'inline-block')
           .html(
             `Date: ${d.dateCollected.toLocaleDateString()} <br>${tooltipLabel}: ${d.value.toLocaleString()}`
           )
-          .style('left', `${event.pageX + 5}px`)
-          .style('top', `${event.pageY + 5}px`);
+          .style('left', `${event.pageX + 10}px`)
+          .style('top', `${event.pageY - 28}px`);
       })
-      .on('mouseleave', () => {
+      .on('mouseleave', function () {
+        select(this).attr('r', 3);
         tooltip.style('display', 'none');
       });
 
@@ -158,5 +187,5 @@ export default function LineChart({ data, dataLabel }: Props) {
     };
   }, [dataLabel, dataArray, height, width]);
 
-  return <svg ref={chartRef} className="h-auto w-[90%] max-w-250 sm:w-[70%]" />;
+  return <svg ref={chartRef} className="h-auto w-full max-w-[700px]" />;
 }

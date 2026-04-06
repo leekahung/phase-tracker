@@ -1,8 +1,5 @@
 export default function LoadingChart() {
   return (
-    <div className="flex h-[500px] w-[95%] flex-col items-center justify-center gap-4">
-      <div className="loading loading-spinner loading-lg" />
-      Loading...
-    </div>
+    <div className="h-[300px] w-full animate-pulse rounded-lg bg-slate-200 dark:bg-slate-500" />
   );
 }

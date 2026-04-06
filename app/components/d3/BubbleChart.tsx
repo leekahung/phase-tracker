@@ -155,7 +155,7 @@ export default function BubbleChart({ data }: Props) {
 
   return (
     <>
-      <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-500 sm:w-[70%]" />
+      <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-200 dark:bg-slate-500 sm:w-[70%]" />
       <DataTable
         genList={generations}
         groupObject={groupByGen}

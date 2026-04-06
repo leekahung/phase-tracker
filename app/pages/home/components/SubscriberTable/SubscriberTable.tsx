@@ -47,7 +47,7 @@ export default function SubscriberTable({ members, isLoading }: Props) {
     );
 
   return (
-    <table className="table w-[95%] max-w-3xl text-center">
+    <table className="table w-[95%] max-w-3xl table-fixed text-center">
       <SubscriberTableHeaders
         handleSortBy={handleSortBy}
         sortBy={sortBy}

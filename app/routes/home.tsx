@@ -27,15 +27,15 @@ export default function home() {
   return (
     <TransitionLayout>
       <div className="flex flex-col items-center gap-4">
-        <h1 className="text-3xl font-semibold">Phase Connect</h1>
-        <h2 className="text-xl italic">
+        <h1 className="text-center text-3xl font-semibold">Phase Connect</h1>
+        <h2 className="text-center text-xl italic">
           Live YouTube subscriber rankings for Phase Connect talents
         </h2>
         {isError ? (
-          <>
-            <em>Unable to fetch</em>
-            <span>No data loaded...</span>
-          </>
+          <div className="rounded-lg bg-red-50 px-6 py-4 text-center text-red-600 dark:bg-red-900/20 dark:text-red-400">
+            <p className="font-semibold">Unable to fetch data</p>
+            <p className="text-sm">No data loaded — please try again later.</p>
+          </div>
         ) : (
           <>
             <div className="flex gap-2">
