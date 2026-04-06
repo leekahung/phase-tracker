@@ -3,6 +3,7 @@ import Navbar from '~/components/navigation/Navbar';
 import PageFooter from './PageFooter';
 import ScrollToTopButton from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
+import Background from '~/components/global/Background';
 
 interface Props {
   children: React.ReactNode;
@@ -13,8 +14,9 @@ export default function PageLayout({ children }: Props) {
 
   return (
     <>
+      <Background />
       <ScrollProgressBar setShowButton={setShowButton} />
-      <div className="grid min-h-screen grid-rows-[80px_1fr_80px]">
+      <div className="relative grid min-h-screen grid-rows-[80px_1fr_80px]">
         <header className="flex items-center justify-between p-4">
           <Navbar />
         </header>

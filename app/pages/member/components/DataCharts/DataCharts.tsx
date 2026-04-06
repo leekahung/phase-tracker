@@ -14,8 +14,8 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
 
   useEffect(() => {
     if (typeof memberData !== 'undefined') {
-      let subChange = 0;
-      let viewChange = 0;
+      let subChange: number;
+      let viewChange: number;
       if (memberData.length == 1) {
         subChange = memberData[0].subscribers;
         viewChange = memberData[0].viewCount;

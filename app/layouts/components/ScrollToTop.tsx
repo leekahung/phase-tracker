@@ -8,7 +8,7 @@ interface Props {
 export default function ScrollToTopButton({ showButton, setShowButton }: Props) {
   return (
     <button
-      className={`fixed right-4 bottom-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-700 text-white transition dark:bg-slate-200 dark:text-slate-700 sm:h-12 sm:w-12 ${
+      className={`fixed right-4 bottom-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-700 text-white transition sm:h-12 sm:w-12 dark:bg-slate-200 dark:text-slate-700 ${
         showButton ? '-translate-y-4 opacity-100' : 'pointer-events-none opacity-0'
       }`}
       onClick={() => {

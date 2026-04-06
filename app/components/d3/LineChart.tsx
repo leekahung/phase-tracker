@@ -13,7 +13,6 @@ import {
 import { useEffect, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
-import { generationColors } from '~/utils/tableHelpers';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
 const formatNumber = (num: number, digits: number) => {
@@ -87,10 +86,7 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickFormat(null)
       );
 
-    xAxisGroup
-      .selectAll('.tick line')
-      .attr('stroke', gridColor)
-      .attr('stroke-dasharray', '4,4');
+    xAxisGroup.selectAll('.tick line').attr('stroke', gridColor).attr('stroke-dasharray', '4,4');
 
     xAxisGroup
       .selectAll('text')
@@ -113,10 +109,7 @@ export default function LineChart({ data, dataLabel }: Props) {
           .tickFormat((value) => formatNumber(value as number, 2))
       );
 
-    yAxisGroup
-      .selectAll('.tick line')
-      .attr('stroke', gridColor)
-      .attr('stroke-dasharray', '4,4');
+    yAxisGroup.selectAll('.tick line').attr('stroke', gridColor).attr('stroke-dasharray', '4,4');
 
     yAxisGroup
       .selectAll('text')

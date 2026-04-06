@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin "daisyui";
+@plugin 'daisyui';
 @theme {
   --animate-fade: fadeUp 1s ease-in-out 1s forwards;
 
@@ -15,6 +15,66 @@
     100% {
       transform: translateY(0);
       opacity: 15%;
+    }
+  }
+
+  @keyframes drift1 {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    33% {
+      transform: translate(80px, -60px);
+    }
+    66% {
+      transform: translate(-50px, 70px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }
+
+  @keyframes drift2 {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    33% {
+      transform: translate(-70px, 50px);
+    }
+    66% {
+      transform: translate(60px, -80px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }
+
+  @keyframes drift3 {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    33% {
+      transform: translate(50px, 80px);
+    }
+    66% {
+      transform: translate(-80px, -50px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }
+
+  @keyframes drift4 {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    33% {
+      transform: translate(-60px, -70px);
+    }
+    66% {
+      transform: translate(80px, 60px);
+    }
+    100% {
+      transform: translate(0px, 0px);
     }
   }
 }
@@ -35,15 +95,30 @@
   }
 }
 
-html,
-body {
+html {
   @apply bg-slate-100 dark:bg-slate-700;
+  overflow-y: scroll;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
 }
 
-html {
-  overflow-y: scroll;
+body {
+  background: transparent;
+}
+
+/* Background blobs */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  will-change: transform;
+  opacity: 0.18;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blob {
+    opacity: 0.3;
+  }
 }

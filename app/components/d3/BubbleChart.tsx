@@ -16,6 +16,8 @@ interface HierarchyNode {
 interface SimulatedHierarchyNode extends d3.HierarchyCircularNode<HierarchyNode> {
   vx: number;
   vy: number;
+  fx: number | null;
+  fy: number | null;
 }
 
 interface Props {
@@ -74,7 +76,11 @@ export default function BubbleChart({ data }: Props) {
     };
 
     const hierarchy = d3.hierarchy<HierarchyNode>(inputObject).sum((d) => d.value ?? 0);
-    const nodes = d3.pack<HierarchyNode>().size([width, height]).padding(1)(hierarchy).leaves();
+    const nodes = d3
+      .pack<HierarchyNode>()
+      .size([width, height])
+      .padding(1)(hierarchy)
+      .leaves() as unknown as SimulatedHierarchyNode[];
 
     const simulation = d3
       .forceSimulation(nodes)
@@ -91,8 +97,17 @@ export default function BubbleChart({ data }: Props) {
       .join('circle')
       .attr('cx', (d) => d.x)
       .attr('cy', (d) => d.y)
-      .attr('fill', (d) => generationColors[d.data.generation] || '#ccc')
-      .call(drag(simulation));
+      .attr('fill', (d) => generationColors[d.data.generation ?? ''] || '#ccc')
+      .call(
+        drag(simulation) as unknown as (
+          sel: d3.Selection<
+            d3.BaseType | SVGCircleElement,
+            SimulatedHierarchyNode,
+            SVGGElement,
+            unknown
+          >
+        ) => void
+      );
 
     node
       .transition()
@@ -155,7 +170,10 @@ export default function BubbleChart({ data }: Props) {
 
   return (
     <>
-      <svg ref={chartRef} className="h-auto w-[90%] rounded-4xl bg-slate-200 dark:bg-slate-500 sm:w-[70%]" />
+      <svg
+        ref={chartRef}
+        className="h-auto w-[90%] rounded-4xl bg-slate-200 sm:w-[70%] dark:bg-slate-500"
+      />
       <DataTable
         genList={generations}
         groupObject={groupByGen}
@@ -166,27 +184,31 @@ export default function BubbleChart({ data }: Props) {
   );
 }
 
-const drag = (simulation) => {
-  function dragstarted(event, d) {
+const drag = (simulation: d3.Simulation<SimulatedHierarchyNode, undefined>) => {
+  type DragEvent = d3.D3DragEvent<SVGCircleElement, SimulatedHierarchyNode, SimulatedHierarchyNode>;
+
+  function dragstarted(event: DragEvent, d: SimulatedHierarchyNode) {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
   }
 
-  function dragged(event, d) {
+  function dragged(event: DragEvent, d: SimulatedHierarchyNode) {
     d.fx = event.x;
     d.fy = event.y;
   }
 
-  function dragended(event, d) {
+  function dragended(event: DragEvent, d: SimulatedHierarchyNode) {
     if (!event.active) simulation.alphaTarget(0);
     d.fx = null;
     d.fy = null;
   }
 
-  const dragAction = d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
-
-  return dragAction;
+  return d3
+    .drag<SVGCircleElement, SimulatedHierarchyNode>()
+    .on('start', dragstarted)
+    .on('drag', dragged)
+    .on('end', dragended);
 };
 
 function centroid(nodes: d3.HierarchyCircularNode<HierarchyNode>[]): { x: number; y: number } {
