@@ -5,6 +5,7 @@ const generationColors: Record<string, string> = {
   KALEiDO: '#C45254',
   Euphoria: '#876455',
   'Invaders QUEST': '#9371BD',
+  Saga: '#D4A843',
 };
 
 export { generationColors };
