@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import useChannels from '~/hooks/useChannels';
 import MemberLoadingCard from './MemberLoadingCard';
-import formatChangeNumbers from '~/utils/numberHelpers';
+import formatChangeNumbers, { getChangeColorClass } from '~/utils/numberHelpers';
 import Avatar from '~/components/global/Avatar';
 import ExternalLink from '~/components/global/ExternalLink';
 
@@ -44,15 +44,7 @@ export default function MemberCard({ dailyChange }: Props) {
                   <td>
                     <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.subscribers.toLocaleString()}</span>
-                      <span
-                        className={
-                          dailyChange.subs > 0
-                            ? 'text-green-300'
-                            : dailyChange.subs < 0
-                              ? 'text-red-300'
-                              : 'text-gray-300'
-                        }
-                      >
+                      <span className={getChangeColorClass(dailyChange.subs)}>
                         ({formatChangeNumbers(dailyChange.subs)})
                       </span>
                     </div>
@@ -63,15 +55,7 @@ export default function MemberCard({ dailyChange }: Props) {
                   <td>
                     <div className="flex flex-wrap justify-center gap-2">
                       <span>{selectedMember?.viewCount.toLocaleString()}</span>
-                      <span
-                        className={
-                          dailyChange.views > 0
-                            ? 'text-green-300'
-                            : dailyChange.views < 0
-                              ? 'text-red-300'
-                              : 'text-gray-300'
-                        }
-                      >
+                      <span className={getChangeColorClass(dailyChange.views)}>
                         ({formatChangeNumbers(dailyChange.views)})
                       </span>
                     </div>

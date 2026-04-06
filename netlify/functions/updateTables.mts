@@ -1,14 +1,7 @@
 import { phaseConnectMembers } from '../utils/phaseMembers.mts';
 import { supabase } from '../utils/setupDatabase.mts';
 import fetchYouTubeData from '../utils/fetchYouTubeData.mts';
-
-function camelToSnakeCase(object: Record<string, unknown>) {
-  return Object.fromEntries(
-    Object.entries(object).map(([key, value]) => {
-      return [key.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`), value];
-    })
-  );
-}
+import { camelToSnakeCase } from '../utils/caseConversion.mts';
 
 export default async () => {
   const errors: { member: string; error: string }[] = [];

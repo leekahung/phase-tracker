@@ -13,14 +13,9 @@ import {
 import { useEffect, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
+import { formatCompactNumber } from '~/utils/numberHelpers';
 
 const margin = { top: 20, right: 70, bottom: 40, left: 90 };
-const formatNumber = (num: number, digits: number) => {
-  return new Intl.NumberFormat('en-US', {
-    notation: 'compact',
-    maximumFractionDigits: digits,
-  }).format(num);
-};
 
 interface Props {
   data: IMemberData[] | undefined;
@@ -106,7 +101,7 @@ export default function LineChart({ data, dataLabel }: Props) {
           .ticks(5)
           .tickSizeOuter(2)
           .tickSize(-width + margin.left + margin.right)
-          .tickFormat((value) => formatNumber(value as number, 2))
+          .tickFormat((value) => formatCompactNumber(value as number, 2))
       );
 
     yAxisGroup.selectAll('.tick line').attr('stroke', gridColor).attr('stroke-dasharray', '4,4');

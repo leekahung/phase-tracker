@@ -1,11 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import type { IMemberInfo } from '~/types/dataTypes';
-import snakeCaseToCamel from '~/utils/dbHelpers';
+import { fetchAndTransform } from '~/utils/dbHelpers';
 
 async function getMembers() {
-  const response = await fetch('/.netlify/functions/getMembers');
-  const results = await response.json();
-  return results.map((item: Record<string, unknown>) => snakeCaseToCamel(item));
+  return fetchAndTransform<IMemberInfo>('/.netlify/functions/getMembers');
 }
 
 function useChannels() {

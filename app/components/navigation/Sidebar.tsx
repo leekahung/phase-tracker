@@ -4,17 +4,12 @@ import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
 import Divider from '../../layouts/components/Divider';
 import useChannels from '~/hooks/useChannels';
 import MenuLinks from './MenuLinks';
+import { groupByGeneration } from '~/utils/tableHelpers';
 import NavButton from '../global/NavButton';
 
 export default function Sidebar() {
   const { members } = useChannels();
-  const groupByGen = members?.reduce(
-    (group, member) => {
-      (group[member.generation] ||= []).push(member);
-      return group;
-    },
-    {} as Record<string, typeof members>
-  );
+  const groupByGen = members ? groupByGeneration(members) : undefined;
   const genLists = Object.entries(groupByGen ?? {}).map(([key, value]) => ({
     generation: key,
     members: value,

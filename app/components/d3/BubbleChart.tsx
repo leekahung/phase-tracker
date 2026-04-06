@@ -4,7 +4,7 @@ import type { IMemberInfo } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { calculateFontSize } from '~/utils/d3Helpers';
 import DataTable from '~/pages/member/components/DataCharts/DataTable';
-import { generationColors } from '~/utils/tableHelpers';
+import { generationColors, groupByGeneration } from '~/utils/tableHelpers';
 
 interface HierarchyNode {
   name?: string;
@@ -37,13 +37,7 @@ export default function BubbleChart({ data }: Props) {
     });
   };
 
-  const groupByGen = data?.reduce(
-    (group, member) => {
-      (group[member.generation] ||= []).push(member);
-      return group;
-    },
-    {} as Record<string, typeof data>
-  );
+  const groupByGen = groupByGeneration(data);
   const generations = Object.keys(groupByGen);
 
   const width = Math.min(window.innerWidth * 0.9, 1200);
@@ -166,6 +160,10 @@ export default function BubbleChart({ data }: Props) {
       labelNamePart2.attr('x', (d) => d.x).attr('y', (d) => d.y);
       labelValues.attr('x', (d) => d.x).attr('y', (d) => d.y);
     });
+
+    return () => {
+      simulation.stop();
+    };
   }, [height, width, genSelected]);
 
   return (

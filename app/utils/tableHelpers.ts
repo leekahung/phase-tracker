@@ -1,3 +1,5 @@
+import type { IMemberInfo } from '~/types/dataTypes';
+
 const generationColors: Record<string, string> = {
   OriginS: '#4C90BF',
   ALiAS: '#D6865B',
@@ -8,4 +10,14 @@ const generationColors: Record<string, string> = {
   Saga: '#D4A843',
 };
 
-export { generationColors };
+function groupByGeneration(members: IMemberInfo[]): Record<string, IMemberInfo[]> {
+  return members.reduce(
+    (group, member) => {
+      (group[member.generation] ||= []).push(member);
+      return group;
+    },
+    {} as Record<string, IMemberInfo[]>
+  );
+}
+
+export { generationColors, groupByGeneration };

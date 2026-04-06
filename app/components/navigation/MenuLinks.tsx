@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 import type { IMemberInfo } from '~/types/dataTypes';
 import NavButton from '../global/NavButton';
-import { generationColors } from '~/utils/tableHelpers';
+import GenerationDot from '~/components/global/GenerationDot';
 
 interface Props {
   itemList: {
@@ -29,10 +29,7 @@ export default function MenuLinks({ itemList, isActiveGen }: Props) {
     >
       <input type="checkbox" aria-label="toggle menu" ref={collapseRef} />
       <span className="collapse-title flex items-center gap-2">
-        <span
-          className="h-2.5 w-2.5 shrink-0 rounded-full"
-          style={{ backgroundColor: generationColors[itemList.generation] }}
-        />
+        <GenerationDot generation={itemList.generation} />
         {itemList.generation}
       </span>
       <ul className="menu collapse-content w-[95%] py-0 text-sm before:invisible">

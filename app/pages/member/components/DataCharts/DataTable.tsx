@@ -1,5 +1,5 @@
 import type { IMemberInfo } from '~/types/dataTypes';
-import { generationColors } from '~/utils/tableHelpers';
+import GenerationDot from '~/components/global/GenerationDot';
 
 interface Props {
   genList: string[];
@@ -37,10 +37,7 @@ export default function DataTable({ genList, groupObject, genSelected, handleGen
               key={generation}
             >
               <td className="flex items-center justify-center gap-4">
-                <div
-                  className="h-6 w-6 rounded-full"
-                  style={{ backgroundColor: generationColors[generation] }}
-                />
+                <GenerationDot generation={generation} className="h-6 w-6" />
                 <p className="w-15">{generation}</p>
               </td>
               <td>{totalSubscribers.toLocaleString()}</td>

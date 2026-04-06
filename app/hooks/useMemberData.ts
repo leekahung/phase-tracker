@@ -1,26 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import type { IMemberData, IMemberInfo } from '~/types/dataTypes';
-import snakeCaseToCamel from '~/utils/dbHelpers';
+import { fetchAndTransform } from '~/utils/dbHelpers';
 
 async function getMemberData(channelId: string) {
-  const response = await fetch('/.netlify/functions/getMemberData', {
+  return fetchAndTransform<IMemberData>('/.netlify/functions/getMemberData', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ channelId: channelId }),
+    body: JSON.stringify({ channelId }),
   });
-  const results = await response.json();
-  return results.map((item: Record<string, unknown>) => snakeCaseToCamel(item));
 }
 
 function useMemberData(selectedMember: IMemberInfo | undefined) {
   const { data: memberData, refetch } = useQuery<IMemberData[]>({
     queryKey: ['member-data', selectedMember?.channelId],
-    queryFn: async () => {
-      if (selectedMember) {
-        return await getMemberData(selectedMember.channelId);
-      }
-      return [];
-    },
+    queryFn: () => getMemberData(selectedMember?.channelId ?? ''),
+    enabled: !!selectedMember,
   });
 
   return {
