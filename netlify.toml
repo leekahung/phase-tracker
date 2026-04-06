@@ -7,4 +7,5 @@ NETLIFY_USE_BUN = "true"
 NODE_VERSION = "22"
 
 [dev]
-command = "bun --bun react-router dev"
+publish = "build/client"
+framework = "#static"

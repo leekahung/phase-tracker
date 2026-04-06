@@ -33,11 +33,13 @@ export default function Background() {
       {blobs.map(({ gen, size, pos, animation }) => (
         <div
           key={gen}
-          className="blob"
+          className="absolute rounded-full opacity-[0.18] dark:opacity-30"
           style={{
             backgroundColor: generationColors[gen],
             width: `${size}px`,
             height: `${size}px`,
+            filter: 'blur(100px)',
+            willChange: 'transform',
             animation,
             ...pos,
           }}

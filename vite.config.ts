@@ -6,4 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [reactRouter(), netlifyPlugin(), tailwindcss()],
+  server: {
+    proxy: {
+      '/.netlify/functions': 'http://localhost:9999',
+    },
+  },
 });

@@ -107,18 +107,3 @@ html {
 body {
   background: transparent;
 }
-
-/* Background blobs */
-.blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(100px);
-  will-change: transform;
-  opacity: 0.18;
-}
-
-@media (prefers-color-scheme: dark) {
-  .blob {
-    opacity: 0.3;
-  }
-}
