@@ -4,7 +4,10 @@ export default async function fetchYouTubeData(channelHandle: string) {
     const response = await fetch(apiUrl);
     const results = await response.json();
     return results;
-  } catch {
-    throw new Error('Unable to fetch data');
+  } catch (error) {
+    throw new Error(
+      `Unable to fetch data for ${channelHandle}: ${error instanceof Error ? error.message : String(error)}`,
+      { cause: error }
+    );
   }
 }

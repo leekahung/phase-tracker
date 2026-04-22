@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router';
 import HamburgerMenuSVG from '../icons/HamburgerMenuSVG';
 import Divider from '../../layouts/components/Divider';
@@ -9,18 +9,24 @@ import NavButton from '../global/NavButton';
 
 export default function Sidebar() {
   const { members } = useChannels();
-  const groupByGen = members ? groupByGeneration(members) : undefined;
-  const genLists = Object.entries(groupByGen ?? {}).map(([key, value]) => ({
-    generation: key,
-    members: value,
-  }));
+  const genLists = useMemo(
+    () =>
+      Object.entries(members ? groupByGeneration(members) : {}).map(([key, value]) => ({
+        generation: key,
+        members: value,
+      })),
+    [members]
+  );
   const location = useLocation();
   const sidebarRef = useRef<HTMLInputElement>(null);
 
   const memberHandle = location.pathname.startsWith('/member/')
     ? location.pathname.split('/member/')[1]
     : null;
-  const activeGeneration = members?.find((m) => m.channelHandle === memberHandle)?.generation;
+  const activeGeneration = useMemo(
+    () => members?.find((m) => m.channelHandle === memberHandle)?.generation,
+    [members, memberHandle]
+  );
 
   useEffect(() => {
     if (sidebarRef.current !== null) {

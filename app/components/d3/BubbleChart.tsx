@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { IMemberInfo } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { calculateFontSize } from '~/utils/d3Helpers';
@@ -37,7 +37,7 @@ export default function BubbleChart({ data }: Props) {
     });
   };
 
-  const groupByGen = groupByGeneration(data);
+  const groupByGen = useMemo(() => groupByGeneration(data), [data]);
   const generations = Object.keys(groupByGen);
 
   const width = Math.min(window.innerWidth * 0.9, 1200);
@@ -150,7 +150,7 @@ export default function BubbleChart({ data }: Props) {
       .attr('class', 'opacity-0 transition-opacity duration-700')
       .text((d) => `${d.data.value?.toLocaleString()}`);
 
-    setTimeout(() => {
+    const fadeTimer = setTimeout(() => {
       d3.selectAll('text').classed('opacity-100', true).classed('opacity-0', false);
     }, 700);
 
@@ -162,6 +162,7 @@ export default function BubbleChart({ data }: Props) {
     });
 
     return () => {
+      clearTimeout(fadeTimer);
       simulation.stop();
     };
   }, [height, width, genSelected]);

@@ -3,8 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"netlify functions:serve --port 9999\" \"bun --bun react-router dev\"",
-    "dev:netlify": "bun run build && netlify dev",
+    "dev": "netlify dev",
     "build": "bun --bun react-router build",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "bun --bun react-router typegen && bunx tsc",

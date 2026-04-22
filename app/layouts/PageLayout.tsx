@@ -16,8 +16,8 @@ export default function PageLayout({ children }: Props) {
     <>
       <Background />
       <ScrollProgressBar setShowButton={setShowButton} />
-      <div className="relative grid min-h-screen grid-rows-[80px_1fr_80px]">
-        <header className="flex items-center justify-between p-4">
+      <div className="relative grid min-h-screen grid-rows-[1fr_80px] pt-[80px]">
+        <header className="fixed top-0 z-40 flex w-full items-center justify-between p-4">
           <Navbar />
         </header>
         <main>{children}</main>

@@ -10,7 +10,7 @@ import {
   axisBottom,
   axisLeft,
 } from 'd3';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import type { IMemberData } from '~/types/dataTypes';
 import LoadingChart from '../animation/LoadingChart';
 import { formatCompactNumber } from '~/utils/numberHelpers';
@@ -28,14 +28,16 @@ export default function LineChart({ data, dataLabel }: Props) {
   const height = 500;
 
   const chartRef = useRef<SVGSVGElement | null>(null);
-  const dataArray = data
-    ?.map((item) => {
-      return {
-        dateCollected: new Date(item.dateCollected),
-        value: item[dataLabel as keyof IMemberData] as number,
-      };
-    })
-    .sort((a, b) => a.dateCollected.getTime() - b.dateCollected.getTime());
+  const dataArray = useMemo(
+    () =>
+      data
+        ?.map((item) => ({
+          dateCollected: new Date(item.dateCollected),
+          value: item[dataLabel as keyof IMemberData] as number,
+        }))
+        .sort((a, b) => a.dateCollected.getTime() - b.dateCollected.getTime()),
+    [data, dataLabel]
+  );
 
   useEffect(() => {
     const rootStyle = getComputedStyle(document.documentElement);

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { IMemberInfo } from '~/types/dataTypes';
 import GenerationDot from '~/components/global/GenerationDot';
 
@@ -9,6 +10,14 @@ interface Props {
 }
 
 export default function DataTable({ genList, groupObject, genSelected, handleGenSelected }: Props) {
+  const totals = useMemo(
+    () =>
+      Object.fromEntries(
+        genList.map((gen) => [gen, groupObject[gen].reduce((t, m) => t + m.subscribers, 0)])
+      ),
+    [genList, groupObject]
+  );
+
   return (
     <table className="table max-w-2xl">
       <thead className="text-center">
@@ -19,10 +28,6 @@ export default function DataTable({ genList, groupObject, genSelected, handleGen
       </thead>
       <tbody className="text-center">
         {genList.map((generation) => {
-          const totalSubscribers = groupObject[generation].reduce(
-            (total, member) => total + member.subscribers,
-            0
-          );
           const bgColor = genSelected.includes(generation) ? 'bg-slate-500/50' : '';
 
           return (
@@ -40,7 +45,7 @@ export default function DataTable({ genList, groupObject, genSelected, handleGen
                 <GenerationDot generation={generation} className="h-6 w-6" />
                 <p className="w-15">{generation}</p>
               </td>
-              <td>{totalSubscribers.toLocaleString()}</td>
+              <td>{totals[generation].toLocaleString()}</td>
             </tr>
           );
         })}

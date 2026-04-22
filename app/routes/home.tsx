@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import useChannels from '~/hooks/useChannels';
 import SubscriberTable from '~/pages/home/components/SubscriberTable/SubscriberTable';
 import LineSkeleton from '~/components/animation/LineSkeleton';
@@ -16,13 +16,17 @@ export default function home() {
   const { members, isLoading, isError } = useChannels();
   const [search, setSearch] = useState('');
 
-  const filteredMembers = members?.filter((member) => {
-    const searchTerm = search.toLowerCase();
-    return (
-      member.memberNameEn.toLowerCase().includes(searchTerm) ||
-      member.memberNameJp.toLowerCase().includes(searchTerm)
-    );
-  });
+  const filteredMembers = useMemo(
+    () =>
+      members?.filter((member) => {
+        const searchTerm = search.toLowerCase();
+        return (
+          member.memberNameEn.toLowerCase().includes(searchTerm) ||
+          member.memberNameJp.toLowerCase().includes(searchTerm)
+        );
+      }),
+    [members, search]
+  );
 
   return (
     <TransitionLayout>

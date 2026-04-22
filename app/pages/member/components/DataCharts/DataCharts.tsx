@@ -16,7 +16,7 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
     if (typeof memberData !== 'undefined') {
       let subChange: number;
       let viewChange: number;
-      if (memberData.length == 1) {
+      if (memberData.length === 1) {
         subChange = memberData[0].subscribers;
         viewChange = memberData[0].viewCount;
       } else {
@@ -25,7 +25,7 @@ export default function DataCharts({ selectedMember, handleDailyChange }: Props)
       }
       handleDailyChange(subChange, viewChange);
     }
-  }, [memberData]);
+  }, [memberData, handleDailyChange]);
 
   return (
     <>

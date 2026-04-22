@@ -6,6 +6,11 @@ publish = "build/client"
 NETLIFY_USE_BUN = "true"
 NODE_VERSION = "22"
 
+[functions]
+directory = "netlify/functions"
+
 [dev]
-publish = "build/client"
-framework = "#static"
+command = "bun --bun react-router dev"
+targetPort = 5173
+functionsPort = 9999
+autoLaunch = false

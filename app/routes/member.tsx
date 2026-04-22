@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
 import useChannels from '~/hooks/useChannels';
 import Divider from '~/layouts/components/Divider';
@@ -21,14 +21,17 @@ export default function member() {
   const location = useLocation();
   const { memberHandle } = useParams();
   const { members, isLoading } = useChannels();
-  const selectedMember = members?.find((member) => member.channelHandle === memberHandle);
+  const selectedMember = useMemo(
+    () => members?.find((member) => member.channelHandle === memberHandle),
+    [members, memberHandle]
+  );
   const [dailyChange, setDailyChange] = useState({ subs: 0, views: 0 });
   const cloudinaryName = import.meta.env.VITE_CLOUDINARY_NAME;
   const selectedMemberUrlString = selectedMember?.memberNameEn.replace(' ', '%20');
 
-  const handleDailyChange = (subChange: number, viewChange: number): void => {
+  const handleDailyChange = useCallback((subChange: number, viewChange: number): void => {
     setDailyChange({ subs: subChange, views: viewChange });
-  };
+  }, []);
 
   useEffect(() => {
     document.title = `Member Info - ${memberHandle}`;

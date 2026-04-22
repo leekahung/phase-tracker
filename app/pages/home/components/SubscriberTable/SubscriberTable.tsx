@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import SubscriberLoadingTable from './SubscriberLoadingTable';
 import SubscriberTableHeaders from './SubscriberTableHeaders';
 import SubscriberTableRows from './SubscriberTableRows';
@@ -22,18 +22,24 @@ export default function SubscriberTable({ members, isLoading }: Props) {
     }
   };
 
-  const sortedMembers = members?.sort((a, b) => {
-    const valueA = a[sortBy];
-    const valueB = b[sortBy];
+  const sortedMembers = useMemo(
+    () =>
+      members?.slice().sort((a, b) => {
+        const valueA = a[sortBy];
+        const valueB = b[sortBy];
 
-    if (typeof valueA === 'string' && typeof valueB === 'string') {
-      return sortDirection === 'desc' ? valueB.localeCompare(valueA) : valueA.localeCompare(valueB);
-    } else if (typeof valueA === 'number' && typeof valueB === 'number') {
-      return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
-    } else {
-      return 0;
-    }
-  });
+        if (typeof valueA === 'string' && typeof valueB === 'string') {
+          return sortDirection === 'desc'
+            ? valueB.localeCompare(valueA)
+            : valueA.localeCompare(valueB);
+        } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+          return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
+        } else {
+          return 0;
+        }
+      }),
+    [members, sortBy, sortDirection]
+  );
 
   const tableRows =
     members?.length === 0 ? (

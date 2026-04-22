@@ -15,8 +15,11 @@ export default function ScrollProgressBar({ setShowButton }: Props) {
   }, [pathname]);
 
   useEffect(() => {
+    let rafId: number;
+
     const handleScroll = () => {
-      requestAnimationFrame(() => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
         const viewportHeight = window.visualViewport?.height || window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
         const progress = (window.scrollY / (documentHeight - viewportHeight)) * 100;
@@ -32,7 +35,10 @@ export default function ScrollProgressBar({ setShowButton }: Props) {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, [pathname]);
 
   return (
