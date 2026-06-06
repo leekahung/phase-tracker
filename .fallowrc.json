@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  // Netlify Functions are platform-invoked entry points. Without this, they and
+  // their imported utils are falsely reported as unused files/exports.
+  "entry": ["netlify/functions/**/*.mts"],
+  "duplicates": {
+    // Hide pair-only clones; report copy-paste in 3+ places.
+    "minOccurrences": 3
+  },
+  "rules": {}
+}
