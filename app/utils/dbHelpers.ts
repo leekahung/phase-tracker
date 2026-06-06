@@ -14,4 +14,3 @@ async function fetchAndTransform<T>(url: string, options?: RequestInit): Promise
 }
 
 export { fetchAndTransform };
-export default snakeCaseToCamel;

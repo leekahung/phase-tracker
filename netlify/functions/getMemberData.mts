@@ -1,4 +1,5 @@
 import { supabase } from '../utils/setupDatabase.mts';
+import { dbResponse } from '../utils/dbResponse.mts';
 
 export default async (event: {
   method: string;
@@ -19,14 +20,5 @@ export default async (event: {
     .order('date_collected', { ascending: false })
     .limit(14);
 
-  if (error) {
-    return new Response(
-      JSON.stringify({
-        message: 'Error fetching from database',
-        error: error.message,
-      }),
-      { status: 500 }
-    );
-  }
-  return new Response(JSON.stringify(data), { status: 200 });
+  return dbResponse({ data, error });
 };
